@@ -1,106 +1,246 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Estudo.Py.BR - Exercícios em Python</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.0/github-markdown-dark.min.css">
-  <style>
-    body {
-      background-color: #0d1117;
-      color: #c9d1d9;
-      font-family: system-ui, sans-serif;
-      padding: 2rem;
-      display: flex;
-      justify-content: center;
-    }
-    .markdown-body {
-      max-width: 900px;
-    }
-    a {
-      color: #58a6ff;
-    }
-    table {
-      width: 100%;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudo.Py.BR | Trilha de Aprendizado Python</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Design System / Variáveis */
+        :root {
+            --bg-main: #0d1117;
+            --bg-card: #161b22;
+            --text-main: #c9d1d9;
+            --text-muted: #8b949e;
+            --python-blue: #3776AB;
+            --python-yellow: #FFD43B;
+            --border-color: #30363d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero Section (Cabeçalho) */
+        header {
+            text-align: center;
+            padding: 6rem 2rem 4rem;
+            background: linear-gradient(180deg, rgba(55, 118, 171, 0.08) 0%, var(--bg-main) 100%);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            font-family: 'Fira Code', monospace;
+            letter-spacing: -1.5px;
+        }
+
+        h1 .blue { color: var(--python-blue); }
+        h1 .yellow { color: var(--python-yellow); }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Grid de Trilhas */
+        .trilhas-section {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            font-family: 'Fira Code', monospace;
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title::before {
+            content: '>>';
+            color: var(--python-yellow);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* UX: Cards Interativos */
+        .card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Animação do topo do card */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--python-blue);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--text-muted);
+            box-shadow: 0 12px 28px rgba(0,0,0,0.4);
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            flex-grow: 1;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
+            font-size: 0.9rem;
+            margin-top: 2rem;
+        }
+
+        /* Responsividade Extra para Mobile */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .subtitle { font-size: 1rem; }
+            header { padding: 4rem 1rem 3rem; }
+        }
+    </style>
 </head>
 <body>
-  <article class="markdown-body">
-    <h1>Estudo.Py.BR</h1>
-    <h2>🐍 <strong>Exercícios em Python - Trilha de Aprendizado</strong></h2>
-    <p>Bem-vindo ao seu playground de Python! Aqui você encontra exercícios organizados por temas e dificuldade para evoluir suas habilidades.</p>
 
-    <h2>🗂️ Estrutura do Repositório</h2>
-    <h3>📌 Tópicos por Dificuldade</h3>
+    <header>
+        <div class="container">
+            <h1><span class="blue">Estudo</span><span class="yellow">.Py</span>.BR</h1>
+            <p class="subtitle">Seu playground de Python. Exercícios práticos organizados por temas e dificuldade para evoluir sua lógica de programação.</p>
+        </div>
+    </header>
 
-    <table>
-      <thead>
-        <tr>
-          <th>Dificuldade</th>
-          <th>Tópico</th>
-          <th>Descrição</th>
-          <th>Link</th>
-        </tr>
-      </thead>
-      <!-- ...cabeçalho permanece igual... -->
-  <tbody>
-    <tr><td>⭐️</td><td>Estrutura Sequencial</td><td>Fundamentos básicos de programação sequencial</td><td><a href="./Estrutura%20Sequencial/exercicios.html">Exercícios</a></td></tr>
-    <tr><td>⭐️</td><td>Estrutura de Decisão</td><td>Condicionais <code>if/else</code> e tomada de decisões</td><td><a href="./Estrutura%20De%20Decisão/exercicios.html">Exercícios</a></td></tr>
-    <tr><td>⭐️⭐️</td><td>Estrutura de Repetição</td><td>Loops <code>for/while</code> e controle de fluxo</td><td><a href="./Estrutura%20De%20Repetição/exercicios.html">Exercícios</a></td></tr>
-    <tr><td>⭐️⭐️</td><td>Estrutura de Listas</td><td>Manipulação de listas e operações com coleções</td><td><a href="./Estrutura%20De%20Listas/exercicios.html">Exercícios</a></td></tr>
-    <tr><td>⭐️⭐️⭐️</td><td>Estrutura de Funções</td><td>Funções, parâmetros, retorno, organização de código</td><td><a href="./Estrutura%20De%20Funções/exercicios.html">Exercícios</a></td></tr>
-    <tr><td>⭐️⭐️</td><td>Estrutura de Strings</td><td>Manipulação de textos e formatação</td><td><a href="./Estrutura%20De%20Strings/exercicios.html">Exercícios</a></td></tr>
-    <tr><td>⭐️⭐️⭐️</td><td>Exercícios com Arquivos</td><td>Leitura, escrita e análise de arquivos</td><td><a href="./Estrutura%20De%20Arquivos/exercicios.html">Exercícios</a></td></tr>
-    <tr><td>⭐️⭐️⭐️</td><td>Exercícios com Classes</td><td>POO: classes, atributos e métodos</td><td><a href="./Estrutura%20De%20Classes/exercicios.html">Exercícios</a></td></tr>
-    <tr><td>⭐️⭐️⭐️⭐️</td><td>Projetos Práticos</td><td>Mini-projetos usando tudo que foi aprendido</td><td><a href="./Exercicios%20De%20Projetos/exercicios.html">Exercícios</a></td></tr>
-  </tbody>
-  
-    </table>
+    <main class="container trilhas-section">
+        <h2 class="section-title">Trilhas_de_Aprendizado</h2>
+        
+        <div class="grid">
+            <a href="Estrutura De Sequencial/exercicios.html" class="card">
+                <div class="card-icon">🔢</div>
+                <h3>Estrutura Sequencial</h3>
+                <p>Variáveis, entrada, saída de dados e operações matemáticas básicas.</p>
+            </a>
 
-    <h2>🚀 Comece Aqui!</h2>
-    <h3>📌 Como Usar</h3>
-    <ul>
-      <li>🔍 Navegue pelos diretórios por tópico</li>
-      <li>💻 Escolha exercícios pela dificuldade</li>
-      <li>🧐 Pratique resolvendo os desafios</li>
-      <li>🔄 Compare suas soluções com as respostas sugeridas</li>
-    </ul>
+            <a href="Estrutura De Decisão/exercicios.html" class="card">
+                <div class="card-icon">⚖️</div>
+                <h3>Estrutura de Decisão</h3>
+                <p>Fluxos condicionais (if, elif, else) e operadores lógicos de controle.</p>
+            </a>
 
-    <h2>🛠️ Ferramentas Recomendadas</h2>
-    <ul>
-      <li>✅ <a href="https://www.python.org/downloads/">Python 3.10+</a> donwload </li>
-      <li>✅ <a href="https://code.visualstudio.com/">VS Code</a> com extensão Python</li>
-      <li>✅ <a href="https://jupyter.org/">Jupyter Notebook</a> para testes e experimentação</li>
-    </ul>
+            <a href="Estrutura De Repetição/exercicios.html" class="card">
+                <div class="card-icon">🔁</div>
+                <h3>Estrutura de Repetição</h3>
+                <p>Automação de tarefas com laços for e while.</p>
+            </a>
 
-    <h2>🌟 Recursos Extras</h2>
-    <table>
-      <thead>
-        <tr><th>Recurso</th><th>Descrição</th><th>Link</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>📖 Documentação Oficial</td><td>Referência completa da linguagem Python</td><td><a href="https://docs.python.org/pt-br/3/">Python Docs</a></td></tr>
-        <tr><td>🎓 Curso Gratuito</td><td>Curso interativo para iniciantes</td><td><a href="https://www.codecademy.com/learn/learn-python-3">Codecademy - Python</a></td></tr>
-        <tr><td>📘 Livro Digital</td><td>Automatize tarefas com Python</td><td><a href="https://automatetheboringstuff.com/">Automate the Boring Stuff</a></td></tr>
-      </tbody>
-    </table>
+            <a href="Estrutura De Listas/exercicios.html" class="card">
+                <div class="card-icon">📋</div>
+                <h3>Estrutura de Listas</h3>
+                <p>Manipulação de arrays, métodos de listas, tuplas e iterações estruturadas.</p>
+            </a>
 
-    <h2>🤝 Contribuições</h2>
-    <p>Adoramos contribuições! Aqui está como você pode ajudar:</p>
-    <ul>
-      <li>📅 Faça um fork do repositório</li>
-      <li>✍️ Adicione novos exercícios ou resoluções</li>
-      <li>📄 Envie um Pull Request</li>
-      <li>🎉 Participe das discussões nas Issues</li>
-    </ul>
+            <a href="Estrutura De Funções/exercicios.html" class="card">
+                <div class="card-icon">🛠️</div>
+                <h3>Estrutura de Funções</h3>
+                <p>Modularização de código, parâmetros, retornos e escopo de variáveis.</p>
+            </a>
 
-    <h2>📜 Licença</h2>
-    <p>Este projeto é open-source sob a licença MIT. Veja o arquivo <a href="./LICENSE">LICENSE</a> para mais detalhes.</p>
+            <a href="Estrutura De Strings/exercicios.html" class="card">
+                <div class="card-icon">🔤</div>
+                <h3>Estrutura de Strings</h3>
+                <p>Fatiamento, formatação e métodos embutidos para manipulação de textos.</p>
+            </a>
 
-    <blockquote>
-      Projeto criado por <strong><a href="https://github.com/zack-rodrigues">zack-rodrigues</a></strong>
-    </blockquote>
-  </article>
+            <a href="Estrutura De Arquivos/exercicios.html" class="card">
+                <div class="card-icon">📁</div>
+                <h3>Estrutura de Arquivos</h3>
+                <p>Leitura e escrita de dados persistentes, lidando com arquivos txt, csv e logs.</p>
+            </a>
+
+            <a href="Estrutura De Classes/exercicios.html" class="card">
+                <div class="card-icon">🏗️</div>
+                <h3>Estrutura de Classes</h3>
+                <p>Fundamentos de Orientação a Objetos: atributos, métodos, herança e abstração.</p>
+            </a>
+
+            <a href="Exercicios De Projetos/exercicios.html" class="card">
+                <div class="card-icon">🚀</div>
+                <h3>Exercícios de Projetos</h3>
+                <p>Desafios completos integrando todos os conhecimentos anteriores em cenários reais.</p>
+            </a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Estudo.Py.BR. Desenvolvido com 🐍 e ☕.</p>
+        </div>
+    </footer>
+
 </body>
 </html>
