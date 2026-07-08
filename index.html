@@ -10,10 +10,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     
     <style>
-        /* Design System / Variáveis */
         :root {
             --bg-main: #0d1117;
             --bg-card: #161b22;
+            --bg-card-hover: #1f242c;
             --text-main: #c9d1d9;
             --text-muted: #8b949e;
             --python-blue: #3776AB;
@@ -41,10 +41,10 @@
             padding: 0 2rem;
         }
 
-        /* Hero Section (Cabeçalho) */
+        /* Hero Section */
         header {
             text-align: center;
-            padding: 6rem 2rem 4rem;
+            padding: 5rem 2rem 3rem;
             background: linear-gradient(180deg, rgba(55, 118, 171, 0.08) 0%, var(--bg-main) 100%);
             border-bottom: 1px solid var(--border-color);
         }
@@ -61,20 +61,25 @@
         h1 .yellow { color: var(--python-yellow); }
 
         .subtitle {
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             color: var(--text-muted);
-            max-width: 600px;
+            max-width: 650px;
             margin: 0 auto;
         }
 
-        /* Grid de Trilhas */
-        .trilhas-section {
-            padding: 4rem 0;
+        /* Seções e Títulos */
+        section {
+            padding: 3.5rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        section:last-of-type {
+            border-bottom: none;
         }
 
         .section-title {
             font-family: 'Fira Code', monospace;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             margin-bottom: 2rem;
             color: var(--text-main);
             display: flex;
@@ -87,13 +92,13 @@
             color: var(--python-yellow);
         }
 
+        /* Grid de Cards (Trilhas) */
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 1.5rem;
         }
 
-        /* UX: Cards Interativos */
         .card {
             background-color: var(--bg-card);
             border: 1px solid var(--border-color);
@@ -108,7 +113,6 @@
             overflow: hidden;
         }
 
-        /* Animação do topo do card */
         .card::before {
             content: '';
             position: absolute;
@@ -124,6 +128,7 @@
 
         .card:hover {
             transform: translateY(-5px);
+            background-color: var(--bg-card-hover);
             border-color: var(--text-muted);
             box-shadow: 0 12px 28px rgba(0,0,0,0.4);
         }
@@ -132,13 +137,28 @@
             transform: scaleX(1);
         }
 
-        .card-icon {
-            font-size: 2.5rem;
+        .card-header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
             margin-bottom: 1rem;
         }
 
+        .card-icon {
+            font-size: 2.2rem;
+        }
+
+        .difficulty-badge {
+            font-size: 0.85rem;
+            background: rgba(255, 212, 59, 0.1);
+            color: var(--python-yellow);
+            padding: 3px 8px;
+            border-radius: 6px;
+            letter-spacing: 1px;
+        }
+
         .card h3 {
-            font-size: 1.3rem;
+            font-size: 1.25rem;
             margin-bottom: 0.5rem;
             color: #fff;
             font-weight: 600;
@@ -146,24 +166,84 @@
 
         .card p {
             color: var(--text-muted);
-            font-size: 0.95rem;
+            font-size: 0.92rem;
             flex-grow: 1;
+            margin-bottom: 1.2rem;
         }
 
+        .card-link-text {
+            color: var(--python-blue);
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Estilo para Listas / Blocos de Conteúdo Informativo */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .info-box {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1.8rem;
+        }
+
+        .info-box h3 {
+            font-size: 1.1rem;
+            color: #fff;
+            margin-bottom: 1rem;
+            font-family: 'Fira Code', monospace;
+        }
+
+        .info-list {
+            list-style: none;
+        }
+
+        .info-list li {
+            color: var(--text-muted);
+            font-size: 0.93rem;
+            margin-bottom: 0.7rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-list li a {
+            color: var(--python-blue);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .info-list li a:hover {
+            color: var(--python-yellow);
+            text-decoration: underline;
+        }
+
+        /* Rodapé */
         footer {
             text-align: center;
             padding: 3rem;
             color: var(--text-muted);
             border-top: 1px solid var(--border-color);
             font-size: 0.9rem;
-            margin-top: 2rem;
         }
 
-        /* Responsividade Extra para Mobile */
+        footer a {
+            color: var(--python-blue);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
         @media (max-width: 768px) {
             h1 { font-size: 2.5rem; }
             .subtitle { font-size: 1rem; }
-            header { padding: 4rem 1rem 3rem; }
+            header { padding: 3rem 1rem 2rem; }
         }
     </style>
 </head>
@@ -172,74 +252,156 @@
     <header>
         <div class="container">
             <h1><span class="blue">Estudo</span><span class="yellow">.Py</span>.BR</h1>
-            <p class="subtitle">Seu playground de Python. Exercícios práticos organizados por temas e dificuldade para evoluir sua lógica de programação.</p>
+            <p class="subtitle">🐍 Exercícios em Python - Trilha de Aprendizado. Bem-vindo ao seu playground de Python! Aqui você encontra exercícios organizados por temas e dificuldade para evoluir suas habilidades.</p>
         </div>
     </header>
 
-    <main class="container trilhas-section">
-        <h2 class="section-title">Trilhas_de_Aprendizado</h2>
+    <main class="container">
         
-        <div class="grid">
-            <a href="Estrutura De Sequencial/exercicios.html" class="card">
-                <div class="card-icon">🔢</div>
-                <h3>Estrutura Sequencial</h3>
-                <p>Variáveis, entrada, saída de dados e operações matemáticas básicas.</p>
-            </a>
+        <section>
+            <h2 class="section-title">Tópicos_por_Dificuldade</h2>
+            <div class="grid">
+                <a href="Estrutura Sequencial/exercicios.html" class="card">
+                    <div class="card-header-top">
+                        <div class="card-icon">🔢</div>
+                        <span class="difficulty-badge">⭐️</span>
+                    </div>
+                    <h3>Estrutura Sequencial</h3>
+                    <p>Fundamentos básicos de programação sequencial, variáveis e I/O.</p>
+                    <span class="card-link-text">Ver Exercícios &rarr;</span>
+                </a>
 
-            <a href="Estrutura De Decisão/exercicios.html" class="card">
-                <div class="card-icon">⚖️</div>
-                <h3>Estrutura de Decisão</h3>
-                <p>Fluxos condicionais (if, elif, else) e operadores lógicos de controle.</p>
-            </a>
+                <a href="Estrutura De Decisão/exercicios.html" class="card">
+                    <div class="card-header-top">
+                        <div class="card-icon">⚖️</div>
+                        <span class="difficulty-badge">⭐️</span>
+                    </div>
+                    <h3>Estrutura de Decisão</h3>
+                    <p>Condicionais if/else e tomada de decisões lógicas.</p>
+                    <span class="card-link-text">Ver Exercícios &rarr;</span>
+                </a>
 
-            <a href="Estrutura De Repetição/exercicios.html" class="card">
-                <div class="card-icon">🔁</div>
-                <h3>Estrutura de Repetição</h3>
-                <p>Automação de tarefas com laços for e while.</p>
-            </a>
+                <a href="Estrutura De Repetição/exercicios.html" class="card">
+                    <div class="card-header-top">
+                        <div class="card-icon">🔁</div>
+                        <span class="difficulty-badge">⭐️⭐️</span>
+                    </div>
+                    <h3>Estrutura de Repetição</h3>
+                    <p>Loops for/while e controle de fluxo avançado.</p>
+                    <span class="card-link-text">Ver Exercícios &rarr;</span>
+                </a>
 
-            <a href="Estrutura De Listas/exercicios.html" class="card">
-                <div class="card-icon">📋</div>
-                <h3>Estrutura de Listas</h3>
-                <p>Manipulação de arrays, métodos de listas, tuplas e iterações estruturadas.</p>
-            </a>
+                <a href="Estrutura De Listas/exercicios.html" class="card">
+                    <div class="card-header-top">
+                        <div class="card-icon">📋</div>
+                        <span class="difficulty-badge">⭐️⭐️</span>
+                    </div>
+                    <h3>Estrutura de Listas</h3>
+                    <p>Manipulação de listas e operações com coleções estruturadas.</p>
+                    <span class="card-link-text">Ver Exercícios &rarr;</span>
+                </a>
 
-            <a href="Estrutura De Funções/exercicios.html" class="card">
-                <div class="card-icon">🛠️</div>
-                <h3>Estrutura de Funções</h3>
-                <p>Modularização de código, parâmetros, retornos e escopo de variáveis.</p>
-            </a>
+                <a href="Estrutura De Funções/exercicios.html" class="card">
+                    <div class="card-header-top">
+                        <div class="card-icon">🛠️</div>
+                        <span class="difficulty-badge">⭐️⭐️⭐️</span>
+                    </div>
+                    <h3>Estrutura de Funções</h3>
+                    <p>Funções, parâmetros, retorno e organização de código.</p>
+                    <span class="card-link-text">Ver Exercícios &rarr;</span>
+                </a>
 
-            <a href="Estrutura De Strings/exercicios.html" class="card">
-                <div class="card-icon">🔤</div>
-                <h3>Estrutura de Strings</h3>
-                <p>Fatiamento, formatação e métodos embutidos para manipulação de textos.</p>
-            </a>
+                <a href="Estrutura De Strings/exercicios.html" class="card">
+                    <div class="card-header-top">
+                        <div class="card-icon">🔤</div>
+                        <span class="difficulty-badge">⭐️⭐️</span>
+                    </div>
+                    <h3>Estrutura de Strings</h3>
+                    <p>Manipulação de textos, fatiamento e formatação.</p>
+                    <span class="card-link-text">Ver Exercícios &rarr;</span>
+                </a>
 
-            <a href="Estrutura De Arquivos/exercicios.html" class="card">
-                <div class="card-icon">📁</div>
-                <h3>Estrutura de Arquivos</h3>
-                <p>Leitura e escrita de dados persistentes, lidando com arquivos txt, csv e logs.</p>
-            </a>
+                <a href="Estrutura De Arquivos/exercicios.html" class="card">
+                    <div class="card-header-top">
+                        <div class="card-icon">📁</div>
+                        <span class="difficulty-badge">⭐️⭐️⭐️</span>
+                    </div>
+                    <h3>Exercícios com Arquivos</h3>
+                    <p>Leitura, escrita e análise de arquivos, logs e relatórios.</p>
+                    <span class="card-link-text">Ver Exercícios &rarr;</span>
+                </a>
 
-            <a href="Estrutura De Classes/exercicios.html" class="card">
-                <div class="card-icon">🏗️</div>
-                <h3>Estrutura de Classes</h3>
-                <p>Fundamentos de Orientação a Objetos: atributos, métodos, herança e abstração.</p>
-            </a>
+                <a href="Estrutura De Classes/exercicios.html" class="card">
+                    <div class="card-header-top">
+                        <div class="card-icon">🏗️</div>
+                        <span class="difficulty-badge">⭐️⭐️⭐️</span>
+                    </div>
+                    <h3>Exercícios com Classes</h3>
+                    <p>POO: Fundamentos de classes, atributos e métodos.</p>
+                    <span class="card-link-text">Ver Exercícios &rarr;</span>
+                </a>
 
-            <a href="Exercicios De Projetos/exercicios.html" class="card">
-                <div class="card-icon">🚀</div>
-                <h3>Exercícios de Projetos</h3>
-                <p>Desafios completos integrando todos os conhecimentos anteriores em cenários reais.</p>
-            </a>
-        </div>
+                <a href="Exercicios De Projetos/exercicios.html" class="card">
+                    <div class="card-header-top">
+                        <div class="card-icon">🚀</div>
+                        <span class="difficulty-badge">⭐️⭐️⭐️⭐️</span>
+                    </div>
+                    <h3>Projetos Práticos</h3>
+                    <p>Mini-projetos usando tudo que foi aprendido na trilha.</p>
+                    <span class="card-link-text">Ver Exercícios &rarr;</span>
+                </a>
+            </div>
+        </section>
+
+        <section>
+            <div class="info-grid">
+                <div class="info-box">
+                    <h3>📌 Como_Usar</h3>
+                    <ul class="info-list">
+                        <li>🔍 Navegue pelos diretórios por tópico</li>
+                        <li>💻 Escolha os exercícios pela dificuldade</li>
+                        <li>🧠 Pratique resolvendo os desafios</li>
+                        <li>🔄 Compare suas soluções com as respostas</li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <h3>🛠️ Ferramentas</h3>
+                    <ul class="info-list">
+                        <li>✅ <a href="https://www.python.org/downloads/" target="_blank">Python 3.10+</a> download</li>
+                        <li>✅ <a href="https://code.visualstudio.com/" target="_blank">VS Code</a> com extensão Python</li>
+                        <li>✅ Jupyter Notebook para testes rápidos</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="info-grid">
+                <div class="info-box">
+                    <h3>🌟 Recursos_Extras</h3>
+                    <ul class="info-list">
+                        <li>📖 <a href="https://docs.python.org/pt-br/3/" target="_blank">Documentação Oficial</a> (Python Docs)</li>
+                        <li>🎓 <a href="https://www.codecademy.com/learn/learn-python-3" target="_blank">Curso Gratuito</a> (Codecademy)</li>
+                        <li>📘 <a href="https://automatetheboringstuff.com/" target="_blank">Livro Digital</a> (Automate the Boring Stuff)</li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <h3>🤝 Contribuições</h3>
+                    <ul class="info-list">
+                        <li>📅 Faça um fork do repositório</li>
+                        <li>✍️ Adicione novos exercícios ou resoluções</li>
+                        <li>📄 Envie um Pull Request</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <footer>
-        <div class="container">
-            <p>&copy; 2026 Estudo.Py.BR. Desenvolvido com 🐍 e ☕.</p>
-        </div>
+        <p>Este projeto é open-source sob a licença MIT. Projeto criado e mantido por <a href="https://github.com/zack-rodrigues" target="_blank">zack-rodrigues</a>.</p>
     </footer>
 
 </body>
