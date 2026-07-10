@@ -20,7 +20,7 @@ Bem-vindo ao seu playground de Python! Aqui você encontra exercícios organizad
 
 | Dificuldade | Tópico                   | Descrição                                                        | Link                                                                 |
 |-------------|--------------------------|------------------------------------------------------------------|----------------------------------------------------------------------|
-| ⭐️          | Estrutura Sequencial     | Fundamentos básicos de programação sequencial                   | [Exercícios](./https://zack-rodrigues.github.io/Estudo.Py.BR/Estrutura%20Sequencial/exercicios.html)                |
+| ⭐️          | Estrutura Sequencial     | Fundamentos básicos de programação sequencial                   | [Exercícios](https://zack-rodrigues.github.io/Estudo.Py.BR/Estrutura%20Sequencial/exercicios.html)                |
 | ⭐️          | Estrutura de Decisão     | Condicionais `if/else` e tomada de decisões                     | [Exercícios](https://zack-rodrigues.github.io/Estudo.Py.BR/Estrutura%20De%20Decis%C3%A3o/exercicios.html)              |
 | ⭐️⭐️        | Estrutura de Repetição   | Loops `for/while` e controle de fluxo                           | [Exercícios](https://zack-rodrigues.github.io/Estudo.Py.BR/Estrutura%20De%20Repeti%C3%A7%C3%A3o/exercicios.html)            |
 | ⭐️⭐️        | Estrutura de Listas      | Manipulação de listas e operações com coleções                  | [Exercícios](https://zack-rodrigues.github.io/Estudo.Py.BR/Estrutura%20De%20Listas/exercicios.html)               |
