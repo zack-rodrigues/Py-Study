@@ -20,15 +20,15 @@ Bem-vindo ao seu playground de Python! Aqui você encontra exercícios organizad
 
 | Dificuldade | Tópico                   | Descrição                                                        | Link                                                                 |
 |-------------|--------------------------|------------------------------------------------------------------|----------------------------------------------------------------------|
-| ⭐️          | Estrutura Sequencial     | Fundamentos básicos de programação sequencial                   | [Exercícios](./Estrutura%20Sequencial/exercicios.md)                |
-| ⭐️          | Estrutura de Decisão     | Condicionais `if/else` e tomada de decisões                     | [Exercícios](./Estrutura%20De%20Decisão/exercicios.md)              |
-| ⭐️⭐️        | Estrutura de Repetição   | Loops `for/while` e controle de fluxo                           | [Exercícios](./Estrutura%20De%20Repetição/exercicios.md)            |
-| ⭐️⭐️        | Estrutura de Listas      | Manipulação de listas e operações com coleções                  | [Exercícios](./Estrutura%20De%20Listas/exercicios.md)               |
-| ⭐️⭐️⭐️      | Estrutura de Funções     | Funções, parâmetros, retorno, organização de código             | [Exercícios](./Estrutura%20De%20Funções/exercicios.md)              |
-| ⭐️⭐️        | Estrutura de Strings     | Manipulação de textos e formatação                              | [Exercícios](./Estrutura%20De%20Strings/exercicios.md)              |
+| ⭐️          | Estrutura Sequencial     | Fundamentos básicos de programação sequencial                   | [Exercícios](./https://zack-rodrigues.github.io/Estudo.Py.BR/Estrutura%20Sequencial/exercicios.html)                |
+| ⭐️          | Estrutura de Decisão     | Condicionais `if/else` e tomada de decisões                     | [Exercícios](https://zack-rodrigues.github.io/Estudo.Py.BR/Estrutura%20De%20Decis%C3%A3o/exercicios.html)              |
+| ⭐️⭐️        | Estrutura de Repetição   | Loops `for/while` e controle de fluxo                           | [Exercícios](https://zack-rodrigues.github.io/Estudo.Py.BR/Estrutura%20De%20Repeti%C3%A7%C3%A3o/exercicios.html)            |
+| ⭐️⭐️        | Estrutura de Listas      | Manipulação de listas e operações com coleções                  | [Exercícios](https://zack-rodrigues.github.io/Estudo.Py.BR/Estrutura%20De%20Listas/exercicios.html)               |
+| ⭐️⭐️⭐️      | Estrutura de Funções     | Funções, parâmetros, retorno, organização de código             | [Exercícios](https://zack-rodrigues.github.io/Estudo.Py.BR/Estrutura%20De%20Fun%C3%A7%C3%B5es/exercicios.html)              |
+| ⭐️⭐️        | Estrutura de Strings     | Manipulação de textos e formatação                              | [Exercícios](https://zack-rodrigues.github.io/Estudo.Py.BR/Estrutura%20De%20Strings/exercicios.html)              |
 | ⭐️⭐️⭐️      | Exercícios com Arquivos  | Leitura, escrita e análise de logs e relatórios                 | [Exercícios](./Estrutura%20De%20Arquivos/exercicios.md)             |
-| ⭐️⭐️⭐️      | Exercícios com Classes   | POO: classes, atributos, métodos e abstração                    | [Exercícios](./Estrutura%20De%20Classes/exercicios.md)              |
-| ⭐️⭐️⭐️⭐️    | Projetos Práticos        | Mini-projetos integrando tudo que foi aprendido                 | [Exercícios](./Exercicios%20De%20Projetos/exercicios.md)            |
+| ⭐️⭐️⭐️      | Exercícios com Classes   | POO: classes, atributos, métodos e abstração                    | [Exercícios](https://zack-rodrigues.github.io/Estudo.Py.BR/Estrutura%20De%20Classes/exercicios.html)              |
+| ⭐️⭐️⭐️⭐️    | Projetos Práticos        | Mini-projetos integrando tudo que foi aprendido                 | [Exercícios](https://zack-rodrigues.github.io/Estudo.Py.BR/Exercicios%20De%20Projetos/exercicios.html)            |
 
 <br>
 
