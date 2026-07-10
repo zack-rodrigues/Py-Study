@@ -2,99 +2,460 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Exercícios com Projetos</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.0/github-markdown-dark.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercícios com Projetos | Estudo.Py.BR</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css">
+  
   <style>
+    /* Paleta de Cores e Tema Base (Estilo GitHub Dark) */
+    :root {
+      --bg-color: #0d1117;
+      --card-bg: #161b22;
+      --text-main: #c9d1d9;
+      --text-muted: #8b949e;
+      --border-color: #30363d;
+      --accent: #58a6ff;
+      --accent-hover: #1f6feb;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
-      background-color: #0d1117;
-      color: #c9d1d9;
-      font-family: system-ui, sans-serif;
-      padding: 2rem;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      padding: 2rem 1rem;
       display: flex;
       justify-content: center;
     }
-    .markdown-body {
+
+    .container {
       max-width: 900px;
+      width: 100%;
     }
-    a {
-      color: #58a6ff;
+
+    /* Navegação e Cabeçalho */
+    .header {
+      margin-bottom: 2.5rem;
     }
-    pre {
-      background-color: #161b22;
-      padding: 1rem;
+    
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 8px 16px;
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
       border-radius: 6px;
-      overflow-x: auto;
+      transition: all 0.2s ease-in-out;
+      margin-bottom: 1.5rem;
     }
-    .exercise {
-      border-bottom: 1px solid #30363d;
-      padding-bottom: 2rem;
-      margin-bottom: 2rem;
+    
+    .back-link:hover {
+      background-color: var(--border-color);
+      color: #ffffff;
     }
-    .resources {
-      background: #161b22;
-      padding: 1rem;
-      border-radius: 6px;
-      margin: 1rem 0;
-    }
-    h2 {
-      border-bottom: 1px solid #30363d;
+
+    h1 {
+      font-size: 2.2rem;
+      border-bottom: 1px solid var(--border-color);
       padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+      color: #ffffff;
     }
+    
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+    }
+
+    /* Grid de Cartões de Exercícios */
+    .exercises-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .exercise-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .exercise-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 0.75rem;
+    }
+    
+    .exercise-header h3 {
+      font-size: 1.3rem;
+      color: var(--accent);
+    }
+    
+    .exercise-desc {
+      margin-bottom: 1.25rem;
+      font-size: 1.05rem;
+      color: #e6edf3;
+    }
+
+    /* Bloco de Preview de Arquivos (estilo VSCode/Terminal) */
+    .file-preview {
+      background-color: #0d1117;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      margin-bottom: 1.5rem;
+      overflow: hidden;
+    }
+    
+    .file-preview-header {
+      background-color: #161b22;
+      border-bottom: 1px solid var(--border-color);
+      padding: 8px 12px;
+      font-size: 0.85rem;
+      color: #8b949e;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .file-preview-content {
+      padding: 12px 16px;
+      font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+      font-size: 0.9rem;
+      color: #c9d1d9;
+      white-space: pre-wrap;
+      margin: 0;
+    }
+
+    /* Bloco de Recursos Adicionais */
+    .resources-block {
+      background-color: #161b22;
+      border-left: 4px solid var(--accent);
+      padding: 12px 16px;
+      margin-bottom: 1.25rem;
+      border-radius: 0 6px 6px 0;
+    }
+    
+    .resources-block strong {
+      color: #ffffff;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    
+    .resources-block ul {
+      margin-left: 1.5rem;
+      color: #c9d1d9;
+    }
+
+    /* Botão de Resposta (details/summary) */
+    details {
+      background-color: var(--bg-color);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    summary {
+      padding: 12px 16px;
+      cursor: pointer;
+      color: var(--accent);
+      font-weight: bold;
+      background-color: var(--card-bg);
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s;
+      user-select: none;
+    }
+    
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary:hover {
+      background-color: #1f242c;
+    }
+
+    summary::before {
+      content: "👁️ Exibir Resposta";
+    }
+    
+    details[open] summary::before {
+      content: "🔽 Ocultar Resposta";
+    }
+    
+    details[open] summary {
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    /* Bloco de Código */
+    .code-content {
+      padding: 0;
+      margin: 0;
+    }
+
+    .code-content pre {
+      margin: 0;
+      padding: 16px;
+      overflow-x: auto;
+      background-color: transparent !important;
+    }
+
+    .code-content code {
+      font-family: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
   </style>
 </head>
 <body>
-  <h3>
-    ↩️<a href="https://zack-rodrigues.github.io/Estudo.Py.BR/">Voltar</a>
-  <article class="markdown-body">
-    <h1>📁 Exercícios com Classes</h1>
 
-    <div class="exercise">
-      <h2>1. Controle de cotas de disco <a href="./controle-cotas-disco.py">[código]</a></h2>
-      <p>A <strong>ACME Inc.</strong>, uma organização com mais de 1500 funcionários, está tendo problemas de espaço em disco no seu servidor de arquivos.</p>
-      
-      <h3>Arquivo de entrada (<code>usuarios.txt</code>):</h3>
-      <pre>alexandre       456123789
+  <div class="container">
+    <div class="header">
+      <a href="https://zack-rodrigues.github.io/Estudo.Py.BR/" class="back-link">↩️ Voltar para a Trilha</a>
+      <h1>💼 Exercícios com Projetos</h1>
+      <p class="subtitle">Chegou a hora de juntar tudo! Vamos construir projetos práticos voltados para análise de dados, monitoramento de servidores e automação do dia a dia.</p>
+    </div>
+
+    <div class="exercises-grid">
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>1. Controle de Cotas de Disco</h3></div>
+        <p class="exercise-desc">A <strong>ACME Inc.</strong>, uma organização com mais de 1500 funcionários, está tendo problemas de espaço em disco no seu servidor de arquivos. Você foi encarregado de desenvolver um programa para gerar o relatório gerencial de uso.</p>
+        
+        <div class="file-preview">
+          <div class="file-preview-header">📅 Arquivo de entrada: usuarios.txt</div>
+          <pre class="file-preview-content">alexandre       456123789
 anderson        1245698456
 antonio         123456456
 carlos          91257581
 cesar           987458
 rosemary        789456125</pre>
+        </div>
 
-      <h3>Relatório gerado (<code>relatório.txt</code>):</h3>
-      <pre>ACME Inc.           Uso do espaço em disco pelos usuários
-------------------------------------------------------------------------
-Nr.  Usuário        Espaço utilizado     % do uso
+        <div class="resources-block">
+          <strong>Desafios Adicionais (Aplicados na Resposta):</strong>
+          <ul>
+            <li>Ordenar os usuários pelo percentual de espaço ocupado (do maior para o menor).</li>
+            <li>Gerar a saída final não apenas no console, mas em uma página <strong>HTML</strong>.</li>
+          </ul>
+        </div>
 
-1    alexandre       434,99 MB            16,85%
-2    anderson       1187,99 MB            46,02%
-3    antonio         117,73 MB             4,56%
-4    carlos           87,03 MB             3,37%
-5    cesar             0,94 MB             0,04%
-6    rosemary        752,88 MB            29,16%
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">import os
 
-Espaço total ocupado: 2581,57 MB
-Espaço médio ocupado: 430,26 MB</pre>
+def bytes_para_mb(bytes_val):
+    return bytes_val / (1024 * 1024)
 
-      <div class="resources">
-        <strong>Recursos adicionais (opcional):</strong>
-        <ul>
-          <li>Ordenar os usuários pelo percentual de espaço ocupado</li>
-          <li>Mostrar apenas os <em>n</em> primeiros em uso, definido pelo usuário</li>
-          <li>Gerar a saída numa página <strong>HTML</strong></li>
-          <li>Criar o programa que <strong>lê as pastas e gera o arquivo inicial</strong></li>
-        </ul>
+# 1. Gerando o arquivo de teste (Mock)
+with open("usuarios.txt", "w") as f:
+    f.write("alexandre       456123789\nanderson        1245698456\n"
+            "antonio         123456456\ncarlos          91257581\n"
+            "cesar           987458\nrosemary        789456125\n")
+
+usuarios = []
+total_bytes = 0
+
+# 2. Leitura e processamento de dados
+with open("usuarios.txt", "r") as f:
+    for linha in f:
+        partes = linha.split()
+        if len(partes) == 2:
+            nome = partes[0]
+            espaco = int(partes[1])
+            # Armazenando como Dicionário para facilitar a ordenação
+            usuarios.append({"nome": nome, "espaco": espaco})
+            total_bytes += espaco
+
+# 3. Desafio Extra: Ordenar do maior para o menor consumo de disco
+usuarios.sort(key=lambda x: x["espaco"], reverse=True)
+
+total_mb = bytes_para_mb(total_bytes)
+media_mb = total_mb / len(usuarios) if usuarios else 0
+
+# 4. Desafio Extra: Gerando o relatório em HTML
+html = f"""
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Relatório ACME Inc.</title>
+    <style> 
+    body { 
+    font-family: Arial, sans-serif; 
+    background: #f4f4f9; 
+    padding: 20px; 
+}
+table { 
+    border-collapse: collapse; 
+    width: 60%; 
+    background: #fff; 
+}
+th, td { 
+    border: 1px solid #ddd; 
+    padding: 8px; 
+    text-align: center; 
+}
+th { 
+    background-color: #007bff; 
+    color: white; 
+}
+.summary { 
+    margin-top: 20px; 
+    font-weight: bold; 
+}
+      
+    </style>
+</head>
+<body>
+    <h2>ACME Inc. - Uso do espaço em disco pelos usuários</h2>
+    <table>
+        <tr><th>Nr.</th><th>Usuário</th><th>Espaço (MB)</th><th>% do uso</th></tr>
+"""
+
+for i, u in enumerate(usuarios):
+    espaco_mb = bytes_para_mb(u["espaco"])
+    perc = (u["espaco"] / total_bytes) * 100
+    html += f"<tr><td>{i+1}</td><td>{u['nome']}</td><td>{espaco_mb:.2f} MB</td><td>{perc:.2f}%</td></tr>\n"
+
+html += f"""
+    </table>
+    <div class="summary">
+        <p>Espaço total ocupado: {total_mb:.2f} MB</p>
+        <p>Espaço médio ocupado: {media_mb:.2f} MB</p>
+    </div>
+</body>
+</html>
+"""
+
+# Salvando a página
+with open("relatorio_acme.html", "w", encoding="utf-8") as f:
+    f.write(html)
+
+print("✅ Análise concluída! O arquivo 'relatorio_acme.html' foi gerado no diretório atual com a listagem ordenada.")</code></pre></div>
+        </details>
       </div>
-    </div>
 
-    <div class="exercise">
-      <h2>2. Analisador de logs do Apache <a href="./analisador-logs-apache.py">[código]</a></h2>
-      <p>Desenvolva um analisador de log do Apache que mostre quais as <strong>strings de pesquisa do Google</strong> que mais levam internautas para o site da sua organização.</p>
-    </div>
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>2. Analisador de Logs do Apache</h3></div>
+        <p class="exercise-desc">Desenvolva um analisador de log do Apache HTTP Server que varra o arquivo e extraia as <strong>strings de pesquisa do Google</strong> que estão redirecionando internautas para o site da sua organização. Ao final, conte e mostre o ranking das mais pesquisadas.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">import urllib.parse
+from collections import Counter
 
-    <div class="exercise">
-      <h2>3. Analisador de logs do Squid: sites bloqueados <a href="./analisador-logs-squid.py">[código]</a></h2>
-      <p>Desenvolva um analisador de log do Squid que mostre <strong>quais os sites mais bloqueados</strong> em uma organização.</p>
+# 1. Gerando um Log de servidor (Mock) para testar o código
+log_mock = """
+127.0.0.1 - - [10/Jul/2026:12:00:00] "GET / HTTP/1.1" 200 "https://www.google.com/search?q=tutorial+de+python" "Mozilla/5.0"
+127.0.0.1 - - [10/Jul/2026:12:05:00] "GET / HTTP/1.1" 200 "https://www.google.com/search?q=exercicios+de+programacao" "Mozilla/5.0"
+127.0.0.1 - - [10/Jul/2026:12:10:00] "GET / HTTP/1.1" 200 "https://www.google.com/search?q=tutorial+de+python" "Mozilla/5.0"
+127.0.0.1 - - [10/Jul/2026:12:15:00] "GET / HTTP/1.1" 200 "https://www.bing.com/search?q=isso+sera+ignorado" "Mozilla/5.0"
+127.0.0.1 - - [10/Jul/2026:12:20:00] "GET / HTTP/1.1" 200 "https://www.google.com/search?q=como+analisar+logs" "Mozilla/5.0"
+"""
+with open("apache_access.log", "w") as f:
+    f.write(log_mock)
+
+# 2. O Programa Real
+termos_pesquisa = []
+
+with open("apache_access.log", "r") as f:
+    for linha in f:
+        # Verifica se a requisição veio do Google
+        if "google.com" in linha:
+            try:
+                # Extraindo o link do Referrer (ficam entre aspas duplas nos logs do Apache)
+                partes = linha.split('"')
+                referrer = partes[3] 
+                
+                # urllib facilita o parse da URL e da Query String (tudo depois do '?')
+                parsed_url = urllib.parse.urlparse(referrer)
+                query_params = urllib.parse.parse_qs(parsed_url.query)
+                
+                # A pesquisa do Google sempre fica na variável 'q'
+                if 'q' in query_params:
+                    # parse_qs retorna uma lista, pegamos o índice 0
+                    termo = query_params['q'][0] 
+                    termos_pesquisa.append(termo)
+            except Exception as e:
+                continue
+
+# Counter já faz o trabalho de agrupar e contar incidências repetidas!
+contagem = Counter(termos_pesquisa)
+
+print("🔎 TOP Termos Pesquisados no Google que levaram ao nosso site:\n")
+for termo, freq in contagem.most_common(5):
+    print(f"-> '{termo}': {freq} acesso(s)")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>3. Analisador de Logs do Squid (Firewall)</h3></div>
+        <p class="exercise-desc">Desenvolva um analisador de log do Squid Proxy/Firewall que identifique a flag <code>TCP_DENIED/403</code>. O programa deve processar as URLs barradas, extrair apenas o domínio principal, e exibir um ranking de <strong>quais são os sites mais bloqueados</strong> na rede da organização.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">import urllib.parse
+from collections import Counter
+
+# 1. Gerando um Log do Squid (Mock) para testar o código
+log_mock = """
+1678888888.1 100 192.168.0.10 TCP_DENIED/403 0 GET http://www.facebook.com/videos - HIER_NONE/- text/html
+1678888889.1 100 192.168.0.11 TCP_DENIED/403 0 GET http://www.youtube.com/watch - HIER_NONE/- text/html
+1678888890.1 100 192.168.0.10 TCP_DENIED/403 0 GET http://www.facebook.com/messages - HIER_NONE/- text/html
+1678888891.1 100 192.168.0.12 TCP_MISS/200 1024 GET http://www.python.org/ - DIRECT/1.2.3.4 text/html
+1678888892.1 100 192.168.0.15 TCP_DENIED/403 0 GET http://www.instagram.com/ - HIER_NONE/- text/html
+1678888893.1 100 192.168.0.10 TCP_DENIED/403 0 GET http://www.youtube.com/shorts - HIER_NONE/- text/html
+"""
+with open("squid.log", "w") as f:
+    f.write(log_mock)
+
+# 2. O Programa Real
+sites_bloqueados = []
+
+with open("squid.log", "r") as f:
+    for linha in f:
+        partes = linha.split()
+        
+        # O Squid divide os campos por espaço. O Status da requisição fica no índice 3.
+        # Filtramos apenas as requisições barradas pelo firewall (TCP_DENIED)
+        if len(partes) > 6 and "TCP_DENIED" in partes[3]:
+            url = partes[6] # A URL inteira acessada fica no índice 6
+            
+            try:
+                # .netloc puxa apenas o domínio (ex: www.facebook.com), removendo "/videos" e derivados.
+                dominio = urllib.parse.urlparse(url).netloc
+                sites_bloqueados.append(dominio)
+            except Exception as e:
+                continue
+
+contagem = Counter(sites_bloqueados)
+
+print("🛡️ Relatório de Firewall - TOP Domínios Bloqueados:\n")
+for dominio, freq in contagem.most_common(10):
+    print(f"❌ {dominio}: {freq} bloqueio(s) registrado(s)")</code></pre></div>
+        </details>
+      </div>
+
     </div>
-  </article>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
 </body>
 </html>

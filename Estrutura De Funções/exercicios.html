@@ -2,121 +2,595 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Funções - Exercícios</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.0/github-markdown-dark.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estrutura de Funções - Exercícios | Estudo.Py.BR</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css">
+  
   <style>
+    /* Paleta de Cores e Tema Base (Estilo GitHub Dark) */
+    :root {
+      --bg-color: #0d1117;
+      --card-bg: #161b22;
+      --text-main: #c9d1d9;
+      --text-muted: #8b949e;
+      --border-color: #30363d;
+      --accent: #58a6ff;
+      --accent-hover: #1f6feb;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
-      background-color: #0d1117;
-      color: #c9d1d9;
-      font-family: system-ui, sans-serif;
-      padding: 2rem;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      padding: 2rem 1rem;
       display: flex;
       justify-content: center;
     }
-    .markdown-body {
+
+    .container {
       max-width: 900px;
+      width: 100%;
     }
-    a {
-      color: #58a6ff;
+
+    /* Navegação e Cabeçalho */
+    .header {
+      margin-bottom: 2.5rem;
     }
-    pre {
-      background-color: #161b22;
-      padding: 1rem;
+    
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 8px 16px;
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
       border-radius: 6px;
-      overflow-x: auto;
+      transition: all 0.2s ease-in-out;
+      margin-bottom: 1.5rem;
     }
+    
+    .back-link:hover {
+      background-color: var(--border-color);
+      color: #ffffff;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+      color: #ffffff;
+    }
+    
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+    }
+
+    /* Grid de Cartões de Exercícios */
+    .exercises-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .exercise-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .exercise-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 0.75rem;
+    }
+    
+    .exercise-header h3 {
+      font-size: 1.3rem;
+      color: var(--accent);
+    }
+    
+    .exercise-desc {
+      margin-bottom: 1.25rem;
+      font-size: 1.05rem;
+      color: #e6edf3;
+    }
+
+    /* Bloco de Exemplo */
+    .example-block {
+      background-color: #0d1117;
+      border-left: 4px solid var(--accent);
+      padding: 12px 16px;
+      margin-bottom: 1.25rem;
+      border-radius: 0 6px 6px 0;
+      font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+      font-size: 0.9rem;
+      color: #8b949e;
+      white-space: pre-wrap;
+    }
+
+    /* Botão de Resposta (details/summary) */
+    details {
+      background-color: var(--bg-color);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    summary {
+      padding: 12px 16px;
+      cursor: pointer;
+      color: var(--accent);
+      font-weight: bold;
+      background-color: var(--card-bg);
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s;
+      user-select: none;
+    }
+    
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary:hover {
+      background-color: #1f242c;
+    }
+
+    summary::before {
+      content: "👁️ Exibir Resposta";
+    }
+    
+    details[open] summary::before {
+      content: "🔽 Ocultar Resposta";
+    }
+    
+    details[open] summary {
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    /* Bloco de Código */
+    .code-content {
+      padding: 0;
+      margin: 0;
+    }
+
+    .code-content pre {
+      margin: 0;
+      padding: 16px;
+      overflow-x: auto;
+      background-color: transparent !important;
+    }
+
+    .code-content code {
+      font-family: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
   </style>
 </head>
 <body>
-  <h3>
-   ↩️<a href="https://zack-rodrigues.github.io/Estudo.Py.BR/">Voltar</a>
-   <article class="markdown-body">
-      <h1>Lista de Exercícios de Estrutura de Funções</h1>
-      <p>Aqui estão os exercícios para praticar estruturas de funções em Python. Clique nos links para acessar os códigos correspondentes.</p>
-      <h2>Exercícios</h2>
-      <ol>
-        <li><strong>Impressão enésima</strong>:
-          <p>Faça um programa para imprimir:</p>
-          <pre>1
+
+  <div class="container">
+    <div class="header">
+      <a href="https://zack-rodrigues.github.io/Estudo.Py.BR/" class="back-link">↩️ Voltar para a Trilha</a>
+      <h1>🛠️ Estrutura de Funções</h1>
+      <p class="subtitle">Aprenda a modularizar seu código! As funções (<code>def</code>) ajudam a evitar repetição de código, facilitam a manutenção e deixam a sua lógica muito mais profissional.</p>
+    </div>
+
+    <div class="exercises-grid">
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>1. Impressão Enésima</h3></div>
+        <p class="exercise-desc">Faça um programa com uma função que receba um valor `n` inteiro e imprima até a n-ésima linha o seguinte formato:</p>
+        <div class="example-block">1
 2   2
 3   3   3
 .....
-n   n   n   n   n   n  ... n</pre>
-          <p>Para um n informado pelo usuário. Use uma função que receba um valor n inteiro e imprima até a n-ésima linha.</p>
-          <a href="./impressao_enesima.py">Código</a>
-        </li>
-        
-        <li><strong>Triângulo numérico</strong>:
-          <p>Faça um programa para imprimir:</p>
-          <pre>1
+n   n   n   n   n   n  ... n</div>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">def imprimir_linhas(n):
+    for i in range(1, n + 1):
+        # Repete o número 'i' transformado em string, separando por espaço
+        # Ex: i=3 -> "3 " * 3 = "3 3 3 "
+        print((str(i) + " ") * i)
+
+n = int(input("Digite um número inteiro: "))
+imprimir_linhas(n)</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>2. Triângulo Numérico</h3></div>
+        <p class="exercise-desc">Crie uma função que receba um valor `n` e construa o seguinte padrão numérico em forma de triângulo retângulo:</p>
+        <div class="example-block">1
 1   2
 1   2   3
 .....
-1   2   3   ...  n</pre>
-          <p>Para um n informado pelo usuário. Use uma função que receba um valor n inteiro e imprima até a n-ésima linha.</p>
-          <a href="./triangulo_numerico.py">Código</a>
-        </li>
+1   2   3   ...  n</div>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">def imprimir_triangulo(n):
+    for i in range(1, n + 1):
+        # Usamos List Comprehension para gerar os números de 1 até a linha atual 'i'
+        linha = [str(numero) for numero in range(1, i + 1)]
+        # O join agrupa a lista com espaços
+        print(" ".join(linha))
+
+n = int(input("Digite um número inteiro: "))
+imprimir_triangulo(n)</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>3. Soma de Três Números</h3></div>
+        <p class="exercise-desc">Faça um programa, com uma função que necessite de três argumentos, e que forneça a soma desses três argumentos ao ser chamada.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">def soma_tres(a, b, c):
+    return a + b + c
+
+n1 = float(input("Digite o 1º número: "))
+n2 = float(input("Digite o 2º número: "))
+n3 = float(input("Digite o 3º número: "))
+
+resultado = soma_tres(n1, n2, n3)
+print(f"A soma dos números é: {resultado}")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>4. Positivo ou Negativo</h3></div>
+        <p class="exercise-desc">Faça um programa com uma função que necessite de um argumento. A função retorna o caractere <code>'P'</code> se seu argumento for positivo, e <code>'N'</code> se seu argumento for zero ou negativo.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">def validar_sinal(numero):
+    if numero > 0:
+        return 'P'
+    else:
+        return 'N'
+
+valor = float(input("Digite um número: "))
+resultado = validar_sinal(valor)
+
+print(f"Resultado da função: {resultado}")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>5. Cálculo de Imposto</h3></div>
+        <p class="exercise-desc">Faça um programa com uma função chamada <code>somaImposto</code>. A função possui dois parâmetros formais: <code>taxaImposto</code> (porcentagem) e <code>custo</code> (preço do item). A função deve retornar o novo valor do item incluindo o imposto.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">def somaImposto(taxaImposto, custo):
+    valor_imposto = custo * (taxaImposto / 100)
+    custo_final = custo + valor_imposto
+    return custo_final
+
+custo_produto = float(input("Qual o custo do produto? R$ "))
+taxa = float(input("Qual a taxa de imposto (%)? "))
+
+preco_final = somaImposto(taxa, custo_produto)
+print(f"O preço do item com impostos é R$ {preco_final:.2f}")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>6. Conversão de Horário (24h para 12h)</h3></div>
+        <p class="exercise-desc">Faça um programa que converta um horário do formato 24 horas para 12 horas (ex: 14:25 vira 02:25 P.M.). Você deve criar uma função para a conversão e outra função apenas para a exibição na tela.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">def converter_hora(hora, minuto):
+    periodo = "A.M."
+    
+    if hora == 0:
+        hora_convertida = 12
+    elif hora == 12:
+        hora_convertida = 12
+        periodo = "P.M."
+    elif hora > 12:
+        hora_convertida = hora - 12
+        periodo = "P.M."
+    else:
+        hora_convertida = hora
         
-        <li><strong>Soma de três números</strong>:
-          <p>Faça um programa com uma função que necessite de três argumentos e que forneça a soma desses três argumentos.</p>
-          <a href="./soma_tres_numeros.py">Código</a>
-        </li>
+    return hora_convertida, minuto, periodo
+
+def exibir_hora(h, m, p):
+    # O :02d garante que os minutos tenham 2 casas (ex: 05 ao invés de 5)
+    print(f"Horário convertido: {h:02d}:{m:02d} {p}\n")
+
+while True:
+    h = int(input("Digite a hora (0 a 23) ou -1 para sair: "))
+    if h == -1:
+        break
+    m = int(input("Digite os minutos (0 a 59): "))
+    
+    h_conv, m_conv, periodo = converter_hora(h, m)
+    exibir_hora(h_conv, m_conv, periodo)</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>7. Cálculo de Pagamento (Multas e Juros)</h3></div>
+        <p class="exercise-desc">Crie a função <code>valorPagamento</code>. Se o dia de atraso for zero, retorne o valor normal. Se houver atraso, cobre 3% de multa fixa + 0,1% de juros por dia de atraso. O programa principal deve pedir as prestações em loop até o usuário digitar 0, imprimindo o relatório final no encerramento.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">def valorPagamento(valor, dias_atraso):
+    if dias_atraso == 0:
+        return valor
+    else:
+        multa = valor * 0.03
+        juros = valor * (0.001 * dias_atraso)
+        return valor + multa + juros
+
+total_arrecadado = 0
+qtd_prestacoes = 0
+
+while True:
+    valor_prestacao = float(input("\nValor da prestação (0 para sair): R$ "))
+    if valor_prestacao == 0:
+        break
         
-        <li><strong>Positivo ou Negativo</strong>:
-          <p>Faça um programa com uma função que necessite de um argumento. A função retorna o valor de caractere 'P', se seu argumento for positivo, e 'N', se seu argumento for zero ou negativo.</p>
-          <a href="./positivo_ou_negativo.py">Código</a>
-        </li>
+    atraso = int(input("Dias em atraso: "))
+    
+    # Chama a função
+    valor_pago = valorPagamento(valor_prestacao, atraso)
+    print(f"Valor a ser pago: R$ {valor_pago:.2f}")
+    
+    # Acumuladores para o relatório final
+    total_arrecadado += valor_pago
+    qtd_prestacoes += 1
+
+print("\n--- Relatório do Dia ---")
+print(f"Prestações pagas: {qtd_prestacoes}")
+print(f"Total arrecadado: R$ {total_arrecadado:.2f}")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>8. Contagem de Dígitos</h3></div>
+        <p class="exercise-desc">Faça uma função que informe a quantidade de dígitos numéricos de um determinado número inteiro fornecido. (Dica: pense no número como uma string).</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">def conta_digitos(numero):
+    # O abs() remove o sinal negativo caso exista, depois converte pra string
+    numero_str = str(abs(numero))
+    return len(numero_str)
+
+num = int(input("Digite um número inteiro: "))
+quantidade = conta_digitos(num)
+
+print(f"O número {num} tem {quantidade} dígito(s).")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>9. Reverso do Número</h3></div>
+        <p class="exercise-desc">Faça uma função que retorne o reverso de um número inteiro informado. Exemplo: Se o usuário enviar <code>127</code>, a função retorna <code>721</code>.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">def reverso_numero(numero):
+    # Removemos o sinal, invertemos com o slicing [::-1]
+    num_invertido = str(abs(numero))[::-1]
+    
+    # Devolvemos o sinal de menos se for negativo e retornamos como inteiro
+    if numero < 0:
+        return int("-" + num_invertido)
+    
+    return int(num_invertido)
+
+num = int(input("Digite um número: "))
+print(f"O reverso de {num} é {reverso_numero(num)}.")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>10. Jogo de Craps (Dados)</h3></div>
+        <p class="exercise-desc">Faça um programa que implemente o Jogo de Craps usando o pacote <code>random</code>. <br><b>Regras:</b> Na 1ª rolagem, tirar 7 ou 11 = Ganhou (Natural). Tirar 2, 3 ou 12 = Perdeu (Craps). Se tirar 4, 5, 6, 8, 9 ou 10, vira seu "Ponto". Continue rolando: se tirar o Ponto = Ganhou. Se tirar 7 antes = Perdeu.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">import random
+
+def rolar_dados():
+    # Rola dois dados separadamente
+    dado1 = random.randint(1, 6)
+    dado2 = random.randint(1, 6)
+    return dado1 + dado2
+
+ponto = 0
+jogada = 1
+
+print("🎲 Bem-vindo ao Cassino - Jogo de Craps! 🎲")
+
+while True:
+    input(f"\n[Enter] para rolar os dados (Jogada {jogada})...")
+    soma = rolar_dados()
+    print(f"Você rolou: {soma}")
+    
+    if jogada == 1:
+        if soma in [7, 11]:
+            print("Natural! Você GANHOU! 🎉")
+            break
+        elif soma in [2, 3, 12]:
+            print("Craps! Você PERDEU! 💀")
+            break
+        else:
+            ponto = soma
+            print(f"Seu Ponto é {ponto}.")
+            print(f"Objetivo: Rolar {ponto} novamente antes de rolar um 7.")
+    else:
+        if soma == ponto:
+            print(f"Você rolou o seu Ponto ({ponto})! Você GANHOU! 🎉")
+            break
+        elif soma == 7:
+            print("Você rolou um 7 antes do seu Ponto! Você PERDEU! 💀")
+            break
+            
+    jogada += 1</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>11. Data por Extenso</h3></div>
+        <p class="exercise-desc">Construa uma função que receba uma string de data no formato <code>DD/MM/AAAA</code> e devolva uma string no formato <code>D de mês-por-extenso de AAAA</code>. Retorne "Inválido" em caso de erro.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">def data_por_extenso(data_str):
+    meses = [
+        "janeiro", "fevereiro", "março", "abril", "maio", "junho",
+        "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"
+    ]
+    
+    # Tenta fatiar a data
+    partes = data_str.split('/')
+    if len(partes) != 3:
+        return "Formato de data inválido."
         
-        <li><strong>Cálculo de Imposto</strong>:
-          <p>Faça um programa com uma função chamada <code>somaImposto</code>. A função possui dois parâmetros formais: <code>taxaImposto</code>, que é a quantia de imposto sobre vendas expressa em porcentagem, e <code>custo</code>, que é o custo de um item antes do imposto. A função "altera" o valor de custo para incluir o imposto sobre vendas.</p>
-          <a href="./calculo_imposto.py">Código</a>
-        </li>
+    dia = int(partes[0])
+    mes = int(partes[1])
+    ano = int(partes[2])
+    
+    if 1 <= mes <= 12:
+        nome_mes = meses[mes - 1] # Índice começa em zero
+        return f"{dia} de {nome_mes} de {ano}"
+    else:
+        return "Mês inválido."
+
+data = input("Digite a data (DD/MM/AAAA): ")
+print(data_por_extenso(data))</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>12. Embaralhar Palavra</h3></div>
+        <p class="exercise-desc">Construa uma função que receba uma string como parâmetro e devolva outra string com os caracteres totalmente embaralhados (use <code>random.shuffle</code>).</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">import random
+
+def embaralhar_texto(palavra):
+    # A string não tem "shuffle", precisamos converter pra lista primeiro
+    lista_chars = list(palavra.lower())
+    
+    # Embaralha a lista in-place (direto na memória)
+    random.shuffle(lista_chars)
+    
+    # Junta as letras de novo em uma string e converte para maiúsculo
+    palavra_embaralhada = "".join(lista_chars).upper()
+    
+    return palavra_embaralhada
+
+texto = input("Digite uma palavra: ")
+print(f"Embaralhado: {embaralhar_texto(texto)}")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>13. Desenha Moldura</h3></div>
+        <p class="exercise-desc">Construa uma função que desenhe um retângulo usando os caracteres <code>+</code>, <code>-</code> e <code>|</code>. A função recebe <code>linhas</code> e <code>colunas</code>. Dentro da função, limite os valores mínimo (1) e máximo (20) caso o usuário extrapole.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">def desenhar_moldura(linhas, colunas):
+    # max/min garantem que o valor não fuja de 1 a 20
+    linhas = max(1, min(20, linhas))
+    colunas = max(1, min(20, colunas))
+    
+    # Construção do topo e da base
+    if colunas > 1:
+        topo_base = "+" + "-" * (colunas - 2) + "+"
+    else:
+        topo_base = "+"
         
-        <li><strong>Conversão de Horário</strong>:
-          <p>Faça um programa que converta da notação de 24 horas para a notação de 12 horas. A entrada é dada em dois inteiros. Deve haver pelo menos duas funções: uma para fazer a conversão e uma para a saída.</p>
-          <a href="./conversao_horario.py">Código</a>
-        </li>
+    # Construção das paredes do meio
+    if colunas > 1:
+        meio = "|" + " " * (colunas - 2) + "|"
+    else:
+        meio = "|"
         
-        <li><strong>Cálculo de Pagamento</strong>:
-          <p>Faça um programa que use a função <code>valorPagamento</code> para determinar o valor a ser pago por uma prestação de uma conta. O programa deverá solicitar ao usuário o valor da prestação e o número de dias em atraso e passar estes valores para a função <code>valorPagamento</code>, que calculará o valor a ser pago e devolverá este valor ao programa que a chamou. O programa deverá então exibir o <code>valor a ser pago</code> na tela. Após a execução o programa deverá voltar a pedir outro valor de prestação e assim continuar até que seja informado um valor igual a <code>zero</code> para a prestação. Neste momento o programa deverá ser encerrado, exibindo o relatório do dia, que conterá a quantidade e o valor total de prestações pagas no dia. O cálculo do valor a ser pago é feito da seguinte forma. Para pagamentos sem atraso, cobrar o valor da prestação. Quando houver atraso, cobrar <code>3%</code> de multa, mais <code>0,1%</code> de juros por dia de atraso.</p>
-          <a href="./calculo_pagamento.py">Código</a>
-        </li>
-        
-        <li><strong>Contagem de Dígitos</strong>:
-          <p>Faça uma função que informe a quantidade de dígitos de um determinado número inteiro informado.</p>
-          <a href="./contagem_digitos.py">Código</a>
-        </li>
-        
-        <li><strong>Reverso do Número</strong>:
-          <p>Faça uma função que retorne o reverso de um número inteiro informado. Por exemplo: <code>127 -> 721</code>.</p>
-          <a href="./reverso_numero.py">Código</a>
-        </li>
-        
-        <li><strong>Jogo de Craps</strong>:
-          <p>Faça um programa que implemente um jogo de Craps, onde o jogador rola dados e segue regras específicas para ganhar ou perder.</p>
-          <a href="./jogo_craps.py">Código</a>
-        </li>
-        
-        <li><strong>Data por Extenso</strong>:
-          <p>Construa uma função que receba uma data no formato <code>DD/MM/AAAA</code> e devolva uma string no formato <code>D de mesPorExtenso de AAAA</code>.</p>
-          <a href="./data_por_extenso.py">Código</a>
-        </li>
-        
-        <li><strong>Embaralhar Palavra</strong>:
-          <p>Construa uma função que receba uma string como parâmetro e devolva outra string com os caracteres embaralhados.</p>
-          <a href="./embaralha_palavra.py">Código</a>
-        </li>
-        
-        <li><strong>Desenha Moldura</strong>:
-          <p>Construa uma função que desenhe um retângulo usando os caracteres <code>+</code>, <code>-</code> e <code>|</code>. A função deve receber dois parâmetros, <code>linhas</code> e <code>colunas</code>, ajustando-os para um intervalo válido de 1 a 20.</p>
-          <a href="./desenha_moldura.py">Código</a>
-        </li>
-        
-        <li><strong>Quadrado Mágico</strong>:
-          <p>Elabore uma função que identifica e mostra na tela todos os quadrados mágicos 3x3, onde a soma das linhas, colunas e diagonais é a mesma.</p>
-          <a href="./quadrado_magico.py">Código</a>
-        </li>
-      </ol>
-    </article>
+    # Desenhando
+    print(topo_base)
+    for _ in range(linhas - 2):
+        print(meio)
+    if linhas > 1:
+        print(topo_base)
+
+l = int(input("Quantidade de linhas (1-20): "))
+c = int(input("Quantidade de colunas (1-20): "))
+desenhar_moldura(l, c)</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>14. Matriz: Quadrado Mágico (3x3)</h3></div>
+        <p class="exercise-desc">Elabore uma função que identifica e mostra na tela todos os "Quadrados Mágicos" de tamanho 3x3. Um quadrado mágico possui números de 1 a 9 onde a soma de qualquer linha, coluna ou diagonal sempre resulta em 15.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">import itertools
+
+def verificar_magico(matriz_plana):
+    # A matriz será uma tupla de 9 índices. Ex: [0][1][2] é a 1ª linha
+    
+    # Linhas
+    l1 = sum(matriz_plana[0:3])
+    l2 = sum(matriz_plana[3:6])
+    l3 = sum(matriz_plana[6:9])
+    
+    # Colunas
+    c1 = matriz_plana[0] + matriz_plana[3] + matriz_plana[6]
+    c2 = matriz_plana[1] + matriz_plana[4] + matriz_plana[7]
+    c3 = matriz_plana[2] + matriz_plana[5] + matriz_plana[8]
+    
+    # Diagonais
+    d1 = matriz_plana[0] + matriz_plana[4] + matriz_plana[8]
+    d2 = matriz_plana[2] + matriz_plana[4] + matriz_plana[6]
+    
+    # Retorna True se TODOS somarem 15
+    return l1 == l2 == l3 == c1 == c2 == c3 == d1 == d2 == 15
+
+def imprimir_quadrados_magicos():
+    # itertools cria todas as permutações possíveis com os números de 1 a 9!
+    # Tem muita magia por baixo dos panos no Python...
+    combinacoes = itertools.permutations(range(1, 10))
+    
+    contador = 0
+    for p in combinacoes:
+        if verificar_magico(p):
+            contador += 1
+            print(f"\nQuadrado Mágico #{contador}:")
+            print(f" {p[0]} | {p[1]} | {p[2]} ")
+            print(f" {p[3]} | {p[4]} | {p[5]} ")
+            print(f" {p[6]} | {p[7]} | {p[8]} ")
+
+print("Calculando todos os quadrados mágicos 3x3...")
+imprimir_quadrados_magicos()</code></pre></div>
+        </details>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
 </body>
 </html>

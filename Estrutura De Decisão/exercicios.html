@@ -2,326 +2,900 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Estrutura de Decisão - Exercícios</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.0/github-markdown-dark.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estrutura de Decisão - Exercícios | Estudo.Py.BR</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css">
+  
   <style>
+    /* Paleta de Cores e Tema Base (Estilo GitHub Dark) */
+    :root {
+      --bg-color: #0d1117;
+      --card-bg: #161b22;
+      --text-main: #c9d1d9;
+      --text-muted: #8b949e;
+      --border-color: #30363d;
+      --accent: #58a6ff;
+      --accent-hover: #1f6feb;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
-      background-color: #0d1117;
-      color: #c9d1d9;
-      font-family: system-ui, sans-serif;
-      padding: 2rem;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      padding: 2rem 1rem;
       display: flex;
       justify-content: center;
     }
-    .markdown-body {
+
+    .container {
       max-width: 900px;
+      width: 100%;
     }
-    a {
-      color: #58a6ff;
+
+    /* Navegação e Cabeçalho */
+    .header {
+      margin-bottom: 2.5rem;
     }
-    li {
+    
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 8px 16px;
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      transition: all 0.2s ease-in-out;
       margin-bottom: 1.5rem;
-      line-height: 1.6;
     }
-    li > p {
-      margin: 0.5rem 0;
+    
+    .back-link:hover {
+      background-color: var(--border-color);
+      color: #ffffff;
     }
-    li > ul, li > ol {
-      margin: 0.5rem 0 1rem;
-      padding-left: 1.5rem;
-    }
-    .code-link {
-      display: block;
-      margin-top: 0.75rem;
-      font-weight: 500;
-    }
+
     h1 {
-      border-bottom: 1px solid #30363d;
+      font-size: 2.2rem;
+      border-bottom: 1px solid var(--border-color);
       padding-bottom: 0.5rem;
       margin-bottom: 1rem;
+      color: #ffffff;
     }
-    h2 {
-      margin: 1.5rem 0 1rem;
-      border-bottom: 1px solid #30363d;
-      padding-bottom: 0.3rem;
+    
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 1.1rem;
     }
-    table {
-      border-collapse: collapse;
+
+    /* Grid de Cartões de Exercícios */
+    .exercises-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .exercise-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .exercise-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 0.75rem;
+    }
+    
+    .exercise-header h3 {
+      font-size: 1.3rem;
+      color: var(--accent);
+    }
+    
+    .exercise-desc {
+      margin-bottom: 1.25rem;
+      font-size: 1.05rem;
+      color: #e6edf3;
+    }
+    
+    .exercise-desc ul {
+      margin-top: 0.5rem;
+      margin-left: 1.5rem;
+      color: #c9d1d9;
+    }
+
+    /* Tabelas dentro dos Cartões */
+    .exercise-card table {
       width: 100%;
+      border-collapse: collapse;
       margin: 1rem 0;
-      border: 1px solid #30363d;
+      font-size: 0.95rem;
     }
-    th, td {
-      border: 1px solid #30363d;
+    
+    .exercise-card th, .exercise-card td {
+      border: 1px solid var(--border-color);
       padding: 8px 12px;
       text-align: left;
     }
-    th {
-      background-color: #161b22;
+    
+    .exercise-card th {
+      background-color: var(--bg-color);
+      color: var(--accent);
     }
+
+    /* Botão de Resposta (details/summary) */
+    details {
+      background-color: var(--bg-color);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    summary {
+      padding: 12px 16px;
+      cursor: pointer;
+      color: var(--accent);
+      font-weight: bold;
+      background-color: var(--card-bg);
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s;
+      user-select: none;
+    }
+    
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary:hover {
+      background-color: #1f242c;
+    }
+
+    summary::before {
+      content: "👁️ Exibir Resposta";
+    }
+    
+    details[open] summary::before {
+      content: "🔽 Ocultar Resposta";
+    }
+    
+    details[open] summary {
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    /* Bloco de Código */
+    .code-content {
+      padding: 0;
+      margin: 0;
+    }
+
+    .code-content pre {
+      margin: 0;
+      padding: 16px;
+      overflow-x: auto;
+      background-color: transparent !important;
+    }
+
+    .code-content code {
+      font-family: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
   </style>
 </head>
 <body>
-  <h3>
-    ↩️<a href="https://zack-rodrigues.github.io/Estudo.Py.BR/">Voltar</a>
-  <article class="markdown-body">
 
-    <h1>Lista de Exercícios de Estrutura de Decisão</h1>
-    <p>Aqui estão os exercícios para praticar estruturas de decisão em Python. Clique nos links para acessar os códigos correspondentes.</p>
+  <div class="container">
+    <div class="header">
+      <a href="https://zack-rodrigues.github.io/Estudo.Py.BR/" class="back-link">↩️ Voltar para a Trilha</a>
+      <h1>⚖️ Estrutura de Decisão</h1>
+      <p class="subtitle">Aprenda a fazer seu código "pensar"! Pratique condicionais (<code>if</code>, <code>elif</code> e <code>else</code>) para controlar o fluxo de execução baseado em condições lógicas e validações.</p>
+    </div>
+
+    <div class="exercises-grid">
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>1. Maior de Dois Números</h3></div>
+        <p class="exercise-desc">Faça um Programa que peça dois números inteiros ao usuário e imprima qual é o maior deles.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">num1 = int(input("Digite o primeiro número: "))
+num2 = int(input("Digite o segundo número: "))
+
+if num1 > num2:
+    print(f"O maior número é {num1}")
+elif num2 > num1:
+    print(f"O maior número é {num2}")
+else:
+    print("Os números são iguais.")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>2. Positivo ou Negativo</h3></div>
+        <p class="exercise-desc">Faça um Programa que peça um valor numérico e mostre na tela se o valor é positivo ou negativo.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">valor = float(input("Digite um valor: "))
+
+if valor > 0:
+    print("O valor é Positivo.")
+elif valor < 0:
+    print("O valor é Negativo.")
+else:
+    print("O valor é Zero (Neutro).")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>3. Validação de Gênero (F/M)</h3></div>
+        <p class="exercise-desc">Faça um Programa que verifique se uma letra digitada é "F" ou "M". Conforme a letra, escrever: F - Feminino, M - Masculino, ou Sexo Inválido.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">letra = input("Digite o sexo (F ou M): ").upper()
+
+if letra == "F":
+    print("F - Feminino")
+elif letra == "M":
+    print("M - Masculino")
+else:
+    print("Sexo Inválido")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>4. Vogal ou Consoante</h3></div>
+        <p class="exercise-desc">Faça um Programa que verifique se uma letra digitada pelo usuário é uma vogal ou uma consoante.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">letra = input("Digite uma letra: ").lower()
+
+if letra in "aeiou":
+    print("A letra é uma VOGAL.")
+elif letra.isalpha(): # Verifica se realmente é uma letra do alfabeto
+    print("A letra é uma CONSOANTE.")
+else:
+    print("Isso não é uma letra!")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>5. Boletim: Média do Aluno</h3></div>
+        <p class="exercise-desc">Faça um programa para a leitura de duas notas parciais de um aluno. O programa deve calcular a média e apresentar:</p>
+        <div class="exercise-desc">
+          <ul>
+            <li>"Aprovado", se a média for maior ou igual a 7.</li>
+            <li>"Reprovado", se a média for menor que 7.</li>
+            <li>"Aprovado com Distinção", se a média for igual a 10.</li>
+          </ul>
+        </div>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">nota1 = float(input("Digite a 1ª nota: "))
+nota2 = float(input("Digite a 2ª nota: "))
+
+media = (nota1 + nota2) / 2
+
+if media == 10:
+    print(f"Média {media} - Aprovado com Distinção! 🌟")
+elif media >= 7:
+    print(f"Média {media} - Aprovado. ✅")
+else:
+    print(f"Média {media} - Reprovado. ❌")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>6. Maior de Três Números</h3></div>
+        <p class="exercise-desc">Faça um Programa que leia três números soltos e mostre o maior deles.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">n1 = float(input("Digite o 1º número: "))
+n2 = float(input("Digite o 2º número: "))
+n3 = float(input("Digite o 3º número: "))
+
+# Usando if/elif nativo:
+if n1 >= n2 and n1 >= n3:
+    maior = n1
+elif n2 >= n1 and n2 >= n3:
+    maior = n2
+else:
+    maior = n3
+
+# Dica Pythonica: maior = max(n1, n2, n3)
+print(f"O maior número é: {maior}")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>7. Maior e Menor de Três</h3></div>
+        <p class="exercise-desc">Expanda o exercício anterior: leia três números e mostre não apenas o maior, mas também o menor deles.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">n1 = float(input("Digite o 1º número: "))
+n2 = float(input("Digite o 2º número: "))
+n3 = float(input("Digite o 3º número: "))
+
+# Usando as funções nativas do Python (max e min)
+maior = max(n1, n2, n3)
+menor = min(n1, n2, n3)
+
+print(f"O MAIOR número é: {maior}")
+print(f"O MENOR número é: {menor}")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>8. Qual Produto Comprar?</h3></div>
+        <p class="exercise-desc">Faça um programa que pergunte o preço de três produtos diferentes e informe qual você deve comprar, sabendo que a decisão é sempre levar o mais barato.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">p1 = float(input("Preço do Produto 1: R$ "))
+p2 = float(input("Preço do Produto 2: R$ "))
+p3 = float(input("Preço do Produto 3: R$ "))
+
+if p1 < p2 and p1 < p3:
+    print("Você deve comprar o Produto 1.")
+elif p2 < p1 and p2 < p3:
+    print("Você deve comprar o Produto 2.")
+else:
+    print("Você deve comprar o Produto 3.")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>9. Ordem Decrescente</h3></div>
+        <p class="exercise-desc">Faça um Programa que leia três números e os exiba na tela em ordem decrescente (do maior para o menor).</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">n1 = float(input("Número 1: "))
+n2 = float(input("Número 2: "))
+n3 = float(input("Número 3: "))
+
+# Armazenando em uma lista para facilitar a ordenação
+numeros = [n1, n2, n3]
+
+# A função sorted com reverse=True já coloca em ordem decrescente
+numeros_ordenados = sorted(numeros, reverse=True)
+
+print(f"Ordem decrescente: {numeros_ordenados}")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>10. Saudação por Turno</h3></div>
+        <p class="exercise-desc">Faça um Programa que pergunte em que turno você estuda. Peça para digitar <b>M</b>-matutino, <b>V</b>-vespertino ou <b>N</b>-noturno. Imprima a saudação correta conforme o caso.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">turno = input("Em qual turno você estuda? (M-Matutino, V-Vespertino, N-Noturno): ").upper()
+
+if turno == 'M':
+    print("Bom Dia! ☀️")
+elif turno == 'V':
+    print("Boa Tarde! 🌤️")
+elif turno == 'N':
+    print("Boa Noite! 🌙")
+else:
+    print("Valor Inválido! Tente novamente.")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>11. Reajuste Salarial (Tabajara)</h3></div>
+        <p class="exercise-desc">As Organizações Tabajara resolveram dar um aumento de salário aos seus colaboradores, de acordo com as faixas abaixo. O programa deve exibir o salário original, a % de aumento, o valor do aumento e o novo salário.</p>
+        <table>
+          <tr><th>Faixa salarial</th><th>Aumento</th></tr>
+          <tr><td>Até R$ 280,00</td><td>20%</td></tr>
+          <tr><td>R$ 280,00 a R$ 700,00</td><td>15%</td></tr>
+          <tr><td>R$ 700,00 a R$ 1500,00</td><td>10%</td></tr>
+          <tr><td>Acima de R$ 1500,00</td><td>5%</td></tr>
+        </table>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">salario = float(input("Salário atual do colaborador: R$ "))
+
+if salario <= 280:
+    percentual = 20
+elif salario <= 700:
+    percentual = 15
+elif salario <= 1500:
+    percentual = 10
+else:
+    percentual = 5
+
+aumento = salario * (percentual / 100)
+novo_salario = salario + aumento
+
+print("\n--- Relatório de Reajuste ---")
+print(f"Salário antes do reajuste: R$ {salario:.2f}")
+print(f"Percentual de aumento: {percentual}%")
+print(f"Valor do aumento: R$ {aumento:.2f}")
+print(f"Novo salário: R$ {novo_salario:.2f}")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>12. Folha de Pagamento Completa</h3></div>
+        <p class="exercise-desc">Calcule a folha de pagamento baseada no valor da hora e horas trabalhadas no mês. Desconte o IR (conforme tabela), 3% de Sindicato e calcule o FGTS (11% pago pela empresa, não desconta do salário). Exiba um relatório detalhado com Bruto, Descontos e Líquido.</p>
+        <table>
+          <tr><th>Salário Bruto</th><th>Desconto IR</th></tr>
+          <tr><td>Até R$ 900,00</td><td>Isento (0%)</td></tr>
+          <tr><td>Até R$ 1500,00</td><td>5%</td></tr>
+          <tr><td>Até R$ 2500,00</td><td>10%</td></tr>
+          <tr><td>Acima de R$ 2500,00</td><td>20%</td></tr>
+        </table>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">valor_hora = float(input("Valor da hora trabalhada: R$ "))
+horas = float(input("Quantidade de horas no mês: "))
+
+salario_bruto = valor_hora * horas
+
+if salario_bruto <= 900:
+    perc_ir = 0
+elif salario_bruto <= 1500:
+    perc_ir = 5
+elif salario_bruto <= 2500:
+    perc_ir = 10
+else:
+    perc_ir = 20
+
+ir = salario_bruto * (perc_ir / 100)
+sindicato = salario_bruto * 0.03
+fgts = salario_bruto * 0.11 # FGTS é recolhido pela empresa, não deduz
+
+total_descontos = ir + sindicato
+salario_liquido = salario_bruto - total_descontos
+
+print("\n--- Holerite ---")
+print(f"Salário Bruto: ({valor_hora} * {horas})  : R$ {salario_bruto:>8.2f}")
+print(f"(-) IR ({perc_ir:02}%)                   : R$ {ir:>8.2f}")
+print(f"(-) Sindicato ( 3%)              : R$ {sindicato:>8.2f}")
+print(f"FGTS (11% - não descontado)      : R$ {fgts:>8.2f}")
+print(f"Total de descontos               : R$ {total_descontos:>8.2f}")
+print(f"Salário Líquido                  : R$ {salario_liquido:>8.2f}")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>13. Dia da Semana</h3></div>
+        <p class="exercise-desc">Faça um Programa que leia um número de 1 a 7 e exiba o dia correspondente da semana (1-Domingo, 2-Segunda, etc.). Se digitar outro valor, mostre "Valor inválido".</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">dia = int(input("Digite um número (1 a 7): "))
+
+if dia == 1: print("1 - Domingo")
+elif dia == 2: print("2 - Segunda-feira")
+elif dia == 3: print("3 - Terça-feira")
+elif dia == 4: print("4 - Quarta-feira")
+elif dia == 5: print("5 - Quinta-feira")
+elif dia == 6: print("6 - Sexta-feira")
+elif dia == 7: print("7 - Sábado")
+else: print("Valor Inválido!")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>14. Conceito do Aluno (Aprovado/Reprovado)</h3></div>
+        <p class="exercise-desc">Lê duas notas parciais, calcula a média e atribui um conceito alfabético de "A" a "E". Mostre as notas, a média, o conceito e se o aluno está APROVADO (A, B, C) ou REPROVADO (D, E).</p>
+        <table>
+          <tr><th>Média</th><th>Conceito</th></tr>
+          <tr><td>9.0 a 10.0</td><td>A</td></tr>
+          <tr><td>7.5 a 8.9</td><td>B</td></tr>
+          <tr><td>6.0 a 7.4</td><td>C</td></tr>
+          <tr><td>4.0 a 5.9</td><td>D</td></tr>
+          <tr><td>0.0 a 3.9</td><td>E</td></tr>
+        </table>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">n1 = float(input("Nota 1: "))
+n2 = float(input("Nota 2: "))
+media = (n1 + n2) / 2
+
+if 9.0 <= media <= 10.0: conceito = 'A'
+elif 7.5 <= media < 9.0: conceito = 'B'
+elif 6.0 <= media < 7.5: conceito = 'C'
+elif 4.0 <= media < 6.0: conceito = 'D'
+else: conceito = 'E'
+
+if conceito in ['A', 'B', 'C']:
+    status = "APROVADO"
+else:
+    status = "REPROVADO"
+
+print(f"\nNotas: {n1} e {n2}")
+print(f"Média: {media:.1f}")
+print(f"Conceito: {conceito} -> {status}")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>15. Que Tipo de Triângulo é Esse?</h3></div>
+        <p class="exercise-desc">Peça os 3 lados de um triângulo. Valide se as medidas podem formar um triângulo. Se puderem, informe se é Equilátero (3 lados iguais), Isósceles (2 lados iguais) ou Escaleno (3 diferentes).</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">l1 = float(input("Lado 1: "))
+l2 = float(input("Lado 2: "))
+l3 = float(input("Lado 3: "))
+
+# Condição de existência de um triângulo
+if (l1 + l2 > l3) and (l1 + l3 > l2) and (l2 + l3 > l1):
+    print("\nOs lados formam um triângulo!")
     
-    <h2>Exercícios</h2>
+    if l1 == l2 == l3:
+        print("Tipo: Triângulo Equilátero.")
+    elif l1 == l2 or l1 == l3 or l2 == l3:
+        print("Tipo: Triângulo Isósceles.")
+    else:
+        print("Tipo: Triângulo Escaleno.")
+else:
+    print("Os valores informados NÃO podem formar um triângulo.")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>16. Equação do Segundo Grau (Bhaskara)</h3></div>
+        <p class="exercise-desc">Calcule as raízes de uma equação <code>ax² + bx + c = 0</code>. Faça todas as validações: se <code>a=0</code> (não é 2º grau), se <code>delta < 0</code> (não possui raízes reais), <code>delta = 0</code> (1 raiz real) ou <code>delta > 0</code> (2 raízes).</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">import math
+
+print("Equação: ax² + bx + c = 0")
+a = float(input("Valor de a: "))
+
+if a == 0:
+    print("Se 'a' é igual a zero, a equação não é do 2º grau. Programa encerrado.")
+else:
+    b = float(input("Valor de b: "))
+    c = float(input("Valor de c: "))
+
+    delta = (b ** 2) - (4 * a * c)
+
+    if delta < 0:
+        print(f"Delta ({delta}) é negativo. A equação não possui raízes reais.")
+    elif delta == 0:
+        raiz = -b / (2 * a)
+        print(f"Delta é zero. A equação possui uma raiz real: {raiz:.2f}")
+    else:
+        raiz1 = (-b + math.sqrt(delta)) / (2 * a)
+        raiz2 = (-b - math.sqrt(delta)) / (2 * a)
+        print(f"Delta é {delta}. As raízes são: {raiz1:.2f} e {raiz2:.2f}")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>17. Validador de Ano Bissexto</h3></div>
+        <p class="exercise-desc">Faça um Programa que peça um ano e informe se ele é ou não um ano bissexto (divisível por 4, mas se terminar em 00 tem que ser divisível por 400).</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">ano = int(input("Digite um ano (Ex: 2024): "))
+
+# Lógica matemática para ano bissexto
+if (ano % 4 == 0 and ano % 100 != 0) or (ano % 400 == 0):
+    print(f"O ano {ano} É um ano BISSEXTO! Tem 366 dias.")
+else:
+    print(f"O ano {ano} NÃO é bissexto. Tem 365 dias.")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>18. Validador de Data</h3></div>
+        <p class="exercise-desc">Faça um Programa que peça uma data no formato dd/mm/aaaa e determine se ela é uma data válida no calendário (respeitando meses de 30/31 dias e Fevereiro bissexto).</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">data = input("Digite a data (dd/mm/aaaa): ")
+
+dia, mes, ano = map(int, data.split('/'))
+valida = False
+
+# Meses com 31 dias
+if mes in [1, 3, 5, 7, 8, 10, 12]:
+    if 1 <= dia <= 31: valida = True
+# Meses com 30 dias
+elif mes in [4, 6, 9, 11]:
+    if 1 <= dia <= 30: valida = True
+# Fevereiro e Anos Bissextos
+elif mes == 2:
+    bissexto = (ano % 4 == 0 and ano % 100 != 0) or (ano % 400 == 0)
+    if bissexto and 1 <= dia <= 29: valida = True
+    elif not bissexto and 1 <= dia <= 28: valida = True
+
+if valida:
+    print("Data VÁLIDA!")
+else:
+    print("Data INVÁLIDA!")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>19. Decomposição Numérica (Centenas, Dezenas, Unidades)</h3></div>
+        <p class="exercise-desc">Leia um número menor que 1000 e extraia as quantidades de centenas, dezenas e unidades, escrevendo o resultado de forma legível.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">numero = int(input("Digite um número (menor que 1000): "))
+
+if numero >= 1000 or numero < 0:
+    print("Número inválido!")
+else:
+    centenas = numero // 100
+    dezenas = (numero % 100) // 10
+    unidades = numero % 10
+
+    # Formatando a saída bonitinha (opcional)
+    str_c = f"{centenas} centena{'s' if centenas > 1 else ''}"
+    str_d = f"{dezenas} dezena{'s' if dezenas > 1 else ''}"
+    str_u = f"{unidades} unidade{'s' if unidades > 1 else ''}"
+
+    print(f"{numero} = {str_c}, {str_d} e {str_u}")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>20. Média de Três Notas</h3></div>
+        <p class="exercise-desc">Semelhante ao exercício 5, mas agora leia TRÊS notas do aluno. Exiba a média alcançada e a mensagem de Aprovado (>=7), Reprovado (<7) ou Distinção (10).</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">n1 = float(input("Nota 1: "))
+n2 = float(input("Nota 2: "))
+n3 = float(input("Nota 3: "))
+
+media = (n1 + n2 + n3) / 3
+
+if media == 10:
+    print(f"Média: {media:.1f} - Aprovado com Distinção!")
+elif media >= 7:
+    print(f"Média: {media:.1f} - Aprovado.")
+else:
+    print(f"Média: {media:.1f} - Reprovado.")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>21. Caixa Eletrônico Inteligente</h3></div>
+        <p class="exercise-desc">Programe a lógica de um caixa eletrônico. Ele deve receber o valor do saque (de 10 a 600 reais) e informar quantas notas de R$ 100, R$ 50, R$ 10, R$ 5 e R$ 1 serão fornecidas, priorizando as notas maiores.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">saque = int(input("Valor do saque (Min: 10 | Máx: 600): R$ "))
+
+if 10 <= saque <= 600:
+    n100 = saque // 100
+    saque %= 100
     
-    <ol>
-      <li>
-        <strong>Maior de dois números</strong>:
-        <p>Faça um Programa que peça dois números e imprima o maior deles.</p>
-        <a href="maior_numero.py" class="code-link">Código</a>
-      </li>
-      
-      <li>
-        <strong>Positivo ou negativo</strong>:
-        <p>Faça um Programa que peça um valor e mostre na tela se o valor é positivo ou negativo.</p>
-        <a href="positivo_negativo.py" class="code-link">Código</a>
-      </li>
-      
-      <li>
-        <strong>Masculino ou Feminino</strong>:
-        <p>Faça um Programa que verifique se uma letra digitada é "F" ou "M". Conforme a letra escrever: F - Feminino, M - Masculino, Sexo Inválido.</p>
-        <a href="masculino_feminino.py" class="code-link">Código</a>
-      </li>
-      
-      <li>
-        <strong>Vogal ou consoante</strong>:
-        <p>Faça um Programa que verifique se uma letra digitada é vogal ou consoante.</p>
-        <a href="vogal_consoante.py" class="code-link">Código</a>
-      </li>
-      
-      <li>
-        <strong>Média do aluno</strong>:
-        <p>Faça um programa para a leitura de duas notas parciais de um aluno. O programa deve calcular a média alcançada por aluno e apresentar:</p>
-        <ul>
-          <li>A mensagem "Aprovado", se a média alcançada for maior ou igual a sete</li>
-          <li>A mensagem "Reprovado", se a média for menor do que sete</li>
-          <li>A mensagem "Aprovado com Distinção", se a média for igual a dez</li>
-        </ul>
-        <a href="media_aluno.py" class="code-link">Código</a>
-      </li>
-      
-      <li>
-        <strong>Maior de três números</strong>:
-        <p>Faça um Programa que leia três números e mostre o maior deles.</p>
-        <a href="maior_numero.py" class="code-link">Código</a>
-      </li>
-      
-      <li>
-        <strong>Maior e menor de três</strong>:
-        <p>Faça um Programa que leia três números e mostre o maior e o menor deles.</p>
-        <a href="maior_e_menor.py" class="code-link">Código</a>
-      </li>
-      
-      <li>
-        <strong>Produto mais barato</strong>:
-        <p>Faça um programa que pergunte o preço de três produtos e informe qual produto você deve comprar, sabendo que a decisão é sempre pelo mais barato.</p>
-        <a href="produto_barato.py" class="code-link">Código</a>
-      </li>
-      
-      <li>
-        <strong>Números em ordem decrescente</strong>:
-        <p>Faça um Programa que leia três números e mostre-os em ordem decrescente.</p>
-        <a href="numero_decrescente.py" class="code-link">Código</a>
-      </li>
-      
-      <li>
-        <strong>Período do dia</strong>:
-        <p>Faça um Programa que pergunte em que turno você estuda. Peça para digitar M-matutino ou V-Vespertino ou N- Noturno. Imprima a mensagem "Bom Dia!", "Boa Tarde!" ou "Boa Noite!" ou "Valor Inválido!", conforme o caso.</p>
-        <a href="periodo_do_dia.py" class="code-link">Código</a>
-      </li>
-      
-      <li>
-        <strong>Reajuste salarial</strong>:
-        <p>As Organizações Tabajara resolveram dar um aumento de salário aos seus colaboradores. Faça um programa que recebe o salário de um colaborador e o reajuste segundo o seguinte critério:</p>
-        <table>
-          <tr>
-            <th>Faixa salarial</th>
-            <th>Aumento</th>
-          </tr>
-          <tr>
-            <td>Até R$ 280,00</td>
-            <td>20%</td>
-          </tr>
-          <tr>
-            <td>R$ 280,00 a R$ 700,00</td>
-            <td>15%</td>
-          </tr>
-          <tr>
-            <td>R$ 700,00 a R$ 1500,00</td>
-            <td>10%</td>
-          </tr>
-          <tr>
-            <td>Acima de R$ 1500,00</td>
-            <td>5%</td>
-          </tr>
-        </table>
-        <p>O programa deve mostrar o salário antes do reajuste, percentual de aumento, valor do aumento e novo salário.</p>
-        <a href="novo_salario.py" class="code-link">Código</a>
-      </li>
-      
-      <li>
-        <strong>Folha de pagamento</strong>:
-        <p>Faça um programa para o cálculo de uma folha de pagamento, com descontos de IR (conforme tabela) e 3% para o Sindicato. O FGTS corresponde a 11% do Salário Bruto.</p>
-        <table>
-          <tr>
-            <th>Salário Bruto</th>
-            <th>Desconto IR</th>
-          </tr>
-          <tr>
-            <td>Até 900</td>
-            <td>Isento</td>
-          </tr>
-          <tr>
-            <td>Até 1500</td>
-            <td>5%</td>
-          </tr>
-          <tr>
-            <td>Até 2500</td>
-            <td>10%</td>
-          </tr>
-          <tr>
-            <td>Acima de 2500</td>
-            <td>20%</td>
-          </tr>
-        </table>
-        <a href="descontos_pagamento.py" class="code-link">Código</a>
-      </li>
-      
-      <li>
-        <strong>Dia da semana</strong>:
-        <p>Faça um Programa que leia um número e exiba o dia correspondente da semana. (1-Domingo, 2- Segunda, etc.), se digitar outro valor deve aparecer valor inválido.</p>
-        <a href="dia_semana.py" class="code-link">Código</a>
-      </li>
-      
-      <li>
-        <strong>Conceito do aluno</strong>:
-        <p>Faça um programa que lê as duas notas parciais de um aluno e calcule a média, atribuindo conceitos conforme tabela:</p>
-        <table>
-          <tr>
-            <th>Média</th>
-            <th>Conceito</th>
-            <th>Status</th>
-          </tr>
-          <tr>
-            <td>9.0 a 10.0</td>
-            <td>A</td>
-            <td>APROVADO</td>
-          </tr>
-          <tr>
-            <td>7.5 a 9.0</td>
-            <td>B</td>
-            <td>APROVADO</td>
-          </tr>
-          <tr>
-            <td>6.0 a 7.5</td>
-            <td>C</td>
-            <td>APROVADO</td>
-          </tr>
-          <tr>
-            <td>4.0 a 6.0</td>
-            <td>D</td>
-            <td>REPROVADO</td>
-          </tr>
-          <tr>
-            <td>0 a 4.0</td>
-            <td>E</td>
-            <td>REPROVADO</td>
-          </tr>
-        </table>
-        <a href="nota_aproveitamento.py" class="code-link">Código</a>
-      </li>
-      
-      <li>
-        <strong>Tipos de triângulo</strong>:
-        <p>Faça um Programa que peça os 3 lados de um triângulo. O programa deverá informar se os valores podem ser um triângulo e, se for, se é equilátero, isósceles ou escaleno.</p>
-        <a href="triangulos.py" class="code-link">Código</a>
-      </li>
-      
-      <li>
-        <strong>Equação do segundo grau</strong>:
-        <p>Faça um programa que calcule as raízes de uma equação do segundo grau, na forma ax² + bx + c, fazendo as validações necessárias.</p>
-        <a href="segundo_grau.py" class="code-link">Código</a>
-      </li>
-      
-      <li>
-        <strong>Ano bissexto</strong>:
-        <p>Faça um Programa que peça um número correspondente a um determinado ano e informe se este ano é ou não bissexto.</p>
-        <a href="ano_bi.py" class="code-link">Código</a>
-      </li>
-      
-      <li>
-        <strong>Data válida</strong>:
-        <p>Faça um Programa que peça uma data no formato dd/mm/aaaa e determine se a mesma é uma data válida.</p>
-        <a href="dia_mes_ano.py" class="code-link">Código</a>
-      </li>
-      
-      <li>
-        <strong>Decomposição numérica</strong>:
-        <p>Faça um Programa que leia um número inteiro menor que 1000 e imprima a quantidade de centenas, dezenas e unidades.</p>
-        <a href="unidades_dezenas.py" class="code-link">Código</a>
-      </li>
-      
-      <li>
-        <strong>Média de três notas</strong>:
-        <p>Faça um Programa para leitura de três notas parciais de um aluno. O programa deve calcular a média e apresentar o status conforme a média.</p>
-        <a href="media_aluno.py" class="code-link">Código</a>
-      </li>
-      
-      <li>
-        <strong>Caixa eletrônico</strong>:
-        <p>Faça um Programa para um caixa eletrônico que informe quantas notas de cada valor serão fornecidas para um saque (notas de 1, 5, 10, 50 e 100 reais).</p>
-        <a href="caixa.py" class="code-link">Código</a>
-      </li>
-      
-      <li>
-        <strong>Par ou ímpar</strong>:
-        <p>Faça um Programa que peça um número inteiro e determine se ele é par ou ímpar.</p>
-        <a href="par_impar.py" class="code-link">Código</a>
-      </li>
-      
-      <li>
-        <strong>Inteiro ou decimal</strong>:
-        <p>Faça um Programa que peça um número e informe se o número é inteiro ou decimal.</p>
-        <a href="decimal.py" class="code-link">Código</a>
-      </li>
-      
-      <li>
-        <strong>Operações com números</strong>:
-        <p>Faça um Programa que leia 2 números, pergunte qual operação deseja realizar e informe características do resultado.</p>
-        <a href="operacao_usuario.py" class="code-link">Código</a>
-      </li>
-      
-      <li>
-        <strong>Questionário criminal</strong>:
-        <p>Faça um programa que faça 5 perguntas sobre um crime e classifique a participação da pessoa no crime.</p>
-        <a href="crime.py" class="code-link">Código</a>
-      </li>
-      
-      <li>
-        <strong>Desconto em combustível</strong>:
-        <p>Um posto está vendendo combustíveis com descontos diferenciados para álcool e gasolina conforme a quantidade.</p>
-        <a href="desconto_combustivel.py" class="code-link">Código</a>
-      </li>
-      
-      <li>
-        <strong>Fruteira</strong>:
-        <p>Uma fruteira está vendendo frutas com tabela de preços diferenciada e desconto adicional para compras maiores.</p>
-        <a href="frutas.py" class="code-link">Código</a>
-      </li>
-      
-      <li>
-        <strong>Promoção de carnes</strong>:
-        <p>O Hipermercado Tabajara está com uma promoção de carnes com preços diferenciados e desconto para pagamento no cartão.</p>
-        <a href="carnes.py" class="code-link">Código</a>
-      </li>
-    </ol>
-  </article>
+    n50 = saque // 50
+    saque %= 50
+    
+    n10 = saque // 10
+    saque %= 10
+    
+    n5 = saque // 5
+    saque %= 5
+    
+    n1 = saque // 1
+    
+    print("\nNotas a serem entregues:")
+    if n100 > 0: print(f"{n100} nota(s) de R$ 100")
+    if n50 > 0: print(f"{n50} nota(s) de R$ 50")
+    if n10 > 0: print(f"{n10} nota(s) de R$ 10")
+    if n5 > 0: print(f"{n5} nota(s) de R$ 5")
+    if n1 > 0: print(f"{n1} nota(s) de R$ 1")
+else:
+    print("Valor fora dos limites permitidos!")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>22. Par ou Ímpar</h3></div>
+        <p class="exercise-desc">Faça um Programa que peça um número inteiro e determine, através da matemática (operador de módulo <code>%</code>), se ele é par ou ímpar.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">num = int(input("Digite um número inteiro: "))
+
+# Se o resto da divisão por 2 for zero, é par.
+if num % 2 == 0:
+    print(f"O número {num} é PAR.")
+else:
+    print(f"O número {num} é ÍMPAR.")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>23. Inteiro ou Decimal</h3></div>
+        <p class="exercise-desc">Faça um Programa que peça um número numérico qualquer e informe se este número é um número inteiro (ex: 5.0) ou decimal/quebrado (ex: 5.4).</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">num = float(input("Digite um número: "))
+
+# O método round() arredonda o número. Se for igual ao original, é inteiro.
+if num == round(num):
+    print(f"{num} é um número INTEIRO.")
+else:
+    print(f"{num} é um número DECIMAL.")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>24. Calculadora com Análise de Dados</h3></div>
+        <p class="exercise-desc">Leia 2 números e qual operação o usuário deseja realizar. O código fará o cálculo e dirá se o resultado gerado é: par ou ímpar; positivo ou negativo; e inteiro ou decimal.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">n1 = float(input("Número 1: "))
+n2 = float(input("Número 2: "))
+op = input("Operação (+, -, *, /): ")
+
+# Realiza a conta
+if op == '+': res = n1 + n2
+elif op == '-': res = n1 - n2
+elif op == '*': res = n1 * n2
+elif op == '/': res = n1 / n2
+else:
+    res = None
+    print("Operação inválida.")
+
+if res is not None:
+    print(f"\nResultado da operação: {res}")
+    
+    # Par ou Ímpar
+    if res % 2 == 0: print("-> É PAR")
+    else: print("-> É ÍMPAR")
+    
+    # Positivo ou Negativo
+    if res > 0: print("-> É POSITIVO")
+    elif res < 0: print("-> É NEGATIVO")
+    else: print("-> É ZERO")
+    
+    # Inteiro ou Decimal
+    if res == round(res): print("-> É INTEIRO")
+    else: print("-> É DECIMAL")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>25. Investigador Criminal (Com `if`)</h3></div>
+        <p class="exercise-desc">Faça um programa que faça 5 perguntas sobre um crime. Dependendo da quantidade de respostas "Sim", classifique: 2 (Suspeito), 3 ou 4 (Cúmplice) ou 5 (Assassino). Use estruturas sequenciais de IF.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">print("Responda 1 para SIM ou 0 para NÃO")
+p1 = int(input("Telefonou para a vítima? "))
+p2 = int(input("Esteve no local do crime? "))
+p3 = int(input("Mora perto da vítima? "))
+p4 = int(input("Devia para a vítima? "))
+p5 = int(input("Já trabalhou com a vítima? "))
+
+# Somamos as respostas (cada sim vale 1)
+pontos = p1 + p2 + p3 + p4 + p5
+
+if pontos == 2:
+    print("\nClassificação: Suspeita")
+elif 3 <= pontos <= 4:
+    print("\nClassificação: Cúmplice")
+elif pontos == 5:
+    print("\nClassificação: Assassino")
+else:
+    print("\nClassificação: Inocente")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>26. Posto de Combustível (Descontos)</h3></div>
+        <p class="exercise-desc">O posto vende Álcool a R$ 1,90 e Gasolina a R$ 2,50. Para o Álcool, há desconto de 3% por litro (até 20L) ou 5% (acima de 20L). Na Gasolina, é 4% (até 20L) e 6% (acima). Calcule o valor a pagar.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">litros = float(input("Quantos litros vendidos? "))
+tipo = input("Tipo (A-Álcool, G-Gasolina): ").upper()
+
+if tipo == 'A':
+    preco_base = 1.90
+    if litros <= 20: desconto = 3
+    else: desconto = 5
+elif tipo == 'G':
+    preco_base = 2.50
+    if litros <= 20: desconto = 4
+    else: desconto = 6
+else:
+    preco_base = 0
+    desconto = 0
+    print("Tipo inválido!")
+
+if preco_base > 0:
+    valor_bruto = litros * preco_base
+    valor_desconto = valor_bruto * (desconto / 100)
+    valor_final = valor_bruto - valor_desconto
+    print(f"Total a pagar: R$ {valor_final:.2f}")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>27. Sistema da Fruteira</h3></div>
+        <p class="exercise-desc">Tabela: Morango (Até 5Kg: R$2,50/Kg | Acima de 5Kg: R$2,20/Kg). Maçã (Até 5Kg: R$1,80/Kg | Acima de 5Kg: R$1,50/Kg). Se o cliente comprar mais de 8 Kg ou o total passar de R$ 25,00, ele ganha mais 10% de desconto!</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">kg_morango = float(input("Quantidade de Morangos (Kg): "))
+kg_maca = float(input("Quantidade de Maçãs (Kg): "))
+
+# Cálculo do Morango
+if kg_morango <= 5: preco_morango = 2.50 * kg_morango
+else: preco_morango = 2.20 * kg_morango
+
+# Cálculo da Maçã
+if kg_maca <= 5: preco_maca = 1.80 * kg_maca
+else: preco_maca = 1.50 * kg_maca
+
+total_kg = kg_morango + kg_maca
+total_preco = preco_morango + preco_maca
+
+# Desconto especial de 10%
+if total_kg > 8 or total_preco > 25.00:
+    total_preco -= total_preco * 0.10
+
+print(f"\nPeso total: {total_kg} Kg")
+print(f"Valor a pagar: R$ {total_preco:.2f}")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>28. Promoção de Carnes Tabajara</h3></div>
+        <p class="exercise-desc">O Hipermercado Tabajara tem uma promoção de carnes (File Duplo, Alcatra, Picanha) com preços melhores para compras acima de 5kg. Se o pagamento for no Cartão Tabajara, o cliente ganha 5% de desconto extra. Gere um cupom fiscal no terminal.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">print("Carnes: 1-File Duplo | 2-Alcatra | 3-Picanha")
+tipo = int(input("Escolha a carne (1, 2 ou 3): "))
+kg = float(input("Quantidade (Kg): "))
+cartao = input("Pagamento no Cartão Tabajara? (S/N): ").upper()
+
+# Definindo o preço do Kilo
+if tipo == 1:
+    nome = "File Duplo"
+    preco_kg = 4.90 if kg <= 5 else 5.80
+elif tipo == 2:
+    nome = "Alcatra"
+    preco_kg = 5.90 if kg <= 5 else 6.80
+elif tipo == 3:
+    nome = "Picanha"
+    preco_kg = 6.90 if kg <= 5 else 7.80
+
+preco_total = kg * preco_kg
+
+# Desconto do Cartão
+if cartao == 'S':
+    tipo_pgto = "Cartão Tabajara"
+    desconto = preco_total * 0.05
+else:
+    tipo_pgto = "Outro"
+    desconto = 0
+
+valor_pagar = preco_total - desconto
+
+print("\n--- CUPOM FISCAL ---")
+print(f"Tipo Carne      : {nome}")
+print(f"Quantidade      : {kg} Kg")
+print(f"Preço Total     : R$ {preco_total:.2f}")
+print(f"Tipo Pagamento  : {tipo_pgto}")
+print(f"Valor Desconto  : R$ {desconto:.2f}")
+print(f"Valor a Pagar   : R$ {valor_pagar:.2f}")</code></pre></div>
+        </details>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
 </body>
 </html>

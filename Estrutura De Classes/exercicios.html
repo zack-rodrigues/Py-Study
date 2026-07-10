@@ -2,212 +2,772 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Exercícios com Classes em Python</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.0/github-markdown-dark.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercícios com Classes | Estudo.Py.BR</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css">
+  
   <style>
+    /* Paleta de Cores e Tema Base (Estilo GitHub Dark) */
+    :root {
+      --bg-color: #0d1117;
+      --card-bg: #161b22;
+      --text-main: #c9d1d9;
+      --text-muted: #8b949e;
+      --border-color: #30363d;
+      --accent: #58a6ff;
+      --accent-hover: #1f6feb;
+      --attr-color: #79c0ff;
+      --method-color: #d2a8ff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
-      background-color: #0d1117;
-      color: #c9d1d9;
-      font-family: system-ui, sans-serif;
-      padding: 2rem;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      padding: 2rem 1rem;
       display: flex;
       justify-content: center;
     }
-    .markdown-body {
+
+    .container {
       max-width: 900px;
+      width: 100%;
     }
-    a {
-      color: #58a6ff;
+
+    /* Navegação e Cabeçalho */
+    .header {
+      margin-bottom: 2.5rem;
     }
-    .exercise {
-      border-bottom: 1px solid #30363d;
-      padding-bottom: 2rem;
-      margin-bottom: 2rem;
+    
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 8px 16px;
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      transition: all 0.2s ease-in-out;
+      margin-bottom: 1.5rem;
     }
-    .file-icon {
-      font-size: 1.2em;
-      margin-right: 5px;
+    
+    .back-link:hover {
+      background-color: var(--border-color);
+      color: #ffffff;
     }
+
+    h1 {
+      font-size: 2.2rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+      color: #ffffff;
+    }
+    
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+    }
+
+    /* Grid de Cartões de Exercícios */
+    .exercises-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .exercise-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .exercise-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 0.75rem;
+    }
+    
+    .exercise-header h3 {
+      font-size: 1.3rem;
+      color: var(--accent);
+    }
+
+    /* Bloco de Informações da Classe */
     .class-info {
-      background-color: #161b22;
-      border-left: 4px solid #58a6ff;
-      padding: 1rem;
-      margin: 1rem 0;
+      background-color: #0d1117;
+      border-left: 4px solid var(--accent);
+      padding: 12px 16px;
+      margin-bottom: 1.25rem;
       border-radius: 0 6px 6px 0;
+      font-size: 0.95rem;
     }
+
+    .class-info p {
+      margin-bottom: 0.4rem;
+    }
+
+    .class-info ul {
+      margin-left: 1.5rem;
+      margin-top: 0.4rem;
+      color: #c9d1d9;
+    }
+
+    .class-info strong {
+      color: #ffffff;
+    }
+
     .attribute {
-      color: #79c0ff;
+      color: var(--attr-color);
+      font-weight: bold;
     }
+    
     .method {
-      color: #d2a8ff;
+      color: var(--method-color);
+      font-weight: bold;
     }
-    h2 {
-      border-bottom: 1px solid #30363d;
-      padding-bottom: 0.3em;
+
+    /* Botão de Resposta (details/summary) */
+    details {
+      background-color: var(--bg-color);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      overflow: hidden;
     }
-    ul {
-      padding-left: 1.5rem;
+
+    summary {
+      padding: 12px 16px;
+      cursor: pointer;
+      color: var(--accent);
+      font-weight: bold;
+      background-color: var(--card-bg);
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s;
+      user-select: none;
     }
+    
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary:hover {
+      background-color: #1f242c;
+    }
+
+    summary::before {
+      content: "👁️ Exibir Resposta";
+    }
+    
+    details[open] summary::before {
+      content: "🔽 Ocultar Resposta";
+    }
+    
+    details[open] summary {
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    /* Bloco de Código */
+    .code-content {
+      padding: 0;
+      margin: 0;
+    }
+
+    .code-content pre {
+      margin: 0;
+      padding: 16px;
+      overflow-x: auto;
+      background-color: transparent !important;
+    }
+
+    .code-content code {
+      font-family: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
   </style>
 </head>
 <body>
-  <h3>
-    ↩️<a href="https://zack-rodrigues.github.io/Estudo.Py.BR/">Voltar</a>
-  <article class="markdown-body">
-    <h1>📁 Exercícios com Classes</h1>
 
-    <div class="exercise">
-      <h2>1. <strong>Classe Bola</strong></h2>
-      <div class="class-info">
-        <p><span class="attribute">Atributos</span>: Cor, circunferência, material</p>
-        <p><span class="method">Métodos</span>: <code>trocaCor</code>, <code>mostraCor</code></p>
-      </div>
-      <a href="./classe_bola.py">Código</a>
+  <div class="container">
+    <div class="header">
+      <a href="https://zack-rodrigues.github.io/Estudo.Py.BR/" class="back-link">↩️ Voltar para a Trilha</a>
+      <h1>🏗️ Exercícios com Classes (POO)</h1>
+      <p class="subtitle">Pratique a Programação Orientada a Objetos em Python. Crie modelos (classes), defina suas características (atributos) e o que elas podem fazer (métodos).</p>
     </div>
 
-    <div class="exercise">
-      <h2>2. <strong>Classe Quadrado</strong></h2>
-      <div class="class-info">
-        <p><span class="attribute">Atributo</span>: Tamanho do lado</p>
-        <p><span class="method">Métodos</span>: <code>mudarLado</code>, <code>retornarLado</code>, <code>calcularArea</code></p>
-      </div>
-      <a href="./classe_quadrado.py">Código</a>
-    </div>
+    <div class="exercises-grid">
 
-    <div class="exercise">
-      <h2>3. <strong>Classe Retângulo</strong></h2>
-      <div class="class-info">
-        <p><span class="attribute">Atributos</span>: ladoA, ladoB</p>
-        <p><span class="method">Métodos</span>: <code>mudarLados</code>, <code>retornarLados</code>, <code>calcularArea</code>, <code>calcularPerimetro</code></p>
-        <p><strong>Extra</strong>: Calcular quantidade de pisos e rodapés para medidas fornecidas pelo usuário.</p>
-      </div>
-      <a href="./classe_retangulo.py">Código</a>
-    </div>
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>1. Classe Bola</h3></div>
+        <div class="class-info">
+          <p><span class="attribute">Atributos:</span> Cor, circunferência, material</p>
+          <p><span class="method">Métodos:</span> <code>trocaCor()</code>, <code>mostraCor()</code></p>
+        </div>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">class Bola:
+    def __init__(self, cor, circunferencia, material):
+        self.cor = cor
+        self.circunferencia = circunferencia
+        self.material = material
+        
+    def trocaCor(self, nova_cor):
+        self.cor = nova_cor
+        print(f"A cor da bola foi alterada para {self.cor}.")
+        
+    def mostraCor(self):
+        print(f"A cor atual da bola é {self.cor}.")
 
-    <div class="exercise">
-      <h2>4. <strong>Classe Pessoa</strong></h2>
-      <div class="class-info">
-        <p><span class="attribute">Atributos</span>: nome, idade, peso, altura</p>
-        <p><span class="method">Métodos</span>: <code>envelhecer</code>, <code>engordar</code>, <code>emagrecer</code>, <code>crescer</code></p>
+# Testando a classe
+minha_bola = Bola("Azul", 68, "Couro")
+minha_bola.mostraCor()
+minha_bola.trocaCor("Vermelha")
+minha_bola.mostraCor()</code></pre></div>
+        </details>
       </div>
-      <a href="./classe_pessoa.py">Código</a>
-    </div>
 
-    <div class="exercise">
-      <h2>5. <strong>Classe Conta Corrente</strong></h2>
-      <div class="class-info">
-        <p><span class="attribute">Atributos</span>: número da conta, nome do correntista, saldo (default = 0)</p>
-        <p><span class="method">Métodos</span>: <code>alterarNome</code>, <code>depositar</code>, <code>sacar</code></p>
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>2. Classe Quadrado</h3></div>
+        <div class="class-info">
+          <p><span class="attribute">Atributos:</span> Tamanho do lado</p>
+          <p><span class="method">Métodos:</span> <code>mudarLado()</code>, <code>retornarLado()</code>, <code>calcularArea()</code></p>
+        </div>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">class Quadrado:
+    def __init__(self, tamanho_lado):
+        self.tamanho_lado = tamanho_lado
+        
+    def mudarLado(self, novo_tamanho):
+        self.tamanho_lado = novo_tamanho
+        
+    def retornarLado(self):
+        return self.tamanho_lado
+        
+    def calcularArea(self):
+        return self.tamanho_lado ** 2
+
+# Testando a classe
+quad = Quadrado(4)
+print(f"Lado: {quad.retornarLado()} | Área: {quad.calcularArea()}")
+quad.mudarLado(6)
+print(f"Novo Lado: {quad.retornarLado()} | Nova Área: {quad.calcularArea()}")</code></pre></div>
+        </details>
       </div>
-      <a href="./classe_conta_corrente.py">Código</a>
-    </div>
 
-    <div class="exercise">
-      <h2>6. <strong>Classe TV</strong></h2>
-      <div class="class-info">
-        <p><span class="attribute">Atributos</span>: canal, volume</p>
-        <p><span class="method">Métodos</span>: <code>mudarCanal</code>, <code>aumentarVolume</code>, <code>diminuirVolume</code></p>
-        <p><strong>Validação</strong>: manter canal e volume dentro de limites válidos.</p>
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>3. Classe Retângulo</h3></div>
+        <div class="class-info">
+          <p><span class="attribute">Atributos:</span> Lado A (base), Lado B (altura)</p>
+          <p><span class="method">Métodos:</span> <code>mudarLados()</code>, <code>retornarLados()</code>, <code>calcularArea()</code>, <code>calcularPerimetro()</code></p>
+          <p><strong>Extra:</strong> Crie um programa que utilize esta classe para calcular a quantidade de pisos e rodapés necessários para um local com medidas fornecidas pelo usuário.</p>
+        </div>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">class Retangulo:
+    def __init__(self, base, altura):
+        self.base = base
+        self.altura = altura
+        
+    def mudarLados(self, nova_base, nova_altura):
+        self.base = nova_base
+        self.altura = nova_altura
+        
+    def retornarLados(self):
+        return self.base, self.altura
+        
+    def calcularArea(self):
+        return self.base * self.altura
+        
+    def calcularPerimetro(self):
+        return 2 * (self.base + self.altura)
+
+# Programa Extra
+print("--- Cálculo de Materiais ---")
+base_local = float(input("Informe a base do local (m): "))
+altura_local = float(input("Informe a altura do local (m): "))
+
+local = Retangulo(base_local, altura_local)
+
+area = local.calcularArea()
+perimetro = local.calcularPerimetro()
+
+print(f"\nSerão necessários {area} m² de piso.")
+print(f"Serão necessários {perimetro} metros de rodapé.")</code></pre></div>
+        </details>
       </div>
-      <a href="./classe_tv.py">Código</a>
-    </div>
 
-    <div class="exercise">
-      <h2>7. <strong>Classe Bichinho Virtual (Tamagushi)</strong></h2>
-      <div class="class-info">
-        <p><span class="attribute">Atributos</span>: nome, fome, saúde, idade</p>
-        <p><span class="method">Métodos</span>: <code>alterarNome</code>, <code>alterarFome</code>, <code>alterarSaude</code>, <code>alterarIdade</code>, <code>retornarHumor</code></p>
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>4. Classe Pessoa</h3></div>
+        <div class="class-info">
+          <p><span class="attribute">Atributos:</span> nome, idade, peso, altura</p>
+          <p><span class="method">Métodos:</span> <code>envelhecer()</code>, <code>engordar()</code>, <code>emagrecer()</code>, <code>crescer()</code></p>
+          <p><strong>Regra:</strong> Por padrão, a cada ano que nossa pessoa envelhece (até os 21 anos), ela deve crescer 0,5 cm.</p>
+        </div>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">class Pessoa:
+    def __init__(self, nome, idade, peso, altura):
+        self.nome = nome
+        self.idade = idade
+        self.peso = peso
+        self.altura = altura # em metros, ex: 1.70
+        
+    def envelhecer(self, anos=1):
+        for _ in range(anos):
+            self.idade += 1
+            if self.idade &lt; 21:
+                self.crescer(0.005) # 0.5 cm
+                
+    def engordar(self, kg):
+        self.peso += kg
+        
+    def emagrecer(self, kg):
+        self.peso -= kg
+        
+    def crescer(self, metros):
+        self.altura += metros
+        
+    def __str__(self):
+        return f"{self.nome}: {self.idade} anos, {self.peso}kg, {self.altura:.2f}m"
+
+# Testando
+joao = Pessoa("João", 18, 70.0, 1.75)
+print(joao)
+joao.envelhecer(3) # Vai para 21 anos e cresce 1 cm (0.5 aos 19, 0.5 aos 20)
+print(joao)</code></pre></div>
+        </details>
       </div>
-      <a href="./classe_bichinho.py">Código</a>
-    </div>
 
-    <div class="exercise">
-      <h2>8. <strong>Classe Macaco</strong></h2>
-      <div class="class-info">
-        <p><span class="attribute">Atributos</span>: nome, bucho (lista de alimentos)</p>
-        <p><span class="method">Métodos</span>: <code>comer</code>, <code>verBucho</code>, <code>digerir</code></p>
-        <p><strong>Extra</strong>: Testar macaco canibal (um comer o outro)</p>
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>5. Classe Conta Corrente</h3></div>
+        <div class="class-info">
+          <p><span class="attribute">Atributos:</span> número da conta, nome do correntista e saldo (default = 0).</p>
+          <p><span class="method">Métodos:</span> <code>alterarNome()</code>, <code>depositar()</code>, <code>sacar()</code></p>
+        </div>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">class ContaCorrente:
+    # O parâmetro saldo=0 define o valor padrão caso o usuário não informe
+    def __init__(self, numero_conta, nome_correntista, saldo=0.0):
+        self.numero_conta = numero_conta
+        self.nome_correntista = nome_correntista
+        self.saldo = saldo
+        
+    def alterarNome(self, novo_nome):
+        self.nome_correntista = novo_nome
+        
+    def depositar(self, valor):
+        if valor &gt; 0:
+            self.saldo += valor
+            
+    def sacar(self, valor):
+        if 0 &lt; valor &lt;= self.saldo:
+            self.saldo -= valor
+        else:
+            print("Saldo insuficiente ou valor inválido.")
+
+# Testando
+conta = ContaCorrente("1234-5", "Ana Silva")
+conta.depositar(500)
+conta.sacar(150)
+print(f"Titular: {conta.nome_correntista} | Saldo: R$ {conta.saldo:.2f}")</code></pre></div>
+        </details>
       </div>
-      <a href="./classe_macaco.py">Código</a>
-    </div>
 
-    <div class="exercise">
-      <h2>9. <strong>Classe Ponto e Retângulo</strong></h2>
-      <div class="class-info">
-        <ul>
-          <li>Classe <code>Ponto</code>: atributos x e y</li>
-          <li>Classe <code>Retangulo</code>: atributos largura, altura, ponto de origem (classe <code>Ponto</code>)</li>
-          <li><strong>Funções</strong>: imprimir ponto, encontrar centro do retângulo</li>
-          <li>Criar menu para alterar retângulo e imprimir centro</li>
-        </ul>
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>6. Classe TV</h3></div>
+        <div class="class-info">
+          <p><span class="attribute">Atributos:</span> canal (default 1), volume (default 50)</p>
+          <p><span class="method">Métodos:</span> <code>mudarCanal()</code>, <code>aumentarVolume()</code>, <code>diminuirVolume()</code></p>
+          <p><strong>Validação:</strong> Garanta que o número do canal e o volume permaneçam dentro de faixas válidas.</p>
+        </div>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">class TV:
+    def __init__(self):
+        self.canal = 1
+        self.volume = 50
+        
+    def mudarCanal(self, novo_canal):
+        if 1 &lt;= novo_canal &lt;= 100:
+            self.canal = novo_canal
+            print(f"Canal alterado para {self.canal}")
+        else:
+            print("Canal inválido.")
+            
+    def aumentarVolume(self):
+        if self.volume &lt; 100:
+            self.volume += 1
+            print(f"Volume: {self.volume}")
+            
+    def diminuirVolume(self):
+        if self.volume &gt; 0:
+            self.volume -= 1
+            print(f"Volume: {self.volume}")
+
+# Testando
+minha_tv = TV()
+minha_tv.mudarCanal(15)
+minha_tv.aumentarVolume()</code></pre></div>
+        </details>
       </div>
-      <a href="./classe_ponto_retangulo.py">Código</a>
-    </div>
 
-    <div class="exercise">
-      <h2>10. <strong>Classe Bomba de Combustível</strong></h2>
-      <div class="class-info">
-        <p><span class="attribute">Atributos</span>: tipoCombustivel, valorLitro, quantidadeCombustivel</p>
-        <p><span class="method">Métodos</span>:
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>7. Classe Bichinho Virtual (Tamagushi)</h3></div>
+        <div class="class-info">
+          <p><span class="attribute">Atributos:</span> nome, fome, saude, idade</p>
+          <p><span class="method">Métodos:</span> <code>alterarNome()</code>, <code>alterarFome()</code>, <code>alterarSaude()</code>, <code>alterarIdade()</code>, <code>retornarHumor()</code></p>
+          <p><strong>Regra:</strong> O humor é uma combinação entre os atributos Fome e Saúde (ex: a média dos dois).</p>
+        </div>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">class Tamagushi:
+    def __init__(self, nome):
+        self.nome = nome
+        self.fome = 100   # 100 = Sem fome
+        self.saude = 100  # 100 = Muito saudável
+        self.idade = 1
+        
+    def alterarNome(self, novo_nome): self.nome = novo_nome
+    def alterarFome(self, valor): self.fome = valor
+    def alterarSaude(self, valor): self.saude = valor
+    def alterarIdade(self, valor): self.idade = valor
+        
+    def retornarHumor(self):
+        # Humor é a média entre saúde e saciedade
+        humor = (self.fome + self.saude) / 2
+        if humor &gt;= 70: return "Feliz"
+        elif humor &gt;= 40: return "Neutro"
+        else: return "Triste/Doente"
+
+# Testando
+pet = Tamagushi("Rex")
+print(f"Humor inicial: {pet.retornarHumor()}")
+pet.alterarFome(30)
+pet.alterarSaude(40)
+print(f"Humor após ficar doente e com fome: {pet.retornarHumor()}")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>8. Classe Macaco</h3></div>
+        <div class="class-info">
+          <p><span class="attribute">Atributos:</span> nome, bucho (uma lista)</p>
+          <p><span class="method">Métodos:</span> <code>comer(alimento)</code>, <code>verBucho()</code>, <code>digerir()</code></p>
+          <p><strong>Extra:</strong> Teste criar dois macacos, alimentá-los, e tente fazer um macaco comer o outro (macaco canibal).</p>
+        </div>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">class Macaco:
+    def __init__(self, nome):
+        self.nome = nome
+        self.bucho = []
+        
+    def comer(self, alimento):
+        # Adiciona o alimento ao bucho
+        self.bucho.append(alimento)
+        
+    def verBucho(self):
+        print(f"Bucho do {self.nome}: {self.bucho}")
+        
+    def digerir(self):
+        if self.bucho:
+            digerido = self.bucho.pop(0) # Remove o primeiro que entrou
+            print(f"{self.nome} digeriu {digerido}.")
+        else:
+            print(f"O bucho de {self.nome} está vazio.")
+            
+    # O método __str__ diz como o Python deve exibir o objeto quando usarmos print()
+    def __repr__(self):
+        return f"Macaco({self.nome})"
+
+# Testando
+george = Macaco("George")
+kong = Macaco("Kong")
+
+george.comer("Banana")
+george.comer("Maçã")
+george.verBucho()
+george.digerir()
+
+kong.comer("Melancia")
+kong.comer(george) # Kong comendo o George!
+kong.verBucho()</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>9. Classe Ponto e Retângulo</h3></div>
+        <div class="class-info">
           <ul>
-            <li><code>abastecerPorValor</code></li>
-            <li><code>abastecerPorLitro</code></li>
-            <li><code>alterarValor</code></li>
-            <li><code>alterarCombustivel</code></li>
-            <li><code>alterarQuantidadeCombustivel</code></li>
+            <li><strong>Classe Ponto:</strong> Atributos x, y.</li>
+            <li><strong>Classe Retângulo:</strong> Atributos largura, altura e um Ponto inicial (representando o canto inferior esquerdo).</li>
+            <li><strong>Métodos:</strong> Função para encontrar o centro do retângulo (retorna um novo Ponto).</li>
           </ul>
-        </p>
-      </div>
-      <a href="./classe_bomba.py">Código</a>
-    </div>
+        </div>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">class Ponto:
+    def __init__(self, x=0, y=0):
+        self.x = x
+        self.y = y
+        
+    def imprimir(self):
+        print(f"Ponto({self.x}, {self.y})")
 
-    <div class="exercise">
-      <h2>11. <strong>Classe Carro</strong></h2>
-      <div class="class-info">
-        <p><span class="attribute">Atributos</span>: consumo (km/litro), combustível (inicia em 0)</p>
-        <p><span class="method">Métodos</span>:
+class Retangulo:
+    def __init__(self, largura, altura, ponto_origem):
+        self.largura = largura
+        self.altura = altura
+        self.origem = ponto_origem # Este atributo recebe um objeto da classe Ponto
+        
+    def encontrarCentro(self):
+        # O centro no eixo X é a origem X + metade da largura
+        centro_x = self.origem.x + (self.largura / 2)
+        # O centro no eixo Y é a origem Y + metade da altura
+        centro_y = self.origem.y + (self.altura / 2)
+        
+        # Retorna um NOVO objeto Ponto
+        return Ponto(centro_x, centro_y)
+
+# Testando com um menu simples
+p_origem = Ponto(10, 10)
+meu_retangulo = Retangulo(100, 50, p_origem)
+
+while True:
+    print("\n1. Encontrar e imprimir Centro")
+    print("2. Alterar dimensões do Retângulo")
+    print("3. Sair")
+    opc = input("Escolha: ")
+    
+    if opc == '1':
+        centro = meu_retangulo.encontrarCentro()
+        print("-> Centro do Retângulo: ", end="")
+        centro.imprimir()
+    elif opc == '2':
+        meu_retangulo.largura = float(input("Nova Largura: "))
+        meu_retangulo.altura = float(input("Nova Altura: "))
+    elif opc == '3':
+        break</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>10. Classe Bomba de Combustível</h3></div>
+        <div class="class-info">
+          <p><span class="attribute">Atributos:</span> tipoCombustivel, valorLitro, quantidadeCombustivel (estoque da bomba)</p>
+          <p><span class="method">Métodos:</span> <code>abastecerPorValor()</code>, <code>abastecerPorLitro()</code>, <code>alterarValor()</code>, <code>alterarCombustivel()</code>, <code>alterarQuantidadeCombustivel()</code></p>
+        </div>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">class BombaCombustivel:
+    def __init__(self, tipo, valor, quantidade):
+        self.tipoCombustivel = tipo
+        self.valorLitro = valor
+        self.quantidadeCombustivel = quantidade # Estoque da bomba
+        
+    def abastecerPorValor(self, valor):
+        litros = valor / self.valorLitro
+        if litros &lt;= self.quantidadeCombustivel:
+            self.quantidadeCombustivel -= litros
+            print(f"Abastecido: {litros:.2f} litros. Total a pagar: R$ {valor:.2f}")
+        else:
+            print("Não há combustível suficiente na bomba.")
+            
+    def abastecerPorLitro(self, litros):
+        if litros &lt;= self.quantidadeCombustivel:
+            valor = litros * self.valorLitro
+            self.quantidadeCombustivel -= litros
+            print(f"Abastecido: {litros:.2f} litros. Total a pagar: R$ {valor:.2f}")
+        else:
+            print("Não há combustível suficiente na bomba.")
+            
+    def alterarValor(self, novo_valor): self.valorLitro = novo_valor
+    def alterarCombustivel(self, novo_tipo): self.tipoCombustivel = novo_tipo
+    def alterarQuantidadeCombustivel(self, nova_qtde): self.quantidadeCombustivel = nova_qtde
+
+# Testando
+bomba = BombaCombustivel("Gasolina", 5.50, 1000)
+bomba.abastecerPorValor(50.0) # Abastece 50 reais
+bomba.abastecerPorLitro(10)   # Abastece 10 litros
+print(f"Estoque restante: {bomba.quantidadeCombustivel:.2f} litros")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>11. Classe Carro</h3></div>
+        <div class="class-info">
+          <p><span class="attribute">Atributos:</span> consumo (km/litro), combustível (inicia sempre em 0)</p>
+          <p><span class="method">Métodos:</span> <code>andar(distancia)</code>, <code>obterGasolina()</code>, <code>adicionarGasolina(qtde)</code></p>
+        </div>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">class Carro:
+    def __init__(self, consumo_km_litro):
+        self.consumo = consumo_km_litro
+        self.combustivel = 0.0
+        
+    def adicionarGasolina(self, litros):
+        self.combustivel += litros
+        
+    def andar(self, distancia):
+        litros_necessarios = distancia / self.consumo
+        
+        if self.combustivel &gt;= litros_necessarios:
+            self.combustivel -= litros_necessarios
+            print(f"O carro andou {distancia}km.")
+        else:
+            print("Gasolina insuficiente para o trajeto.")
+            
+    def obterGasolina(self):
+        return self.combustivel
+
+# Testando
+meuFusca = Carro(15) # 15 km por litro
+meuFusca.adicionarGasolina(20) # Abastece 20 litros
+meuFusca.andar(100) # Anda 100 km
+print(f"Gasolina restante: {meuFusca.obterGasolina():.2f} litros")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>12. Classe Conta de Investimento</h3></div>
+        <div class="class-info">
+          <p><span class="attribute">Atributos:</span> saldo, taxaJuros</p>
+          <p><span class="method">Métodos:</span> <code>adicioneJuros()</code> (aplica a taxa de juros sobre o saldo atual)</p>
+          <p><strong>Teste:</strong> Inicie com R$1000, taxa 10%, e aplique o método 5 vezes consecutivas para ver os juros compostos.</p>
+        </div>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">class ContaInvestimento:
+    def __init__(self, saldo_inicial, taxa_juros):
+        self.saldo = saldo_inicial
+        self.taxa_juros = taxa_juros # ex: 10 para 10%
+        
+    def adicioneJuros(self):
+        # Aumenta o saldo baseado na porcentagem de juros
+        self.saldo += self.saldo * (self.taxa_juros / 100)
+        
+    def getSaldo(self):
+        return self.saldo
+
+# Testando Juros Compostos
+conta = ContaInvestimento(1000.0, 10.0)
+
+for i in range(5):
+    conta.adicioneJuros()
+    print(f"Mês {i+1}: R$ {conta.getSaldo():.2f}")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>13. Classe Funcionário</h3></div>
+        <div class="class-info">
+          <p><span class="attribute">Atributos:</span> nome, salário</p>
+          <p><span class="method">Métodos:</span> <code>getNome()</code>, <code>getSalario()</code>, <code>aumentarSalario(porcentagem)</code></p>
+        </div>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">class Funcionario:
+    def __init__(self, nome, salario):
+        self.nome = nome
+        self.salario = salario
+        
+    def getNome(self):
+        return self.nome
+        
+    def getSalario(self):
+        return self.salario
+        
+    def aumentarSalario(self, porcentagem):
+        aumento = self.salario * (porcentagem / 100)
+        self.salario += aumento
+
+# Testando
+harry = Funcionario("Harry", 25000)
+harry.aumentarSalario(10)
+print(f"{harry.getNome()} tem o salário de R$ {harry.getSalario():.2f}")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>14. Bichinho Virtual++ (Fazenda)</h3></div>
+        <div class="class-info">
+          <p>Aprimore a classe Tamagushi (Bichinho Virtual):</p>
           <ul>
-            <li><code>andar(distancia)</code></li>
-            <li><code>obterGasolina()</code></li>
-            <li><code>adicionarGasolina(qtde)</code></li>
+            <li>Permita receber parâmetros exatos para "alimentar" (quantidade) e "brincar" (tempo).</li>
+            <li>Adicione o método <code>__str__</code> que funciona como uma porta secreta (mostra status interno).</li>
+            <li>Crie uma "Fazenda" controlando uma lista de objetos Bichinho (Alimente e brinque com todos de uma vez!).</li>
           </ul>
-        </p>
-      </div>
-      <a href="./classe_carro.py">Código</a>
-    </div>
+        </div>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">class BichinhoPlus:
+    def __init__(self, nome):
+        self.nome = nome
+        self.fome = 50
+        self.tedio = 50
+        
+    def alimentar(self, quantidade):
+        self.fome -= quantidade
+        if self.fome &lt; 0: self.fome = 0
+            
+    def brincar(self, tempo):
+        self.tedio -= tempo
+        if self.tedio &lt; 0: self.tedio = 0
+            
+    def ouvir(self):
+        print(f"{self.nome} diz: Minha fome é {self.fome} e meu tédio é {self.tedio}.")
+        
+    # A Porta Secreta!
+    def __str__(self):
+        return f"[{self.nome} - Atributos Ocultos: Fome:{self.fome} Tedio:{self.tedio}]"
 
-    <div class="exercise">
-      <h2>12. <strong>Classe Conta de Investimento</strong></h2>
-      <div class="class-info">
-        <p><span class="attribute">Atributos</span>: saldo, taxaJuros</p>
-        <p><span class="method">Método</span>: <code>adicioneJuros()</code></p>
-        <p><strong>Exemplo</strong>: criar conta com R$1000, taxa 10%, aplicar juros 5 vezes</p>
-      </div>
-      <a href="./classe_investimento.py">Código</a>
-    </div>
+# Fazenda de Bichinhos (Lista de Objetos)
+fazenda = [
+    BichinhoPlus("Vaca"),
+    BichinhoPlus("Porco"),
+    BichinhoPlus("Galinha")
+]
 
-    <div class="exercise">
-      <h2>13. <strong>Classe Funcionário</strong></h2>
-      <div class="class-info">
-        <p><span class="attribute">Atributos</span>: nome, salário</p>
-        <p><span class="method">Métodos</span>: <code>getNome()</code>, <code>getSalario()</code>, <code>aumentarSalario(porcentagem)</code></p>
-      </div>
-      <a href="./classe_funcionario.py">Código</a>
-    </div>
+print("--- Interagindo com a Fazenda Inteira ---")
 
-    <div class="exercise">
-      <h2>14. <strong>Classe Bichinho Virtual++</strong></h2>
-      <div class="class-info">
-        <p>Melhore o programa do bichinho virtual:</p>
-        <ul>
-          <li>Especificar quantidade de comida e tempo de brincadeira</li>
-          <li>"Porta escondida" que mostra valores exatos do objeto (<code>__str__</code>)</li>
-          <li>Criar uma fazenda com vários bichinhos (lista de objetos)</li>
-          <li>Controlar todos ao mesmo tempo (alimentar, brincar, ouvir)</li>
-        </ul>
+# Alimentando todos de uma vez (Polimorfismo / Loop)
+for animal in fazenda:
+    animal.alimentar(20)
+    animal.brincar(10)
+    animal.ouvir()
+
+print("\n--- Usando a Porta Secreta ---")
+for animal in fazenda:
+    print(animal) # Isso chama o método __str__ de cada objeto</code></pre></div>
+        </details>
       </div>
-      <a href="./classe_bichinho_plus.py">Código</a>
+
     </div>
-  </article>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
 </body>
 </html>

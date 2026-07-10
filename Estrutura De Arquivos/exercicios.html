@@ -2,70 +2,232 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercícios com Arquivos | Estudo.Py.BR</title>
   
-  <title>Exercícios com Arquivos</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.0/github-markdown-dark.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css">
+  
   <style>
+    /* Paleta de Cores e Tema Base (Estilo GitHub Dark) */
+    :root {
+      --bg-color: #0d1117;
+      --card-bg: #161b22;
+      --text-main: #c9d1d9;
+      --text-muted: #8b949e;
+      --border-color: #30363d;
+      --accent: #58a6ff;
+      --accent-hover: #1f6feb;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
-      background-color: #0d1117;
-      color: #c9d1d9;
-      font-family: system-ui, sans-serif;
-      padding: 2rem;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      padding: 2rem 1rem;
       display: flex;
       justify-content: center;
     }
-    .markdown-body {
+
+    .container {
       max-width: 900px;
-    }
-    a {
-      color: #58a6ff;
-    }
-    pre {
-      background-color: #161b22;
-      padding: 1rem;
-      border-radius: 6px;
-      overflow-x: auto;
-    }
-    .file-icon {
-      font-size: 1.2em;
-      margin-right: 5px;
-    }
-    .exercise {
-      border-bottom: 1px solid #30363d;
-      padding-bottom: 2rem;
-      margin-bottom: 2rem;
-    }
-    table {
-      border-collapse: collapse;
       width: 100%;
-      margin: 1rem 0;
     }
-    th, td {
-      border: 1px solid #30363d;
-      padding: 8px;
-      text-align: left;
+
+    /* Navegação e Cabeçalho */
+    .header {
+      margin-bottom: 2.5rem;
     }
-    th {
+    
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 8px 16px;
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      transition: all 0.2s ease-in-out;
+      margin-bottom: 1.5rem;
+    }
+    
+    .back-link:hover {
+      background-color: var(--border-color);
+      color: #ffffff;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+      color: #ffffff;
+    }
+    
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+    }
+
+    /* Grid de Cartões de Exercícios */
+    .exercises-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .exercise-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .exercise-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 0.75rem;
+    }
+    
+    .exercise-header h3 {
+      font-size: 1.3rem;
+      color: var(--accent);
+    }
+    
+    .exercise-desc {
+      margin-bottom: 1.25rem;
+      font-size: 1.05rem;
+      color: #e6edf3;
+    }
+    
+    .exercise-desc ul {
+      margin-top: 0.5rem;
+      margin-left: 1.5rem;
+      color: #8b949e;
+    }
+
+    /* Bloco de Preview de Arquivos (estilo VSCode/Terminal) */
+    .file-preview {
+      background-color: #0d1117;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      margin-bottom: 1.5rem;
+      overflow: hidden;
+    }
+    
+    .file-preview-header {
       background-color: #161b22;
+      border-bottom: 1px solid var(--border-color);
+      padding: 8px 12px;
+      font-size: 0.85rem;
+      color: #8b949e;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
+
+    .file-preview-content {
+      padding: 12px 16px;
+      font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+      font-size: 0.9rem;
+      color: #c9d1d9;
+      white-space: pre-wrap;
+      margin: 0;
+    }
+
+    /* Botão de Resposta (details/summary) */
+    details {
+      background-color: var(--bg-color);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    summary {
+      padding: 12px 16px;
+      cursor: pointer;
+      color: var(--accent);
+      font-weight: bold;
+      background-color: var(--card-bg);
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s;
+      user-select: none;
+    }
+    
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary:hover {
+      background-color: #1f242c;
+    }
+
+    summary::before {
+      content: "👁️ Exibir Resposta";
+    }
+    
+    details[open] summary::before {
+      content: "🔽 Ocultar Resposta";
+    }
+    
+    details[open] summary {
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    /* Bloco de Código */
+    .code-content {
+      padding: 0;
+      margin: 0;
+    }
+
+    .code-content pre {
+      margin: 0;
+      padding: 16px;
+      overflow-x: auto;
+      background-color: transparent !important;
+    }
+
+    .code-content code {
+      font-family: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
   </style>
 </head>
 <body>
 
-  
-  <h3>
-    ↩️<a href="https://zack-rodrigues.github.io/Estudo.Py.BR/">Voltar</a>
-  
+  <div class="container">
+    <div class="header">
+      <a href="https://zack-rodrigues.github.io/Estudo.Py.BR/" class="back-link">↩️ Voltar para a Trilha</a>
+      <h1>📁 Exercícios com Arquivos</h1>
+      <p class="subtitle">Aprenda a manipular o sistema de arquivos utilizando Python! Pratique as rotinas de leitura (<code>read</code>), escrita (<code>write</code>) e formatação de relatórios a partir de dados em formato <code>.txt</code>.</p>
+    </div>
 
-  <article class="markdown-body">
-    <h1>📁 Exercícios com Arquivos</h1>
-    
-    <div class="exercise">
-      <h2>1. <strong>Validador de Endereços IP</strong></h2>
-      <p>Faça um programa que leia um arquivo texto contendo uma lista de endereços IP e gere um outro arquivo, contendo um relatório dos endereços IP válidos e inválidos.</p>
-      
-      <h3><span class="file-icon">📅</span> Arquivo de entrada (<code>ips.txt</code>)</h3>
-      <pre>200.135.80.9
+    <div class="exercises-grid">
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>1. Validador de Endereços IP</h3></div>
+        <p class="exercise-desc">Faça um programa que leia um arquivo texto contendo uma lista de endereços IP e gere um outro arquivo, contendo um relatório dos endereços IP classificados como válidos e inválidos (regras de IP: 4 blocos separados por pontos, variando de 0 a 255).</p>
+        
+        <div class="file-preview">
+          <div class="file-preview-header">📅 Arquivo de entrada: ips.txt</div>
+          <pre class="file-preview-content">200.135.80.9
 192.168.1.1
 8.35.67.74
 257.32.4.5
@@ -73,9 +235,11 @@
 1.2.3.4
 9.8.234.5
 192.168.0.256</pre>
-      
-      <h3><span class="file-icon">📄</span> Arquivo de saída (<code>relatorio_ips.txt</code>)</h3>
-      <pre>[Endereços válidos:]
+        </div>
+
+        <div class="file-preview">
+          <div class="file-preview-header">📄 Arquivo de saída: relatorio_ips.txt</div>
+          <pre class="file-preview-content">[Endereços válidos:]
 200.135.80.9
 192.168.1.1
 8.35.67.74
@@ -86,34 +250,79 @@
 85.345.1.2
 9.8.234.5
 192.168.0.256</pre>
-      
-      <a href="./validador_ips.py">Código</a>
-    </div>
+        </div>
+
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python"># Função auxiliar para validar as regras do IPv4
+def validar_ip(ip):
+    partes = ip.split('.')
+    # Um IP deve ter exatamente 4 partes
+    if len(partes) != 4:
+        return False
+    # Cada parte deve ser número e estar entre 0 e 255
+    for parte in partes:
+        if not parte.isdigit() or int(parte) < 0 or int(parte) > 255:
+            return False
+    return True
+
+# -------------------------------------------------------------
+# Dica de Estudo: Bloco gerador do arquivo de entrada
+# -------------------------------------------------------------
+with open("ips.txt", "w") as f:
+    f.write("200.135.80.9\n192.168.1.1\n8.35.67.74\n257.32.4.5\n85.345.1.2\n1.2.3.4\n9.8.234.5\n192.168.0.256\n")
+# -------------------------------------------------------------
+
+validos = []
+invalidos = []
+
+# Lendo o arquivo original
+with open("ips.txt", "r") as arquivo:
+    for linha in arquivo:
+        ip = linha.strip()  # Remove espaços em branco e quebras de linha
+        if validar_ip(ip):
+            validos.append(ip)
+        else:
+            invalidos.append(ip)
+
+# Escrevendo no novo arquivo de relatório
+with open("relatorio_ips.txt", "w") as relatorio:
+    relatorio.write("[Endereços válidos:]\n")
+    for ip in validos:
+        relatorio.write(f"{ip}\n")
     
-    <div class="exercise">
-      <h2>2. <strong>Relatório de Espaço em Disco por Usuário</strong></h2>
-      <p>A ACME Inc., uma empresa de 500 funcionários, está tendo problemas de espaço em disco no seu servidor de arquivos. Para tentar resolver este problema, o Administrador de Rede precisa saber qual o espaço ocupado pelos usuários, e identificar os usuários com maior espaço ocupado.</p>
-      
-      <p>O administrador possui um arquivo com o seguinte conteúdo:</p>
-      
-      <h3><span class="file-icon">📅</span> Arquivo de entrada (<code>usuarios.txt</code>)</h3>
-      <pre>alexandre       456123789
+    relatorio.write("\n[Endereços inválidos:]\n")
+    for ip in invalidos:
+        relatorio.write(f"{ip}\n")
+
+print("Sucesso! Relatório 'relatorio_ips.txt' gerado no diretório atual.")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>2. Relatório de Espaço em Disco por Usuário</h3></div>
+        <p class="exercise-desc">A ACME Inc. está com problemas de espaço em disco no servidor. O administrador possui um arquivo com os nomes dos usuários e o espaço consumido (em bytes). Você deve ler este arquivo, converter de bytes para MB, e gerar um relatório indicando:</p>
+        <div class="exercise-desc">
+          <ul>
+            <li>Espaço utilizado em Megabytes</li>
+            <li>Porcentagem de uso sobre o espaço total</li>
+            <li>Espaço total e espaço médio ocupado pela equipe</li>
+          </ul>
+        </div>
+
+        <div class="file-preview">
+          <div class="file-preview-header">📅 Arquivo de entrada: usuarios.txt</div>
+          <pre class="file-preview-content">alexandre       456123789
 anderson        1245698456
 antonio         123456456
 carlos          91257581
 cesar           987458
 rosemary        789456125</pre>
-      
-      <p>O nome do usuário possui exatamente 15 caracteres. A partir deste arquivo, você deve criar um relatório com:</p>
-      <ul>
-        <li>Espaço utilizado em MB</li>
-        <li>Porcentagem do uso</li>
-        <li>Espaço total ocupado</li>
-        <li>Espaço médio ocupado</li>
-      </ul>
-      
-      <h3><span class="file-icon">📄</span> Arquivo de saída (<code>relatorio.txt</code>)</h3>
-      <pre>ACME Inc.               Uso do espaço em disco pelos usuários
+        </div>
+
+        <div class="file-preview">
+          <div class="file-preview-header">📄 Arquivo de saída: relatorio.txt</div>
+          <pre class="file-preview-content">ACME Inc.               Uso do espaço em disco pelos usuários
 --------------------------------------------------------------
 Nr.  Usuário        Espaço utilizado     % do uso
 1    alexandre      434,99 MB            16,85%
@@ -125,9 +334,66 @@ Nr.  Usuário        Espaço utilizado     % do uso
 
 Espaço total ocupado: 2581,57 MB
 Espaço médio ocupado: 430,26 MB</pre>
-      
-      <a href="./relatorio_usuarios.py">Código</a>
+        </div>
+
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python"># Função auxiliar: Transforma Bytes em MegaBytes
+def bytes_para_mb(bytes_size):
+    return bytes_size / (1024 * 1024)
+
+# -------------------------------------------------------------
+# Dica de Estudo: Bloco gerador do arquivo de entrada
+# -------------------------------------------------------------
+with open("usuarios.txt", "w") as f:
+    f.write("alexandre       456123789\nanderson        1245698456\nantonio         123456456\ncarlos          91257581\ncesar           987458\nrosemary        789456125\n")
+# -------------------------------------------------------------
+
+usuarios = []
+espacos = []
+total_espaco_bytes = 0
+
+# Lendo o arquivo de entrada
+with open("usuarios.txt", "r") as arquivo:
+    for linha in arquivo:
+        # split() separa a linha por espaços (mesmo se houver múltiplos)
+        partes = linha.split()
+        if len(partes) == 2:
+            nome = partes[0]
+            espaco_bytes = int(partes[1])
+            
+            usuarios.append(nome)
+            espacos.append(espaco_bytes)
+            total_espaco_bytes += espaco_bytes
+
+total_mb = bytes_para_mb(total_espaco_bytes)
+
+# Escrevendo o arquivo de saída formatado
+with open("relatorio.txt", "w") as relatorio:
+    relatorio.write("ACME Inc.               Uso do espaço em disco pelos usuários\n")
+    relatorio.write("-" * 65 + "\n")
+    relatorio.write(f"{'Nr.':<4} {'Usuário':<14} {'Espaço utilizado':<20} {'% do uso'}\n")
+    
+    for i in range(len(usuarios)):
+        espaco_mb = bytes_para_mb(espacos[i])
+        percentual = (espacos[i] / total_espaco_bytes) * 100
+        
+        # Formatando as colunas alinhadas
+        relatorio.write(f"{i+1:<4} {usuarios[i]:<14} {espaco_mb:>7.2f} MB {percentual:>16.2f}%\n")
+    
+    media_mb = total_mb / len(usuarios) if usuarios else 0
+    relatorio.write("\n")
+    relatorio.write(f"Espaço total ocupado: {total_mb:.2f} MB\n")
+    relatorio.write(f"Espaço médio ocupado: {media_mb:.2f} MB\n")
+
+print("Sucesso! Relatório gerencial 'relatorio.txt' criado.")</code></pre></div>
+        </details>
+      </div>
+
     </div>
-  </article>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
 </body>
 </html>
