@@ -2,422 +2,997 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Estrutura de Repetição - Exercícios</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.0/github-markdown-dark.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estrutura de Repetição - Exercícios | Estudo.Py.BR</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css">
+  
   <style>
+    /* Paleta de Cores e Tema Base (Estilo GitHub Dark) */
+    :root {
+      --bg-color: #0d1117;
+      --card-bg: #161b22;
+      --text-main: #c9d1d9;
+      --text-muted: #8b949e;
+      --border-color: #30363d;
+      --accent: #58a6ff;
+      --accent-hover: #1f6feb;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
-      background-color: #0d1117;
-      color: #c9d1d9;
-      font-family: system-ui, sans-serif;
-      padding: 2rem;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      padding: 2rem 1rem;
       display: flex;
       justify-content: center;
     }
-    .markdown-body {
+
+    .container {
       max-width: 900px;
+      width: 100%;
     }
-    a {
-      color: #58a6ff;
+
+    /* Navegação e Cabeçalho */
+    .header {
+      margin-bottom: 2.5rem;
     }
-    li {
+    
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 8px 16px;
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      transition: all 0.2s ease-in-out;
       margin-bottom: 1.5rem;
     }
-    li > p {
-      margin: 0.5rem 0;
+    
+    .back-link:hover {
+      background-color: var(--border-color);
+      color: #ffffff;
     }
-    li > ul, li > ol {
-      margin: 0.5rem 0 1rem;
+
+    h1 {
+      font-size: 2.2rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+      color: #ffffff;
     }
-    .code-link {
-      display: block;
-      margin-top: 0.5rem;
+    
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 1.1rem;
     }
+
+    /* Grid de Cartões de Exercícios */
+    .exercises-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .exercise-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .exercise-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 0.75rem;
+    }
+    
+    .exercise-header h3 {
+      font-size: 1.3rem;
+      color: var(--accent);
+    }
+    
+    .exercise-desc {
+      margin-bottom: 1.25rem;
+      font-size: 1.05rem;
+      color: #e6edf3;
+    }
+
+    /* Botão de Resposta (details/summary) */
+    details {
+      background-color: var(--bg-color);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    summary {
+      padding: 12px 16px;
+      cursor: pointer;
+      color: var(--accent);
+      font-weight: bold;
+      background-color: var(--card-bg);
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s;
+      user-select: none;
+    }
+    
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary:hover {
+      background-color: #1f242c;
+    }
+
+    summary::before {
+      content: "👁️ Exibir Resposta";
+    }
+    
+    details[open] summary::before {
+      content: "🔽 Ocultar Resposta";
+    }
+    
+    details[open] summary {
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    /* Bloco de Código */
+    .code-content {
+      padding: 0;
+      margin: 0;
+    }
+
+    .code-content pre {
+      margin: 0;
+      padding: 16px;
+      overflow-x: auto;
+      background-color: transparent !important;
+    }
+
+    .code-content code {
+      font-family: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
   </style>
 </head>
 <body>
-  <h3>
-    ↩️<a href="https://zack-rodrigues.github.io/Estudo.Py.BR/">Voltar</a>
-   <article class="markdown-body">
-      <h1>Lista de Exercícios de Estrutura de Repetição</h1>
-      <p>Aqui estão os exercícios para praticar estruturas de repetição em Python. Clique nos links para acessar os códigos correspondentes.</p>
-      
-      <h2>Exercícios</h2>
-      
-      <ol>
-        <li>
-          <strong>Validação de Nota</strong>: 
-          <p>Faça um programa que peça uma nota, entre zero e dez. Mostre uma mensagem caso o valor seja inválido e continue pedindo até que o usuário informe um valor válido.</p>
-          <a href="./notas_zero_a_dez.py" class="code-link">Código</a>
-        </li>
+
+  <div class="container">
+    <div class="header">
+      <a href="https://zack-rodrigues.github.io/Estudo.Py.BR/" class="back-link">↩️ Voltar para a Trilha</a>
+      <h1>🔁 Estrutura de Repetição</h1>
+      <p class="subtitle">Aprenda a controlar o fluxo do seu programa com loops! Pratique o uso de <code>for</code> e <code>while</code> para automatizar tarefas repetitivas, validar dados e criar lógicas avançadas.</p>
+    </div>
+
+    <div class="exercises-grid">
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>1. Validação de Nota</h3></div>
+        <p class="exercise-desc">Crie um programa que peça uma nota entre 0 e 10. Continue pedindo a nota em loop até que o usuário informe um valor válido.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">nota = float(input("Informe uma nota entre 0 e 10: "))
+while nota &lt; 0 or nota &gt; 10:
+    print("Valor inválido!")
+    nota = float(input("Informe novamente uma nota entre 0 e 10: "))
+print(f"Nota válida registrada: {nota}")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>2. Validação de Usuário e Senha</h3></div>
+        <p class="exercise-desc">Faça um programa de cadastro que leia um nome de usuário e uma senha. Não aceite a senha se for igual ao nome do usuário, exibindo um erro e pedindo os dados novamente.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">usuario = input("Digite o nome de usuário: ")
+senha = input("Digite a senha: ")
+while senha == usuario:
+    print("Erro: A senha não pode ser igual ao nome de usuário.")
+    usuario = input("Digite o nome de usuário: ")
+    senha = input("Digite a senha: ")
+print("Cadastro realizado com sucesso!")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>3. Validação Completa de Dados</h3></div>
+        <p class="exercise-desc">Faça um programa que leia e valide: Nome (> 3 caracteres), Idade (0 a 150), Salário (> 0), Sexo ('f' ou 'm') e Estado Civil ('s', 'c', 'v', 'd').</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">nome = input("Nome: ")
+while len(nome) &lt;= 3:
+    nome = input("O nome deve ter mais de 3 caracteres. Nome: ")
+
+idade = int(input("Idade: "))
+while idade &lt; 0 or idade &gt; 150:
+    idade = int(input("Idade inválida (0 a 150). Idade: "))
+
+salario = float(input("Salário: R$ "))
+while salario &lt;= 0:
+    salario = float(input("O salário deve ser maior que zero. Salário: R$ "))
+
+sexo = input("Sexo (f/m): ").lower()
+while sexo not in ['f', 'm']:
+    sexo = input("Sexo inválido. Informe 'f' ou 'm': ").lower()
+
+estado_civil = input("Estado Civil (s/c/v/d): ").lower()
+while estado_civil not in ['s', 'c', 'v', 'd']:
+    estado_civil = input("Estado civil inválido. Informe s, c, v ou d: ").lower()
+
+print("Todos os dados foram validados com sucesso!")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>4. Crescimento Populacional (Taxas Fixas)</h3></div>
+        <p class="exercise-desc">A população de 'A' é 80.000 (crescendo 3% ao ano) e 'B' é 200.000 (crescendo 1.5% ao ano). Calcule quantos anos são necessários para que 'A' ultrapasse ou iguale 'B'.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">pop_a = 80000
+pop_b = 200000
+anos = 0
+
+while pop_a &lt; pop_b:
+    pop_a += pop_a * 0.03
+    pop_b += pop_b * 0.015
+    anos += 1
+
+print(f"Serão necessários {anos} anos para a população A ultrapassar ou igualar a B.")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>5. Crescimento Populacional (Entrada do Usuário)</h3></div>
+        <p class="exercise-desc">Aprimore o programa anterior permitindo ao usuário digitar as populações iniciais e as taxas de crescimento. Adicione validações para evitar loops infinitos.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">pop_a = float(input("População da cidade A: "))
+taxa_a = float(input("Taxa de crescimento da cidade A (%): ")) / 100
+
+pop_b = float(input("População da cidade B: "))
+taxa_b = float(input("Taxa de crescimento da cidade B (%): ")) / 100
+
+anos = 0
+
+if taxa_a &lt;= taxa_b and pop_a &lt; pop_b:
+    print("A cidade A nunca ultrapassará a cidade B com essa taxa.")
+else:
+    while pop_a &lt; pop_b:
+        pop_a += pop_a * taxa_a
+        pop_b += pop_b * taxa_b
+        anos += 1
+    print(f"Serão necessários {anos} anos.")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>6. Impressão de Números</h3></div>
+        <p class="exercise-desc">Faça um programa que imprima na tela os números de 1 a 20, um abaixo do outro. Depois modifique para mostrá-los um ao lado do outro.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python"># Um abaixo do outro
+for i in range(1, 21):
+    print(i)
+
+# Um ao lado do outro
+for i in range(1, 21):
+    print(i, end=" ")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>7. Maior de Cinco Números</h3></div>
+        <p class="exercise-desc">Crie um laço de repetição que leia 5 números fornecidos pelo usuário e informe qual é o maior deles.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">maior = float('-inf')  # Começa com o menor valor possível
+
+for i in range(5):
+    numero = float(input(f"Digite o {i+1}º número: "))
+    if numero &gt; maior:
+        maior = numero
+
+print(f"O maior número digitado foi: {maior}")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>8. Cálculo de Soma e Média</h3></div>
+        <p class="exercise-desc">Leia 5 números, calcule a soma de todos eles e exiba a média aritmética no final.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">soma = 0
+
+for i in range(5):
+    numero = float(input(f"Digite o {i+1}º número: "))
+    soma += numero
+
+media = soma / 5
+print(f"Soma: {soma}")
+print(f"Média: {media:.2f}")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>9. Números Ímpares até 50</h3></div>
+        <p class="exercise-desc">Escreva um programa que imprima na tela apenas os números ímpares existentes no intervalo entre 1 e 50.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python"># Usando o step 2 no range para pular de ímpar em ímpar
+for i in range(1, 51, 2):
+    print(i, end=" ")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>10. Intervalo Numérico</h3></div>
+        <p class="exercise-desc">Receba dois números inteiros informados pelo usuário e gere na tela os números inteiros que estão no intervalo entre eles.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">inicio = int(input("Digite o número inicial: "))
+fim = int(input("Digite o número final: "))
+
+# Garantindo que vai imprimir em ordem crescente, mesmo se início for maior que fim
+if inicio &gt; fim:
+    inicio, fim = fim, inicio
+
+for i in range(inicio + 1, fim):
+    print(i, end=" ")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>11. Soma do Intervalo</h3></div>
+        <p class="exercise-desc">Altere o programa anterior para, além de mostrar os números, mostrar no final a soma dos números desse intervalo.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">inicio = int(input("Digite o número inicial: "))
+fim = int(input("Digite o número final: "))
+soma = 0
+
+if inicio &gt; fim:
+    inicio, fim = fim, inicio
+
+print("Números no intervalo:")
+for i in range(inicio + 1, fim):
+    print(i, end=" ")
+    soma += i
+
+print(f"\nA soma do intervalo é: {soma}")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>12. Gerador de Tabuada</h3></div>
+        <p class="exercise-desc">Desenvolva um gerador de tabuada, capaz de gerar a tabuada de qualquer número inteiro entre 1 a 10. O usuário deve informar qual número ele deseja ver a tabuada.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">num = int(input("Deseja ver a tabuada de qual número? (1 a 10): "))
+
+print(f"\nTabuada de {num}:")
+for i in range(1, 11):
+    print(f"{num} X {i} = {num * i}")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>13. Cálculo de Potência Manual</h3></div>
+        <p class="exercise-desc">Faça um programa que peça dois números (base e expoente) e calcule a potência. Não utilize a função de potência nativa do Python (como <code>**</code> ou <code>math.pow</code>).</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">base = float(input("Digite a base: "))
+expoente = int(input("Digite o expoente: "))
+resultado = 1
+
+for _ in range(expoente):
+    resultado *= base
+
+print(f"Resultado: {resultado}")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>14. Contador de Pares e Ímpares</h3></div>
+        <p class="exercise-desc">Peça ao usuário para digitar 10 números inteiros. O programa deve contar e exibir a quantidade de números pares e a quantidade de números ímpares.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">pares = 0
+impares = 0
+
+for i in range(10):
+    num = int(input(f"Digite o {i+1}º número inteiro: "))
+    if num % 2 == 0:
+        pares += 1
+    else:
+        impares += 1
+
+print(f"\nQuantidade de Pares: {pares}")
+print(f"Quantidade de Ímpares: {impares}")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>15. Sequência Fibonacci (N-ésimo Termo)</h3></div>
+        <p class="exercise-desc">A série de Fibonacci é formada pela sequência 1,1,2,3,5,8,13... Faça um programa que gere e exiba a série até o n-ésimo termo informado pelo usuário.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">n = int(input("Quantos termos da sequência de Fibonacci deseja ver? "))
+
+ultimo = 1
+penultimo = 1
+
+if n &gt;= 1: print(penultimo, end=" ")
+if n &gt;= 2: print(ultimo, end=" ")
+
+for _ in range(3, n + 1):
+    termo = ultimo + penultimo
+    print(termo, end=" ")
+    penultimo = ultimo
+    ultimo = termo</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>16. Fibonacci até Limite 500</h3></div>
+        <p class="exercise-desc">Gere e imprima a série de Fibonacci até que o valor gerado seja maior que 500.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">ultimo = 1
+penultimo = 0
+termo = 0
+
+print(penultimo, end=" ")
+print(ultimo, end=" ")
+
+while termo &lt;= 500:
+    termo = ultimo + penultimo
+    print(termo, end=" ")
+    penultimo = ultimo
+    ultimo = termo</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>17. Cálculo Fatorial</h3></div>
+        <p class="exercise-desc">Faça um programa que calcule o fatorial de um número inteiro fornecido pelo usuário. (Ex: 5! = 5 * 4 * 3 * 2 * 1 = 120).</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">num = int(input("Digite um número para calcular o fatorial: "))
+fatorial = 1
+
+for i in range(1, num + 1):
+    fatorial *= i
+
+print(f"{num}! = {fatorial}")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>18. Estatísticas de Números</h3></div>
+        <p class="exercise-desc">Dado um conjunto de N números (onde o usuário escolhe a quantidade N), determine o menor valor, o maior valor e a soma de todos os valores.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">quantidade = int(input("Quantos números deseja informar? "))
+
+maior = float('-inf')
+menor = float('inf')
+soma = 0
+
+for i in range(quantidade):
+    num = float(input(f"Digite o {i+1}º número: "))
+    soma += num
+    if num &gt; maior: maior = num
+    if num &lt; menor: menor = num
+
+print(f"\nMaior: {maior}")
+print(f"Menor: {menor}")
+print(f"Soma: {soma}")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>19. Estatísticas com Validação</h3></div>
+        <p class="exercise-desc">Altere o programa anterior para que ele aceite APENAS números entre 0 e 1000. Se o usuário digitar algo fora disso, peça o número novamente.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">quantidade = int(input("Quantos números deseja informar? "))
+maior, menor, soma = float('-inf'), float('inf'), 0
+
+for i in range(quantidade):
+    while True:
+        num = float(input(f"Digite o {i+1}º número (entre 0 e 1000): "))
+        if 0 &lt;= num &lt;= 1000:
+            break
+        print("Valor inválido! O número deve estar entre 0 e 1000.")
         
-        <li>
-          <strong>Validação de Usuário e Senha</strong>: 
-          <p>Faça um programa que leia um nome de usuário e a sua senha e não aceite a senha igual ao nome do usuário, mostrando uma mensagem de erro e voltando a pedir as informações.</p>
-          <a href="./usuario_senha.py" class="code-link">Código</a>
-        </li>
+    soma += num
+    if num &gt; maior: maior = num
+    if num &lt; menor: menor = num
+
+print(f"Maior: {maior} | Menor: {menor} | Soma: {soma}")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>20. Fatorial Limitado com Repetição</h3></div>
+        <p class="exercise-desc">Altere o programa de cálculo de fatorial, permitindo calcular várias vezes até o usuário decidir sair. Limite a entrada apenas a números inteiros positivos menores que 16.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">while True:
+    num = int(input("\nDigite um número para o fatorial (menor que 16, ou -1 para sair): "))
+    
+    if num == -1:
+        print("Programa encerrado.")
+        break
         
-        <li>
-          <strong>Validação Completa de Dados</strong>: 
-          <p>Faça um programa que leia e valide as seguintes informações:</p>
-          <ul>
-            <li>Nome: maior que 3 caracteres</li>
-            <li>Idade: entre 0 e 150</li>
-            <li>Salário: maior que zero</li>
-            <li>Sexo: 'f' ou 'm'</li>
-            <li>Estado Civil: 's', 'c', 'v' ou 'd'</li>
-          </ul>
-          <a href="./validacao_informacoes.py" class="code-link">Código</a>
-        </li>
+    if num &lt; 0 or num &gt;= 16:
+        print("Apenas números positivos menores que 16.")
+        continue
         
-        <li>
-          <strong>Crescimento Populacional (Taxas Fixas)</strong>: 
-          <p>Supondo que a população de um país A seja 80000 habitantes com taxa anual de 3% e a população de B seja 200000 com taxa de 1.5%. Calcule quantos anos são necessários para que A ultrapasse ou iguale B.</p>
-          <a href="./crescimento_populacional.py" class="code-link">Código</a>
-        </li>
+    fatorial = 1
+    for i in range(1, num + 1):
+        fatorial *= i
+    print(f"{num}! = {fatorial}")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>21. Verificador de Números Primos</h3></div>
+        <p class="exercise-desc">Faça um programa que peça um número inteiro e informe se ele é ou não um número primo (número primo é aquele divisível apenas por 1 e por ele mesmo).</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">num = int(input("Digite um número: "))
+divisores = 0
+
+for i in range(1, num + 1):
+    if num % i == 0:
+        divisores += 1
+
+if divisores == 2:
+    print(f"{num} é um número PRIMO.")
+else:
+    print(f"{num} NÃO é um número primo.")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>22. Divisores de Números Não-Primos</h3></div>
+        <p class="exercise-desc">Altere o programa de números primos, mostrando, caso o número não seja primo, por quais números ele é divisível.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">num = int(input("Digite um número: "))
+lista_divisores = []
+
+for i in range(1, num + 1):
+    if num % i == 0:
+        lista_divisores.append(i)
+
+if len(lista_divisores) == 2:
+    print(f"{num} é um número PRIMO.")
+else:
+    print(f"{num} NÃO é primo. Ele é divisível por: {lista_divisores}")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>23. Lista de Números Primos</h3></div>
+        <p class="exercise-desc">Monte um programa que mostre todos os números primos entre 1 e N (sendo N digitado pelo usuário) e conte o número total de divisões executadas.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">n = int(input("Achar primos até qual número? "))
+divisoes = 0
+primos = []
+
+for num in range(2, n + 1):
+    eh_primo = True
+    for i in range(2, num):
+        divisoes += 1
+        if num % i == 0:
+            eh_primo = False
+            break
+    if eh_primo:
+        primos.append(num)
+
+print(f"Primos encontrados: {primos}")
+print(f"Total de divisões executadas: {divisoes}")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>24. Média de N Notas</h3></div>
+        <p class="exercise-desc">Faça um programa que calcule e mostre a média aritmética de um número indeterminado de notas (o usuário informa a quantidade de notas antes de digitá-las).</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">qtd_notas = int(input("Quantas notas deseja calcular? "))
+soma = 0
+
+for i in range(qtd_notas):
+    nota = float(input(f"Digite a {i+1}ª nota: "))
+    soma += nota
+
+if qtd_notas &gt; 0:
+    media = soma / qtd_notas
+    print(f"A média das notas é: {media:.2f}")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>25. Classificação da Turma por Idade</h3></div>
+        <p class="exercise-desc">Peça a idade de n pessoas. Calcule a média de idades e diga se a turma é Jovem (0 a 25 anos), Adulta (26 a 60 anos) ou Idosa (maior que 60 anos).</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">n = int(input("Quantas pessoas na turma? "))
+soma_idades = 0
+
+for i in range(n):
+    idade = int(input(f"Idade da {i+1}ª pessoa: "))
+    soma_idades += idade
+
+media = soma_idades / n if n &gt; 0 else 0
+
+if 0 &lt;= media &lt;= 25:
+    classificacao = "Jovem"
+elif 26 &lt;= media &lt;= 60:
+    classificacao = "Adulta"
+else:
+    classificacao = "Idosa"
+
+print(f"Média de idade: {media:.1f}. A turma é {classificacao}.")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>26. Simulador de Eleição</h3></div>
+        <p class="exercise-desc">Simule uma eleição com 3 candidatos. Peça o número total de eleitores, depois peça o voto de cada um (1, 2 ou 3) e ao final mostre o vencedor.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">eleitores = int(input("Número de eleitores: "))
+votos_c1 = votos_c2 = votos_c3 = 0
+
+for i in range(eleitores):
+    voto = int(input(f"Eleitor {i+1}, digite o número do candidato (1, 2 ou 3): "))
+    if voto == 1: votos_c1 += 1
+    elif voto == 2: votos_c2 += 1
+    elif voto == 3: votos_c3 += 1
+    else: print("Voto nulo.")
+
+print("\n--- Resultado ---")
+print(f"Candidato 1: {votos_c1} votos")
+print(f"Candidato 2: {votos_c2} votos")
+print(f"Candidato 3: {votos_c3} votos")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>27. Média de Alunos por Turma</h3></div>
+        <p class="exercise-desc">Calcule o número médio de alunos por turma de uma escola. O usuário diz quantas turmas existem e a quantidade de alunos de cada uma (as turmas não podem ter mais de 40 alunos).</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">turmas = int(input("Quantas turmas existem? "))
+total_alunos = 0
+
+for i in range(turmas):
+    while True:
+        alunos = int(input(f"Quantidade de alunos na {i+1}ª turma: "))
+        if 0 &lt;= alunos &lt;= 40:
+            total_alunos += alunos
+            break
+        print("Turma não pode ter mais que 40 alunos ou valor negativo.")
+
+media = total_alunos / turmas if turmas &gt; 0 else 0
+print(f"A média de alunos por turma é: {media:.1f}")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>28. Inventário da Coleção de CDs</h3></div>
+        <p class="exercise-desc">Crie um programa para um colecionador de CDs. O usuário informa quantos CDs possui e o valor pago em cada um. Calcule o valor total investido e o valor médio gasto.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">qtd_cds = int(input("Quantidade de CDs na coleção: "))
+total_investido = 0
+
+for i in range(qtd_cds):
+    valor = float(input(f"Valor pago no {i+1}º CD: R$ "))
+    total_investido += valor
+
+media = total_investido / qtd_cds if qtd_cds &gt; 0 else 0
+print(f"\nValor total investido: R$ {total_investido:.2f}")
+print(f"Valor médio por CD: R$ {media:.2f}")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>29. Tabela de Preços - Loja de R$ 1,99</h3></div>
+        <p class="exercise-desc">Gere uma tabela de preços automática para uma loja de R$ 1,99. A tabela deve mostrar os valores de 1 até 50 itens.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">print("Lojas Quase Dois - Tabela de preços")
+for i in range(1, 51):
+    print(f"{i} - R$ {i * 1.99:.2f}")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>30. Tabela de Preços - Padaria</h3></div>
+        <p class="exercise-desc">O dono da padaria quer uma tabela como a da loja de R$ 1,99, mas o preço do pão varia diariamente. Peça o preço do pão e gere a tabela de 1 a 50 pães.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">preco = float(input("Preço do pão: R$ "))
+
+print("\nPanificadora Pão de Ontem - Tabela de preços")
+for i in range(1, 51):
+    print(f"{i} - R$ {i * preco:.2f}")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>31. Caixa Registradora Rudimentar</h3></div>
+        <p class="exercise-desc">Implemente um caixa onde você digita os valores dos produtos. Se digitar 0, ele encerra a compra, mostra o total, pede o dinheiro dado pelo cliente e calcula o troco.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">while True:
+    print("\nLojas Tabajara")
+    total = 0
+    contador = 1
+    
+    while True:
+        preco = float(input(f"Produto {contador}: R$ "))
+        if preco == 0:
+            break
+        total += preco
+        contador += 1
         
-        <li>
-          <strong>Crescimento Populacional (Entrada do Usuário)</strong>: 
-          <p>Altere o programa anterior permitindo ao usuário informar as populações e taxas de crescimento iniciais, validando as entradas.</p>
-          <a href="./crescimento_populacional_usuario.py" class="code-link">Código</a>
-        </li>
+    if total == 0:
+        break # Sai do caixa geral se não teve compra
         
-        <li>
-          <strong>Impressão de Números</strong>: 
-          <p>Faça um programa que imprima na tela:</p>
-          <ul>
-            <li>Os números de 1 a 20, um abaixo do outro</li>
-            <li>Os mesmos números, um ao lado do outro</li>
-          </ul>
-          <a href="./numeros_1_a_20.py" class="code-link">Código</a>
-        </li>
+    print(f"Total: R$ {total:.2f}")
+    dinheiro = float(input("Dinheiro recebido: R$ "))
+    print(f"Troco: R$ {dinheiro - total:.2f}")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>32. Fatorial com Exibição Detalhada</h3></div>
+        <p class="exercise-desc">Exiba a string com a matemática completa do fatorial. Exemplo: Se o usuário digitar 5, exiba <code>Fatorial de: 5 | 5! = 5 . 4 . 3 . 2 . 1 = 120</code>.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">num = int(input("Fatorial de: "))
+fatorial = 1
+detalhe = f"{num}! = "
+
+for i in range(num, 0, -1):
+    fatorial *= i
+    detalhe += str(i)
+    if i &gt; 1:
+        detalhe += " . "
+
+detalhe += f" = {fatorial}"
+print(detalhe)</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>33. Análise de Temperaturas Indeterminadas</h3></div>
+        <p class="exercise-desc">Leia uma quantidade indeterminada de temperaturas (encerre quando necessário), e informe a maior, a menor e a média das temperaturas lidas.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">maior = float('-inf')
+menor = float('inf')
+soma = 0
+qtd = 0
+
+while True:
+    temp_str = input("Digite a temperatura (ou 'sair' para encerrar): ")
+    if temp_str.lower() == 'sair':
+        break
         
-        <li>
-          <strong>Maior de Cinco Números</strong>: 
-          <p>Leia 5 números e informe o maior número.</p>
-          <a href="./maior_de_5_numeros.py" class="code-link">Código</a>
-        </li>
+    temp = float(temp_str)
+    soma += temp
+    qtd += 1
+    
+    if temp &gt; maior: maior = temp
+    if temp &lt; menor: menor = temp
+
+if qtd &gt; 0:
+    print(f"Maior: {maior} | Menor: {menor} | Média: {soma/qtd:.2f}")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>34. Número Primo em Criptografia</h3></div>
+        <p class="exercise-desc">Um reforço sobre números primos! Refaça o script de identificação de números primos garantindo otimização de laços. (Revisão da lógica).</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">num = int(input("Digite um número: "))
+primo = True
+
+if num &lt; 2:
+    primo = False
+else:
+    # Otimização: checar apenas até a raiz quadrada ou metade já resolve
+    for i in range(2, int(num ** 0.5) + 1):
+        if num % i == 0:
+            primo = False
+            break
+
+if primo:
+    print("É um número primo.")
+else:
+    print("Não é um número primo.")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>35. Gerador de Números Primos em Massa</h3></div>
+        <p class="exercise-desc">Construa um código que gere todos os números primos entre 1 e um limite determinado pelo usuário, usando uma lógica limpa.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">limite = int(input("Gerar primos até qual número? "))
+primos = []
+
+for num in range(2, limite + 1):
+    primo = True
+    for i in range(2, int(num ** 0.5) + 1):
+        if num % i == 0:
+            primo = False
+            break
+    if primo:
+        primos.append(num)
+
+print(primos)</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>36. Tabuada com Intervalo Personalizado</h3></div>
+        <p class="exercise-desc">Peça a tabuada de um número e deixe o usuário escolher em qual multiplicador começa e em qual termina. Valide para que o valor final não seja menor que o inicial.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">num = int(input("Montar a tabuada de: "))
+inicio = int(input("Começar por: "))
+fim = int(input("Terminar em: "))
+
+while fim &lt; inicio:
+    print("O final não pode ser menor que o início!")
+    fim = int(input("Terminar em: "))
+
+print(f"\nVou montar a tabuada de {num} começando em {inicio} e terminando em {fim}:")
+for i in range(inicio, fim + 1):
+    print(f"{num} X {i} = {num * i}")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>37. Senso de Academia</h3></div>
+        <p class="exercise-desc">Leia os dados (código, peso, altura) de clientes de uma academia até digitar código 0. Encontre o mais alto, mais baixo, mais pesado, mais magro, e as médias de peso e altura.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">maior_alt = menor_alt = maior_peso = menor_peso = 0
+cod_maior_alt = cod_menor_alt = cod_maior_peso = cod_menor_peso = 0
+soma_alt = soma_peso = clientes = 0
+
+while True:
+    cod = int(input("Código do cliente (0 para sair): "))
+    if cod == 0: break
+    
+    alt = float(input("Altura (m): "))
+    peso = float(input("Peso (kg): "))
+    
+    if clientes == 0: # Primeira rodada define tudo
+        maior_alt = menor_alt = alt
+        maior_peso = menor_peso = peso
+        cod_maior_alt = cod_menor_alt = cod_maior_peso = cod_menor_peso = cod
+    
+    if alt &gt; maior_alt: maior_alt, cod_maior_alt = alt, cod
+    if alt &lt; menor_alt: menor_alt, cod_menor_alt = alt, cod
+    if peso &gt; maior_peso: maior_peso, cod_maior_peso = peso, cod
+    if peso &lt; menor_peso: menor_peso, cod_menor_peso = peso, cod
         
-        <li>
-          <strong>Cálculo de Média</strong>: 
-          <p>Leia 5 números e informe a soma e a média.</p>
-          <a href="./soma_media_5_numeros.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Números Ímpares</strong>: 
-          <p>Imprima os números ímpares entre 1 e 50.</p>
-          <a href="./impares_1_a_50.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Intervalo Numérico</strong>: 
-          <p>Receba dois números inteiros e gere os números inteiros que estão no intervalo compreendido por eles.</p>
-          <a href="./intervalo_entre_numeros.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Soma de Intervalo</strong>: 
-          <p>Altere o programa anterior para mostrar a soma dos números no intervalo.</p>
-          <a href="./intervalo_com_soma.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Gerador de Tabuada</strong>: 
-          <p>Desenvolva um gerador de tabuada de qualquer número inteiro entre 1 e 10.</p>
-          <a href="./gerador_tabuada.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Cálculo de Potência</strong>: 
-          <p>Faça um programa que peça base e expoente e calcule a potência sem usar a função de potência da linguagem.</p>
-          <a href="./potencia_sem_funcao.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Contador de Pares e Ímpares</strong>: 
-          <p>Peça 10 números inteiros e mostre a quantidade de números pares e ímpares.</p>
-          <a href="./pares_impares.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Sequência Fibonacci (N-ésimo Termo)</strong>: 
-          <p>Gere a série de Fibonacci até o n-ésimo termo (sequência: 1,1,2,3,5,8...).</p>
-          <a href="./fibonacci_n_termo.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Fibonacci até Limite</strong>: 
-          <p>Gere a série de Fibonacci até que o valor seja maior que 500 (sequência: 0,1,1,2,3,5...).</p>
-          <a href="./fibonacci_ate_500.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Cálculo Fatorial</strong>: 
-          <p>Calcule o fatorial de um número inteiro fornecido (ex: 5! = 5.4.3.2.1 = 120).</p>
-          <a href="./fatorial.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Estatísticas de Números</strong>: 
-          <p>Dado um conjunto de N números, determine o menor valor, o maior valor e a soma dos valores.</p>
-          <a href="./maior_menor_soma.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Estatísticas com Validação</strong>: 
-          <p>Aceite apenas números entre 0 e 1000 no programa anterior.</p>
-          <a href="./maior_menor_soma_validacao.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Fatorial com Repetição</strong>: 
-          <p>Calcule o fatorial várias vezes, limitando a números inteiros positivos menores que 16.</p>
-          <a href="./fatorial_com_repeticao.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Verificador de Números Primos</strong>: 
-          <p>Determine se um número inteiro é primo (divisível apenas por 1 e por ele mesmo).</p>
-          <a href="./numero_primo.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Divisores de Números Não-Primos</strong>: 
-          <p>Informe, para números não-primos, por quais números eles são divisíveis.</p>
-          <a href="./numero_primo_divisores.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Lista de Números Primos</strong>: 
-          <p>Mostre todos os primos entre 1 e N, com contagem de divisões executadas.</p>
-          <a href="./primos_1_a_n.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Média de N Notas</strong>: 
-          <p>Calcule e mostre a média aritmética de N notas.</p>
-          <a href="./media_n_notas.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Classificação por Idade</strong>: 
-          <p>Peça idades de n pessoas e classifique a turma como:</p>
-          <ul>
-            <li>Jovem (média 0-25)</li>
-            <li>Adulta (média 26-60)</li>
-            <li>Idosa (média >60)</li>
-          </ul>
-          <a href="./media_idade_turma.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Simulador de Eleição</strong>: 
-          <p>Numa eleição com três candidatos, peça votos para n eleitores e mostre o número de votos de cada candidato.</p>
-          <a href="./eleicao_3_candidatos.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Média de Alunos por Turma</strong>: 
-          <p>Calcule o número médio de alunos por turma (máximo 40 alunos por turma).</p>
-          <a href="./media_alunos_turma.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Coleção de CDs</strong>: 
-          <p>Calcule o valor total investido e o valor médio gasto em uma coleção de CDs.</p>
-          <a href="./investimento_cds.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Tabela de Preços (R$1,99)</strong>: 
-          <p>Gere tabela de preços de 1 até 50 produtos a R$1,99 cada.</p>
-          <a href="./tabela_precos_199.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Tabela de Preços de Pães</strong>: 
-          <p>Gere tabela de preços de 1 até 50 pães com preço informado pelo usuário.</p>
-          <a href="./tabela_precos_paes.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Caixa Registradora</strong>: 
-          <p>Implemente uma caixa registradora rudimentar que:</p>
-          <ul>
-            <li>Recebe valores de produtos até digitar 0</li>
-            <li>Calcula total e troco</li>
-            <li>Reinicia para próxima compra</li>
-          </ul>
-          <a href="./caixa_registradora.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Fatorial com Exibição Detalhada</strong>: 
-          <p>Mostre o cálculo fatorial passo a passo (ex: 5! = 5.4.3.2.1 = 120).</p>
-          <a href="./fatorial_exemplo.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Análise de Temperaturas</strong>: 
-          <p>Leia temperaturas indeterminadas e informe:</p>
-          <ul>
-            <li>Maior e menor temperaturas</li>
-            <li>Média das temperaturas</li>
-          </ul>
-          <a href="./temperaturas.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Verificação de Número Primo (Revisão)</strong>: 
-          <p>Determine se um número é primo (aplicações em criptografia).</p>
-          <a href="./numero_primo_revisao.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Gerador de Números Primos</strong>: 
-          <p>Gere todos os números primos entre 1 e um número informado.</p>
-          <a href="./lista_primos.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Tabuada Personalizada</strong>: 
-          <p>Faça tabuada com intervalo personalizado (validar se final ≥ inicial).</p>
-          <a href="./tabuada_intervalo.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Senso de Academia</strong>: 
-          <p>Entre clientes de academia, encontre:</p>
-          <ul>
-            <li>Mais alto/baixo</li>
-            <li>Mais gordo/magro</li>
-            <li>Médias de altura/peso</li>
-          </ul>
-          <a href="./senso_academia.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Simulação de Aumento Salarial</strong>: 
-          <p>Calcule salário atual com aumentos anuais progressivos a partir de 1995.</p>
-          <a href="./aumento_salarial.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Altura dos Alunos</strong>: 
-          <p>Entre 10 alunos, encontre o mais alto e o mais baixo com suas alturas.</p>
-          <a href="./altura_alunos.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Estatísticas de Acidentes</strong>: 
-          <p>Analise dados de acidentes em 5 cidades:</p>
-          <ul>
-            <li>Maior/menor índice</li>
-            <li>Médias de veículos e acidentes</li>
-          </ul>
-          <a href="./estatisticas_acidentes.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Simulador de Dívida com Juros</strong>: 
-          <p>Mostre tabela com opções de parcelamento e juros conforme regras:</p>
-          <ul>
-            <li>1 parcela: 0%</li>
-            <li>3 parcelas: 10%</li>
-            <li>6 parcelas: 15%</li>
-            <li>9 parcelas: 20%</li>
-            <li>12 parcelas: 25%</li>
-          </ul>
-          <a href="./tabela_divida_juros.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Contagem por Intervalos</strong>: 
-          <p>Conte números positivos nos intervalos [0-25], [26-50], [51-75] e [76-100].</p>
-          <a href="./contador_intervalos.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Sistema de Lanchonete</strong>: 
-          <p>Calcule valor total de pedido com cardápio fixo:</p>
-          <ul>
-            <li>Cachorro Quente (100): R$1,20</li>
-            <li>Bauru Simples (101): R$1,30</li>
-            <li>Bauru com ovo (102): R$1,50</li>
-            <li>Hambúrguer (103): R$1,20</li>
-            <li>Cheeseburguer (104): R$1,30</li>
-            <li>Refrigerante (105): R$1,00</li>
-          </ul>
-          <a href="./lanchonete_pedido.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Urna Eletrônica</strong>: 
-          <p>Simule eleição com 4 candidatos, votos nulos e em branco, mostrando:</p>
-          <ul>
-            <li>Total por candidato</li>
-            <li>Votos nulos/brancos</li>
-            <li>Percentuais</li>
-          </ul>
-          <a href="./eleicao_presidencial.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Corretor Automático de Prova</strong>: 
-          <p>Compare respostas com gabarito (A,B,C,D,E,E,D,C,B,A) e mostre:</p>
-          <ul>
-            <li>Maior/menor acerto</li>
-            <li>Total de alunos</li>
-            <li>Média da turma</li>
-          </ul>
-          <a href="./prova_gabarito.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Competição de Salto em Distância</strong>: 
-          <p>Para cada atleta (5 saltos):</p>
-          <ul>
-            <li>Elimine melhor/pior salto</li>
-            <li>Calcule média dos 3 restantes</li>
-          </ul>
-          <a href="./salto_distancia.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Competição de Tiro ao Alvo</strong>: 
-          <p>Para cada jogador (5 tiros), calcule pontuação total e média.</p>
-          <a href="./competicao_tiro_ao_alvo.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Análise de Temperaturas Anuais</strong>: 
-          <p>Mostre meses com temperaturas acima da média anual.</p>
-          <a href="./temperaturas_acima_media_anual.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Validação de Credenciais</strong>: 
-          <p>Não permita login igual à senha, solicitando nova senha até válida.</p>
-          <a href="./validacao_login_senha.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Tabela de Potências</strong>: 
-          <p>Mostre tabela com números de 1 a N, seus quadrados e cubos.</p>
-          <a href="./tabela_quadrado_cubo.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Leitura de Valores com Confirmação</strong>: 
-          <p>Leia números até usuário desejar parar, mostrando:</p>
-          <ul>
-            <li>Total de números</li>
-            <li>Soma</li>
-            <li>Média</li>
-          </ul>
-          <a href="./leitura_valores_com_validacao.py" class="code-link">Código</a>
-        </li>
-      </ol>
-    </article>
+    soma_alt += alt
+    soma_peso += peso
+    clientes += 1
+
+if clientes &gt; 0:
+    print(f"\nMais Alto: Cod {cod_maior_alt} com {maior_alt}m")
+    print(f"Mais Baixo: Cod {cod_menor_alt} com {menor_alt}m")
+    print(f"Mais Pesado: Cod {cod_maior_peso} com {maior_peso}kg")
+    print(f"Média Altura: {soma_alt/clientes:.2f}m | Média Peso: {soma_peso/clientes:.2f}kg")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>38. Simulação de Aumento Salarial Progressivo</h3></div>
+        <p class="exercise-desc">Um funcionário foi contratado em 1995 por R$ 1.000,00. Em 1996 recebeu aumento de 1.5%. A partir de 1997, os aumentos anuais sempre dobraram em relação ao ano anterior. Calcule o salário em um ano inserido pelo usuário.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">ano_atual = int(input("Digite o ano para ver o salário: "))
+salario = 1000.0
+aumento = 0.015 # 1.5%
+
+# Em 1996 aplica 1.5%
+salario += salario * aumento
+
+for ano in range(1997, ano_atual + 1):
+    aumento *= 2
+    salario += salario * aumento
+
+print(f"O salário no ano {ano_atual} é: R$ {salario:.2f}")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>39. Altura de Alunos</h3></div>
+        <p class="exercise-desc">Faça um programa que leia o número do aluno e sua altura em centímetros para 10 alunos. Encontre o aluno mais alto e o mais baixo, exibindo o número e altura de ambos.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">maior_alt = menor_alt = 0
+aluno_alto = aluno_baixo = ""
+
+for i in range(10):
+    numero = input("Número do aluno: ")
+    altura = float(input("Altura em cm: "))
+    
+    if i == 0:
+        maior_alt = menor_alt = altura
+        aluno_alto = aluno_baixo = numero
+    else:
+        if altura &gt; maior_alt:
+            maior_alt = altura
+            aluno_alto = numero
+        if altura &lt; menor_alt:
+            menor_alt = altura
+            aluno_baixo = numero
+
+print(f"\nMais Alto: Aluno {aluno_alto} ({maior_alt} cm)")
+print(f"Mais Baixo: Aluno {aluno_baixo} ({menor_alt} cm)")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>40. Tabela de Dívida e Parcelamento</h3></div>
+        <p class="exercise-desc">Leia o valor de uma dívida e crie uma tabela mostrando o valor da dívida com juros, o valor da parcela e a quantidade de parcelas (1x 0%, 3x 10%, 6x 15%, 9x 20%, 12x 25%).</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">divida_inicial = float(input("Valor da dívida: R$ "))
+
+print("\nValor da Dívida | Juros | Quantidade de Parcelas | Valor da Parcela")
+
+parcelas_juros = [(1, 0), (3, 10), (6, 15), (9, 20), (12, 25)]
+
+for parcelas, juros_porcento in parcelas_juros:
+    valor_juros = divida_inicial * (juros_porcento / 100)
+    divida_total = divida_inicial + valor_juros
+    valor_parcela = divida_total / parcelas
+    
+    print(f"R$ {divida_total:&lt;12.2f} | R$ {valor_juros:&lt;4.2f} | {parcelas:&lt;22} | R$ {valor_parcela:.2f}")</code></pre></div>
+        </details>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
 </body>
 </html>

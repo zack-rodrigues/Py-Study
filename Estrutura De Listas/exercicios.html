@@ -2,260 +2,850 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Listas - Exercícios</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.0/github-markdown-dark.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estrutura de Listas - Exercícios | Estudo.Py.BR</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css">
+  
   <style>
+    /* Paleta de Cores e Tema Base (Estilo GitHub Dark) */
+    :root {
+      --bg-color: #0d1117;
+      --card-bg: #161b22;
+      --text-main: #c9d1d9;
+      --text-muted: #8b949e;
+      --border-color: #30363d;
+      --accent: #58a6ff;
+      --accent-hover: #1f6feb;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
-      background-color: #0d1117;
-      color: #c9d1d9;
-      font-family: system-ui, sans-serif;
-      padding: 2rem;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      padding: 2rem 1rem;
       display: flex;
       justify-content: center;
     }
-    .markdown-body {
+
+    .container {
       max-width: 900px;
+      width: 100%;
     }
-    a {
-      color: #58a6ff;
+
+    /* Navegação e Cabeçalho */
+    .header {
+      margin-bottom: 2.5rem;
     }
-    li {
+    
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 8px 16px;
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      transition: all 0.2s ease-in-out;
       margin-bottom: 1.5rem;
-      line-height: 1.6;
     }
-    li > p {
-      margin: 0.5rem 0;
+    
+    .back-link:hover {
+      background-color: var(--border-color);
+      color: #ffffff;
     }
-    li > ul, li > ol {
-      margin: 0.5rem 0 1rem;
-      padding-left: 1.5rem;
-    }
-    .code-link {
-      display: block;
-      margin-top: 0.75rem;
-      font-weight: 500;
-    }
+
     h1 {
-      border-bottom: 1px solid #30363d;
+      font-size: 2.2rem;
+      border-bottom: 1px solid var(--border-color);
       padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+      color: #ffffff;
     }
-    h2 {
-      margin-top: 1.5rem;
-      border-bottom: 1px solid #30363d;
-      padding-bottom: 0.3rem;
+    
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 1.1rem;
     }
+
+    /* Grid de Cartões de Exercícios */
+    .exercises-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .exercise-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .exercise-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 0.75rem;
+    }
+    
+    .exercise-header h3 {
+      font-size: 1.3rem;
+      color: var(--accent);
+    }
+    
+    .exercise-desc {
+      margin-bottom: 1.25rem;
+      font-size: 1.05rem;
+      color: #e6edf3;
+    }
+
+    /* Botão de Resposta (details/summary) */
+    details {
+      background-color: var(--bg-color);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    summary {
+      padding: 12px 16px;
+      cursor: pointer;
+      color: var(--accent);
+      font-weight: bold;
+      background-color: var(--card-bg);
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s;
+      user-select: none;
+    }
+    
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary:hover {
+      background-color: #1f242c;
+    }
+
+    summary::before {
+      content: "👁️ Exibir Resposta";
+    }
+    
+    details[open] summary::before {
+      content: "🔽 Ocultar Resposta";
+    }
+    
+    details[open] summary {
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    /* Bloco de Código */
+    .code-content {
+      padding: 0;
+      margin: 0;
+    }
+
+    .code-content pre {
+      margin: 0;
+      padding: 16px;
+      overflow-x: auto;
+      background-color: transparent !important;
+    }
+
+    .code-content code {
+      font-family: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
   </style>
 </head>
 <body>
-  <h3>
-    ↩️<a href="https://zack-rodrigues.github.io/Estudo.Py.BR/">Voltar</a>
-   <article class="markdown-body">
-      <h1>Lista de Exercícios com Listas em Python</h1>
-      <p>Aqui estão os exercícios para praticar manipulação de listas em Python. Clique nos links para acessar os códigos correspondentes.</p>
-      
-      <h2>Exercícios</h2>
-      
-      <ol>
-        <li>
-          <strong>Leitura de Vetor Inteiro</strong>:
-          <p>Faça um Programa que leia um vetor de 5 números inteiros e mostre-os.</p>
-          <a href="./5_numeros_inteiros.py" class="code-link">Código</a>
-        </li>
+
+  <div class="container">
+    <div class="header">
+      <a href="https://zack-rodrigues.github.io/Estudo.Py.BR/" class="back-link">↩️ Voltar para a Trilha</a>
+      <h1>📋 Estrutura de Listas</h1>
+      <p class="subtitle">As listas (ou vetores) permitem armazenar coleções de dados em uma única variável. Pratique a inserção, ordenação e manipulação de múltiplos dados ao mesmo tempo!</p>
+    </div>
+
+    <div class="exercises-grid">
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>1. Leitura de Vetor Inteiro</h3></div>
+        <p class="exercise-desc">Faça um Programa que leia um vetor (lista) de 5 números inteiros e mostre-os na tela.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">numeros = []
+
+for i in range(5):
+    num = int(input(f"Digite o {i+1}º número inteiro: "))
+    numeros.append(num)
+
+print(f"Os números digitados foram: {numeros}")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>2. Vetor Invertido</h3></div>
+        <p class="exercise-desc">Faça um Programa que leia um vetor de 10 números reais (float) e mostre-os na ordem inversa em que foram digitados.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">reais = []
+
+for i in range(10):
+    num = float(input(f"Digite o {i+1}º número real: "))
+    reais.append(num)
+
+# O slicing [::-1] inverte a lista no Python
+print(f"Vetor na ordem inversa: {reais[::-1]}")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>3. Cálculo de Média</h3></div>
+        <p class="exercise-desc">Faça um Programa que leia 4 notas escolares, armazene-as em uma lista, e em seguida mostre as notas e a média na tela.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">notas = []
+
+for i in range(4):
+    nota = float(input(f"Digite a {i+1}ª nota: "))
+    notas.append(nota)
+
+media = sum(notas) / len(notas)
+
+print(f"\nNotas informadas: {notas}")
+print(f"Média do aluno: {media:.2f}")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>4. Contador de Consoantes</h3></div>
+        <p class="exercise-desc">Faça um Programa que leia um vetor de 10 caracteres e diga quantas consoantes foram lidas. Em seguida, imprima essas consoantes.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">caracteres = []
+consoantes = []
+vogais = ['a', 'e', 'i', 'o', 'u']
+
+for i in range(10):
+    letra = input(f"Digite o {i+1}º caractere: ").lower()
+    caracteres.append(letra)
+    
+    # Se for uma letra e não for vogal, é consoante
+    if letra.isalpha() and letra not in vogais:
+        consoantes.append(letra)
+
+print(f"\nForam lidas {len(consoantes)} consoantes.")
+print(f"As consoantes são: {consoantes}")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>5. Separador Par/Ímpar</h3></div>
+        <p class="exercise-desc">Faça um Programa que leia 20 números inteiros. Armazene os números pares no vetor PAR e os ímpares no vetor IMPAR. No final, imprima os três vetores (o original, os pares e os ímpares).</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">numeros = []
+pares = []
+impares = []
+
+for i in range(20):
+    num = int(input(f"Digite o {i+1}º número: "))
+    numeros.append(num)
+    
+    if num % 2 == 0:
+        pares.append(num)
+    else:
+        impares.append(num)
+
+print(f"\nLista completa: {numeros}")
+print(f"Apenas pares: {pares}")
+print(f"Apenas ímpares: {impares}")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>6. Média de Alunos (Matrizes Simples)</h3></div>
+        <p class="exercise-desc">Peça as quatro notas de 10 alunos, calcule e armazene as médias em um vetor. Ao final, imprima quantos alunos tiveram a média maior ou igual a 7.0.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">medias = []
+
+for aluno in range(10):
+    print(f"\n--- Notas do Aluno {aluno+1} ---")
+    soma_notas = 0
+    for nota_num in range(4):
+        nota = float(input(f"Nota {nota_num+1}: "))
+        soma_notas += nota
         
-        <li>
-          <strong>Vetor Invertido</strong>:
-          <p>Faça um Programa que leia um vetor de 10 números reais e mostre-os na ordem inversa.</p>
-          <a href="./10_numeros_reais.py" class="code-link">Código</a>
-        </li>
+    media = soma_notas / 4
+    medias.append(media)
+
+aprovados = sum(1 for m in medias if m &gt;= 7.0)
+
+print(f"\nMédias da turma: {medias}")
+print(f"Total de alunos com média &gt;= 7.0: {aprovados}")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>7. Operações Básicas com Vetor</h3></div>
+        <p class="exercise-desc">Faça um Programa que leia um vetor de 5 números inteiros. Mostre todos os números lidos, a soma e a multiplicação de todos eles.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">import math
+
+numeros = []
+
+for i in range(5):
+    num = int(input(f"Digite o {i+1}º número: "))
+    numeros.append(num)
+
+soma = sum(numeros)
+# math.prod multiplica todos os elementos da lista de uma vez (Python 3.8+)
+multiplicacao = math.prod(numeros) 
+
+print(f"\nNúmeros digitados: {numeros}")
+print(f"Soma dos números: {soma}")
+print(f"Multiplicação dos números: {multiplicacao}")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>8. Dados Pessoais Invertidos</h3></div>
+        <p class="exercise-desc">Faça um Programa que peça idade e altura de 5 pessoas, armazenando esses dados em dois vetores distintos. Imprima as idades e alturas inseridas, mas na ordem inversa.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">idades = []
+alturas = []
+
+for i in range(5):
+    print(f"\n--- Pessoa {i+1} ---")
+    idade = int(input("Idade: "))
+    altura = float(input("Altura (m): "))
+    
+    idades.append(idade)
+    alturas.append(altura)
+
+print(f"\nIdades na ordem inversa: {idades[::-1]}")
+print(f"Alturas na ordem inversa: {alturas[::-1]}")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>9. Soma de Quadrados</h3></div>
+        <p class="exercise-desc">Faça um Programa que leia um vetor A com 10 números inteiros, calcule e mostre a soma dos quadrados dos elementos deste vetor.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">vetor_a = []
+soma_quadrados = 0
+
+for i in range(10):
+    num = int(input(f"Digite o {i+1}º número: "))
+    vetor_a.append(num)
+    soma_quadrados += (num ** 2)
+
+print(f"\nVetor A: {vetor_a}")
+print(f"A soma dos quadrados dos elementos é: {soma_quadrados}")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>10. Intercalação de Vetores</h3></div>
+        <p class="exercise-desc">Faça um Programa que leia dois vetores com 10 elementos cada. Gere um terceiro vetor de 20 elementos, cujos valores deverão ser compostos pelos elementos intercalados dos dois primeiros.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">vetor1 = []
+vetor2 = []
+vetor3 = []
+
+print("Preenchendo o Vetor 1:")
+for i in range(10):
+    vetor1.append(input(f"Elemento {i+1}: "))
+
+print("\nPreenchendo o Vetor 2:")
+for i in range(10):
+    vetor2.append(input(f"Elemento {i+1}: "))
+
+# Intercalando
+for i in range(10):
+    vetor3.append(vetor1[i])
+    vetor3.append(vetor2[i])
+
+print(f"\nVetor Intercalado: {vetor3}")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>11. Intercalação de Três Vetores</h3></div>
+        <p class="exercise-desc">Altere o programa anterior para intercalar 3 vetores de 10 elementos cada, gerando um resultado de 30 elementos intercalados.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">v1, v2, v3, intercalado = [], [], [], []
+
+print("Vetor 1:")
+for i in range(10): v1.append(input(f"Item {i+1}: "))
+
+print("Vetor 2:")
+for i in range(10): v2.append(input(f"Item {i+1}: "))
+
+print("Vetor 3:")
+for i in range(10): v3.append(input(f"Item {i+1}: "))
+
+# Intercalando os 3 juntos
+for i in range(10):
+    intercalado.extend([v1[i], v2[i], v3[i]])
+
+print(f"\nVetor final (30 elementos): {intercalado}")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>12. Análise de Alunos</h3></div>
+        <p class="exercise-desc">Foram anotadas as idades e alturas de 30 alunos. Determine quantos alunos com mais de 13 anos possuem altura inferior à média de altura de toda a turma.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">idades = []
+alturas = []
+
+# Nota: Loop diminuído para 5 apenas para facilitar o teste manual.
+# Para a resposta final de 30 alunos, altere o range para 30.
+quantidade_alunos = 5 
+
+for i in range(quantidade_alunos):
+    idade = int(input(f"Idade do aluno {i+1}: "))
+    altura = float(input(f"Altura do aluno {i+1} (em metros): "))
+    idades.append(idade)
+    alturas.append(altura)
+
+media_altura = sum(alturas) / quantidade_alunos
+alunos_filtro = 0
+
+for i in range(quantidade_alunos):
+    if idades[i] &gt; 13 and alturas[i] &lt; media_altura:
+        alunos_filtro += 1
+
+print(f"\nMédia de altura da turma: {media_altura:.2f}m")
+print(f"Alunos &gt; 13 anos e menores que a média: {alunos_filtro}")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>13. Temperaturas Mensais</h3></div>
+        <p class="exercise-desc">Receba as temperaturas médias de cada mês de um ano. Calcule a média anual e mostre na tela quais temperaturas ficaram acima da média, junto com seu respectivo mês (ex: 1 - Janeiro, 2 - Fevereiro).</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">meses = ["1 - Janeiro", "2 - Fevereiro", "3 - Março", "4 - Abril", 
+         "5 - Maio", "6 - Junho", "7 - Julho", "8 - Agosto", 
+         "9 - Setembro", "10 - Outubro", "11 - Novembro", "12 - Dezembro"]
+
+temperaturas = []
+
+for mes in meses:
+    temp = float(input(f"Temperatura média de {mes}: "))
+    temperaturas.append(temp)
+
+media_anual = sum(temperaturas) / 12
+
+print(f"\n--- Média Anual: {media_anual:.2f}°C ---")
+print("Meses com temperaturas acima da média anual:")
+
+for i in range(12):
+    if temperaturas[i] &gt; media_anual:
+        print(f"{meses[i]}: {temperaturas[i]:.2f}°C")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>14. Questionário Criminal</h3></div>
+        <p class="exercise-desc">Faça um programa com 5 perguntas de Sim ou Não ("Telefonou para a vítima?", etc). Classifique a pessoa baseado no número de "Sims": 2 (Suspeita), 3 ou 4 (Cúmplice), 5 (Assassino). Senão: Inocente.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">perguntas = [
+    "Telefonou para a vítima?",
+    "Esteve no local do crime?",
+    "Mora perto da vítima?",
+    "Devia para a vítima?",
+    "Já trabalhou com a vítima?"
+]
+
+respostas_positivas = 0
+
+print("Responda com 'S' (Sim) ou 'N' (Não):")
+for pergunta in perguntas:
+    resp = input(pergunta + " ").upper()
+    if resp == 'S':
+        respostas_positivas += 1
+
+print("\n--- Veredito ---")
+if respostas_positivas == 2:
+    print("Classificação: Suspeita")
+elif 3 &lt;= respostas_positivas &lt;= 4:
+    print("Classificação: Cúmplice")
+elif respostas_positivas == 5:
+    print("Classificação: Assassino")
+else:
+    print("Classificação: Inocente")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>15. Análise Completa de Notas</h3></div>
+        <p class="exercise-desc">Leia valores indeterminados de notas (até digitar -1). Mostre: quantidade de notas, valores na ordem original (em linha), na ordem inversa (em coluna), a soma, a média, quantas notas foram acima da média e quantas foram menores que 7.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">notas = []
+
+while True:
+    nota = float(input("Digite uma nota (ou -1 para encerrar): "))
+    if nota == -1:
+        break
+    notas.append(nota)
+
+quantidade = len(notas)
+
+if quantidade &gt; 0:
+    soma = sum(notas)
+    media = soma / quantidade
+    acima_media = sum(1 for n in notas if n &gt; media)
+    abaixo_sete = sum(1 for n in notas if n &lt; 7)
+
+    print(f"\nQuantidade de valores lidos: {quantidade}")
+    print(f"Valores originais: {' '.join(map(str, notas))}")
+    
+    print("Valores na ordem inversa:")
+    for n in reversed(notas):
+        print(n)
         
-        <li>
-          <strong>Cálculo de Média</strong>:
-          <p>Faça um Programa que leia 4 notas, mostre as notas e a média na tela.</p>
-          <a href="./media_4_notas.py" class="code-link">Código</a>
-        </li>
+    print(f"Soma: {soma}")
+    print(f"Média: {media:.2f}")
+    print(f"Quantidade de notas acima da média: {acima_media}")
+    print(f"Quantidade de notas abaixo de 7: {abaixo_sete}")
+    print("\nPrograma encerrado.")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>16. Distribuição Salarial</h3></div>
+        <p class="exercise-desc">Calcule o salário de vendedores (base $200 + 9% de comissão das vendas). Usando uma lista de contadores, identifique quantos receberam salários nas faixas $200-299, $300-399, etc, até a faixa de $1000 ou mais.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">contadores = [0] * 9  # Índices de 0 a 8 (para as 9 faixas salariais)
+
+while True:
+    vendas = float(input("Digite o total de vendas brutas (ou 0 para encerrar): $ "))
+    if vendas == 0:
+        break
         
-        <li>
-          <strong>Contador de Consoantes</strong>:
-          <p>Faça um Programa que leia um vetor de 10 caracteres, e diga quantas consoantes foram lidas. Imprima as consoantes.</p>
-          <a href="./consoantes.py" class="code-link">Código</a>
-        </li>
+    salario = 200 + (vendas * 0.09)
+    print(f"Salário final: $ {salario:.2f}\n")
+    
+    # Lógica matemática para achar a posição (índice) na lista
+    # Ex: 250 // 100 = 2. 2 - 2 = Índice 0
+    indice = int(salario // 100) - 2
+    
+    # Se estourar a faixa limite (salário &gt;= 1000), fixa no último índice
+    if indice &gt; 8:
+        indice = 8
         
-        <li>
-          <strong>Separador Par/Ímpar</strong>:
-          <p>Faça um Programa que leia 20 números inteiros e armazene:</p>
-          <ul>
-            <li>Números pares no vetor PAR</li>
-            <li>Números ímpares no vetor IMPAR</li>
-          </ul>
-          <p>Imprima os três vetores.</p>
-          <a href="./20_numeros.py" class="code-link">Código</a>
-        </li>
+    contadores[indice] += 1
+
+print("\n--- Distribuição Salarial ---")
+for i in range(8):
+    print(f"$ {i * 100 + 200} - $ {i * 100 + 299}: {contadores[i]} vendedor(es)")
+print(f"$ 1000 em diante: {contadores[8]} vendedor(es)")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>17. Competição de Salto em Distância</h3></div>
+        <p class="exercise-desc">Para cada atleta, receba o nome e as distâncias de 5 saltos. O programa deve calcular a média aritmética simples dos saltos e exibir as informações formatadas na tela. O sistema encerra ao digitar o nome vazio.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">while True:
+    nome = input("\nNome do Atleta (ou ENTER para sair): ")
+    if nome == "":
+        break
         
-        <li>
-          <strong>Média de Alunos</strong>:
-          <p>Faça um Programa que peça as quatro notas de 10 alunos, calcule e armazene as médias em um vetor, e imprima o número de alunos com média ≥ 7.0.</p>
-          <a href="./4_notas.py" class="code-link">Código</a>
-        </li>
+    saltos = []
+    for i in range(5):
+        saltos.append(float(input(f"Distância do {i+1}º salto: ")))
         
-        <li>
-          <strong>Operações com Vetor</strong>:
-          <p>Faça um Programa que leia um vetor de 5 números inteiros, mostre:</p>
-          <ul>
-            <li>Os números</li>
-            <li>A soma</li>
-            <li>A multiplicação</li>
-          </ul>
-          <a href="./5_inteiros.py" class="code-link">Código</a>
-        </li>
+    media = sum(saltos) / 5
+    
+    print("\nResultado final:")
+    print(f"Atleta: {nome}")
+    print(f"Saltos: {' - '.join(map(str, saltos))}")
+    print(f"Média dos saltos: {media:.1f} m")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>18. Enquete de Melhor Jogador</h3></div>
+        <p class="exercise-desc">Uma enquete pede aos eleitores votos numéricos (de 1 a 23) para eleger o melhor jogador de futebol. Tabule os dados, rejeitando valores fora da faixa, calcule o % de cada um e informe o grande vencedor.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">votos = [0] * 24 # Índices 0 a 23 (ignoramos o 0)
+total_votos = 0
+
+print("Enquete: Quem foi o melhor jogador? (1 a 23. Digite 0 para encerrar)")
+
+while True:
+    voto = int(input("Número do jogador (0=fim): "))
+    if voto == 0: break
+    
+    if 1 &lt;= voto &lt;= 23:
+        votos[voto] += 1
+        total_votos += 1
+    else:
+        print("Número inválido! Digite entre 1 e 23.")
+
+if total_votos &gt; 0:
+    print(f"\nResultado da votação:\nForam computados {total_votos} votos.")
+    print(f"{'Jogador':&lt;10} | {'Votos':&lt;10} | {'%':&lt;10}")
+    
+    melhor_jogador = 0
+    mais_votos = 0
+    
+    for i in range(1, 24):
+        if votos[i] &gt; 0:
+            perc = (votos[i] / total_votos) * 100
+            print(f"{i:&lt;10} | {votos[i]:&lt;10} | {perc:.1f}%")
+            
+            if votos[i] &gt; mais_votos:
+                mais_votos = votos[i]
+                melhor_jogador = i
+                
+    perc_vencedor = (mais_votos / total_votos) * 100
+    print(f"\nO melhor jogador foi o número {melhor_jogador}, com {mais_votos} votos ({perc_vencedor:.1f}%).")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>19. Pesquisa de Sistema Operacional</h3></div>
+        <p class="exercise-desc">Tabule os resultados da enquete "Qual o melhor SO para servidores?" (1=Windows, 2=Unix, 3=Linux, 4=Netware, 5=Mac OS, 6=Outro). Mostre os votos absolutos, % e declare o SO vencedor.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">sistemas = ["", "Windows Server", "Unix", "Linux", "Netware", "Mac OS", "Outro"]
+votos = [0] * 7
+total_votos = 0
+
+print("Qual o melhor Sistema Operacional para uso em servidores?")
+print("1-Windows Server | 2-Unix | 3-Linux | 4-Netware | 5-Mac OS | 6-Outro")
+
+while True:
+    voto = int(input("Voto (0=fim): "))
+    if voto == 0: break
+    
+    if 1 &lt;= voto &lt;= 6:
+        votos[voto] += 1
+        total_votos += 1
+    else:
+        print("Valor inválido! Digite entre 1 e 6.")
+
+if total_votos &gt; 0:
+    print("\nSistema Operacional     Votos   %")
+    print("-------------------     -----   ---")
+    
+    mais_votos = 0
+    vencedor = ""
+    
+    for i in range(1, 7):
+        perc = (votos[i] / total_votos) * 100
+        print(f"{sistemas[i]:&lt;23} {votos[i]:&lt;7} {perc:.0f}%")
         
-        <li>
-          <strong>Dados Pessoais Invertidos</strong>:
-          <p>Faça um Programa que peça idade e altura de 5 pessoas, armazenando em vetores separados. Imprima os dados na ordem inversa.</p>
-          <a href="./5_pessoas.py" class="code-link">Código</a>
-        </li>
+        if votos[i] &gt; mais_votos:
+            mais_votos = votos[i]
+            vencedor = sistemas[i]
+            
+    print("-------------------     -----")
+    print(f"Total                   {total_votos}")
+    print(f"\nO vencedor foi {vencedor}, com {mais_votos} votos.")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>20. Projeção de Abono Salarial</h3></div>
+        <p class="exercise-desc">A empresa Tabajara vai pagar um abono de 20% do salário aos funcionários, com mínimo de R$100,00. Leia salários de N pessoas e calcule a projeção de gastos da folha extra, exibindo dados tabulados.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">salarios = []
+
+while True:
+    s = float(input("Salário (0 para encerrar): R$ "))
+    if s == 0: break
+    salarios.append(s)
+
+print("\nProjeção de Gastos com Abono")
+print("============================")
+
+abonos = []
+minimos_pagos = 0
+maior_abono = 0
+
+for salario in salarios:
+    abono = salario * 0.20
+    if abono &lt; 100.0:
+        abono = 100.0
+        minimos_pagos += 1
+    
+    if abono &gt; maior_abono:
+        maior_abono = abono
         
-        <li>
-          <strong>Soma de Quadrados</strong>:
-          <p>Faça um Programa que leia um vetor A com 10 números inteiros e mostre a soma dos quadrados dos elementos.</p>
-          <a href="./soma_quadrados.py" class="code-link">Código</a>
-        </li>
+    abonos.append(abono)
+    print(f"R$ {salario:&lt;8.2f} - R$ {abono:.2f}")
+
+print(f"\nForam processados {len(salarios)} colaboradores")
+print(f"Total gasto com abonos: R$ {sum(abonos):.2f}")
+print(f"Valor mínimo pago a {minimos_pagos} colaboradores")
+print(f"Maior valor de abono pago: R$ {maior_abono:.2f}")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>21. Comparativo de Carros</h3></div>
+        <p class="exercise-desc">Receba 5 modelos de carros e o consumo (km/litro) de cada um. Mostre qual é o mais econômico e calcule quantos litros e quanto custará (gasolina R$ 2,25) para percorrerem 1.000 km.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">carros = []
+consumos = []
+
+print("Comparativo de Consumo de Combustível")
+for i in range(5):
+    print(f"\nVeículo {i+1}")
+    carros.append(input("Nome: "))
+    consumos.append(float(input("Km por litro: ")))
+
+print("\nRelatório Final")
+melhor_consumo = 0
+carro_economico = ""
+
+for i in range(5):
+    litros = 1000 / consumos[i]
+    custo = litros * 2.25
+    print(f"{i+1} - {carros[i]:&lt;15} - {consumos[i]:&lt;5.1f} - {litros:&lt;6.1f} litros - R$ {custo:.2f}")
+    
+    # O melhor é o que roda MAIS km com 1 litro
+    if consumos[i] &gt; melhor_consumo:
+        melhor_consumo = consumos[i]
+        carro_economico = carros[i]
+
+print(f"\nO menor consumo é do {carro_economico}.")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>22. Inventário de Mouses Sucateados</h3></div>
+        <p class="exercise-desc">A empresa testa e classifica mouses com defeito: 1-Esfera, 2-Limpeza, 3-Cabo, 4-Quebrado. O programa lê uma lista e emite um relatório com quantidades e % do defeito para facilitar o conserto.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">defeitos = ["", "Necessita da esfera", "Necessita de limpeza", "Necessita troca do cabo", "Quebrado ou inutilizado"]
+contagem = [0] * 5
+total_mouses = 0
+
+print("Situações: 1-Esfera | 2-Limpeza | 3-Cabo | 4-Quebrado | 0-Sair")
+while True:
+    id_mouse = input("ID do mouse (0=Sair): ")
+    if id_mouse == '0': break
+    
+    defeito = int(input("Tipo de defeito (1 a 4): "))
+    if 1 &lt;= defeito &lt;= 4:
+        contagem[defeito] += 1
+        total_mouses += 1
+    else:
+        print("Defeito inválido!")
+
+if total_mouses &gt; 0:
+    print("\nRelatório de Mouses com Defeito")
+    print(f"Quantidade total analisada: {total_mouses}")
+    print("\nSituação                        Quantidade   Percentual")
+    for i in range(1, 5):
+        perc = (contagem[i] / total_mouses) * 100
+        print(f"{i}- {defeitos[i]:&lt;26} {contagem[i]:&lt;12} {perc:.1f}%")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>23. Monitoramento de Disco (Versão em Memória)</h3></div>
+        <p class="exercise-desc">Levante o espaço em disco usado pelos usuários (informado em bytes). Converta os dados para Megabytes, calcule o percentual de uso de cada um sobre o total da empresa, e gere o relatório gerencial.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">def bytes_para_mb(bytes_size):
+    return bytes_size / (1024 * 1024)
+
+usuarios = []
+espacos_bytes = []
+
+print("Digite 'sair' no nome para finalizar.")
+while True:
+    nome = input("Nome do usuário: ")
+    if nome.lower() == "sair": break
+    espaco = int(input(f"Espaço usado por {nome} (em bytes): "))
+    
+    usuarios.append(nome)
+    espacos_bytes.append(espaco)
+
+if len(usuarios) &gt; 0:
+    espaco_total_mb = bytes_para_mb(sum(espacos_bytes))
+    
+    print("\nACME Inc.           Uso do espaço em disco pelos usuários")
+    print("-" * 65)
+    print("Nr.  Usuário        Espaço utilizado     % do uso")
+    
+    for i in range(len(usuarios)):
+        espaco_mb = bytes_para_mb(espacos_bytes[i])
+        perc = (espaco_mb / espaco_total_mb) * 100
+        print(f"{i+1:&lt;4} {usuarios[i]:&lt;14} {espaco_mb:&gt;7.2f} MB {perc:&gt;15.2f}%")
         
-        <li>
-          <strong>Intercalação de Vetores</strong>:
-          <p>Faça um Programa que leia dois vetores com 10 elementos cada e gere um terceiro vetor de 20 elementos intercalados.</p>
-          <a href="./intercalado.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Intercalação de Três Vetores</strong>:
-          <p>Altere o programa anterior para intercalar 3 vetores de 10 elementos cada.</p>
-          <a href="./10_elementos.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Análise de Alunos</strong>:
-          <p>Foram anotadas idades e alturas de 30 alunos. Determine quantos alunos com mais de 13 anos possuem altura inferior à média da turma.</p>
-          <a href="./30_alunos.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Temperaturas Mensais</strong>:
-          <p>Faça um programa que:</p>
-          <ul>
-            <li>Receba temperaturas médias de cada mês</li>
-            <li>Calcule a média anual</li>
-            <li>Mostre temperaturas acima da média com seus meses por extenso</li>
-          </ul>
-          <a href="./temperatura.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Questionário Criminal</strong>:
-          <p>Faça um programa com 5 perguntas sobre um crime que classifica o entrevistado como:</p>
-          <ul>
-            <li>2 respostas positivas: Suspeita</li>
-            <li>3-4 respostas positivas: Cúmplice</li>
-            <li>5 respostas positivas: Assassino</li>
-            <li>Caso contrário: Inocente</li>
-          </ul>
-          <a href="./crime.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Análise Completa de Notas</strong>:
-          <p>Faça um programa que leia valores indeterminados de notas (até digitar -1) e mostre:</p>
-          <ul>
-            <li>Quantidade de valores</li>
-            <li>Valores na ordem original (lado a lado)</li>
-            <li>Valores na ordem inversa (um abaixo do outro)</li>
-            <li>Soma e média</li>
-            <li>Valores acima da média</li>
-            <li>Valores abaixo de 7</li>
-          </ul>
-          <a href="./indeterminado.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Distribuição Salarial</strong>:
-          <p>Calcule quantos vendedores receberam salários nos intervalos:</p>
-          <ul>
-            <li>$200-$299</li>
-            <li>$300-$399</li>
-            <li>...</li>
-            <li>$1000+</li>
-          </ul>
-          <p>Cada vendedor recebe $200 + 9% das vendas brutas.</p>
-          <a href="./salario.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Competição de Salto</strong>:
-          <p>Para cada atleta (5 saltos):</p>
-          <ul>
-            <li>Receba nome e distâncias</li>
-            <li>Calcule média dos saltos</li>
-            <li>Mostre nome, saltos e média</li>
-          </ul>
-          <p>Encerre quando nome for vazio.</p>
-          <a href="./atleta.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Enquete de Melhor Jogador</strong>:
-          <p>Receba votos (números 1-23) para melhor jogador e mostre:</p>
-          <ul>
-            <li>Total de votos</li>
-            <li>Votos por jogador</li>
-            <li>Percentual de votos</li>
-            <li>Melhor jogador (mais votos)</li>
-          </ul>
-          <a href="./emissora.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Pesquisa de Sistema Operacional</strong>:
-          <p>Tabule resultados da enquete: "Qual o melhor Sistema Operacional para servidores?"</p>
-          <a href="./empresa.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Projeção de Abono Salarial</strong>:
-          <p>Calcule projeção de gastos com abonos para colaboradores.</p>
-          <a href="./tabajara.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Comparativo de Carros</strong>:
-          <p>Para 5 modelos de carros e seus consumos:</p>
-          <ul>
-            <li>Mostre o modelo mais econômico</li>
-            <li>Calcule consumo e custo para 1000km (gasolina a R$2,25)</li>
-          </ul>
-          <a href="./carros.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Inventário de Mouses</strong>:
-          <p>Teste e classifique 200 mouses quanto ao estado para reaproveitamento.</p>
-          <a href="./estagio.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Monitoramento de Disco</strong>:
-          <p>Para 500 funcionários:</p>
-          <ul>
-            <li>Identifique espaço ocupado por usuários</li>
-            <li>Mostre maiores consumidores de espaço</li>
-          </ul>
-          <a href="./acme.py" class="code-link">Código</a>
-        </li>
-        
-        <li>
-          <strong>Simulação de Dados</strong>:
-          <p>Simule 100 lançamentos de dado e mostre quantas vezes cada valor (1-6) foi obtido.</p>
-          <a href="./dados.py" class="code-link">Código</a>
-        </li>
-      </ol>
-    </article>
+    print("-" * 65)
+    print(f"Espaço total ocupado: {espaco_total_mb:.2f} MB")
+    print(f"Espaço médio ocupado: {(espaco_total_mb / len(usuarios)):.2f} MB")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>24. Simulação de Lançamento de Dados</h3></div>
+        <p class="exercise-desc">Faça um programa que simule o lançamento de um dado convencional 100 vezes. Armazene as rolagens em um vetor e em seguida conte e mostre quantas vezes cada valor (1 a 6) foi obtido.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">import random
+
+rolagens = []
+
+# Sorteando 100 vezes entre 1 e 6
+for _ in range(100):
+    rolagens.append(random.randint(1, 6))
+
+print("Resultado das rolagens:")
+
+# Usamos a função .count() das Listas para contar incidências
+for face in range(1, 7):
+    quantidade = rolagens.count(face)
+    print(f"Face {face}: caiu {quantidade} vezes.")</code></pre></div>
+        </details>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
 </body>
 </html>

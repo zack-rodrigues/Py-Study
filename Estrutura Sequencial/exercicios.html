@@ -2,54 +2,566 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Estrutura Sequencial - Exercícios</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.0/github-markdown-dark.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estrutura Sequencial - Exercícios | Estudo.Py.BR</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css">
+  
   <style>
+    /* Paleta de Cores e Tema Base (Estilo GitHub Dark) */
+    :root {
+      --bg-color: #0d1117;
+      --card-bg: #161b22;
+      --text-main: #c9d1d9;
+      --text-muted: #8b949e;
+      --border-color: #30363d;
+      --accent: #58a6ff;
+      --accent-hover: #1f6feb;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
-      background-color: #0d1117;
-      color: #c9d1d9;
-      font-family: system-ui, sans-serif;
-      padding: 2rem;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      padding: 2rem 1rem;
       display: flex;
       justify-content: center;
     }
-    .markdown-body {
+
+    .container {
       max-width: 900px;
+      width: 100%;
     }
-    a {
-      color: #58a6ff;
+
+    /* Navegação e Cabeçalho */
+    .header {
+      margin-bottom: 2.5rem;
     }
+    
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 8px 16px;
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      transition: all 0.2s ease-in-out;
+      margin-bottom: 1.5rem;
+    }
+    
+    .back-link:hover {
+      background-color: var(--border-color);
+      color: #ffffff;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+      color: #ffffff;
+    }
+    
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+    }
+
+    /* Grid de Cartões de Exercícios */
+    .exercises-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .exercise-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .exercise-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 0.75rem;
+    }
+    
+    .exercise-header h3 {
+      font-size: 1.3rem;
+      color: var(--accent);
+    }
+    
+    .exercise-desc {
+      margin-bottom: 1.25rem;
+      font-size: 1.05rem;
+      color: #e6edf3;
+    }
+
+    /* Botão de Resposta (details/summary) */
+    details {
+      background-color: var(--bg-color);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    summary {
+      padding: 12px 16px;
+      cursor: pointer;
+      color: var(--accent);
+      font-weight: bold;
+      background-color: var(--card-bg);
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s;
+      user-select: none;
+    }
+    
+    summary::-webkit-details-marker {
+      display: none; /* Remove a seta padrão em alguns navegadores */
+    }
+
+    summary:hover {
+      background-color: #1f242c;
+    }
+
+    summary::before {
+      content: "👁️ Exibir Resposta";
+    }
+    
+    details[open] summary::before {
+      content: "🔽 Ocultar Resposta";
+    }
+    
+    details[open] summary {
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    /* Bloco de Código */
+    .code-content {
+      padding: 0;
+      margin: 0;
+    }
+
+    .code-content pre {
+      margin: 0;
+      padding: 16px;
+      overflow-x: auto;
+      background-color: transparent !important;
+    }
+
+    .code-content code {
+      font-family: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
   </style>
 </head>
 <body>
-  <h3>
-   ↩️<a href="https://zack-rodrigues.github.io/Estudo.Py.BR/">Voltar</a>
-   <article class="markdown-body">
-      <h1>Lista de Exercícios de Estrutura Sequencial</h1>
-      <p>Aqui estão os exercícios para praticar estruturas sequencial em Python. Clique nos links para acessar os códigos correspondentes.</p>
-      <h2>Exercícios</h2>
-      <ol>
-        <li><strong>Alo mundo</strong>:Faça um Programa que mostre a mensagem "Alo mundo" na tela.<p></p> <a href="./alo_mundo.py">Código</a></li><p></p>
-        <li><strong>Número informado</strong>: Faça um Programa que peça um número e então mostre a mensagem "O número informado foi [número]".<p></p> <a href="./numero_informado.py">Código</a></li><p></p>
-        <li><strong>Soma de dois números</strong>: Faça um Programa que peça dois números e imprima a soma. <p></p><a href="./soma_numeros.py">Código</a></li><p></p>
-        <li><strong>Média de notas</strong>: Faça um Programa que peça as 4 notas bimestrais e mostre a média.<p></p> <a href="./media_notas.py">Código</a></li><p></p>
-        <li><strong>Metros para centímetros</strong>: Faça um Programa que converta metros para centímetros.<p></p> <a href="./metros_para_centimetros.py">Código</a></li><p></p>
-        <li><strong>Área do círculo</strong>: Faça um Programa que peça o raio de um círculo, calcule e mostre sua área.<p></p> <a href="./area_circulo.py">Código</a></li><p></p>
-        <li><strong>Dobro da área do quadrado</strong>: Faça um Programa que calcule a área de um quadrado, em seguida mostre o dobro desta área para o usuário.<p></p> <a href="./dobro_area_quadrado.py">Código</a></li><p></p>
-        <li><strong>Salário do mês</strong>: Faça um Programa que pergunte quanto você ganha por hora e o número de horas trabalhadas no mês. Calcule e mostre o total do seu salário no referido mês.<p></p> <a href="./folha_pagamento.py">Código</a></li><p></p>
-        <li><strong>Fahrenheit para Celsius</strong>: Faça um Programa que peça a temperatura em graus Fahrenheit, transforme e mostre a temperatura em graus Celsius. <p></p><a href="./fahrenheit_para_celsius.py">Código</a></li><p></p>
-        <li><strong>Celsius para Fahrenheit</strong>: Faça um Programa que peça a temperatura em graus Celsius, transforme e mostre em graus Fahrenheit.<p></p> <a href="./celsius_para_fahrenheit.py">Código</a></li><p></p>
-        <li><strong>Peso ideal</strong>: Tendo como dados de entrada a altura de uma pessoa, construa um algoritmo que calcule seu peso ideal, usando a fórmula: (72.7*altura) - 58.<p></p> <a href="./peso_ideal.py">Código</a></li><p></p>
-        <li><strong>Peso ideal por gênero</strong>: Tendo como dado de entrada a altura (h) de uma pessoa, construa um algoritmo que calcule seu peso ideal, utilizando fórmulas específicas para homens e mulheres.<p></p> <a href="./peso_ideal_h_m.py">Código</a></li><p></p>
-        <li><strong>Pescador e multa</strong>: João Papo-de-Pescador comprou um microcomputador para controlar o rendimento diário de seu trabalho. Faça um programa que leia a variável peso (peso de peixes) e calcule o excesso e a multa a pagar.<p></p> <a href="./pescador_multa.py">Código</a></li><p></p>
-        <li><strong>Loja de tintas</strong>: Faça um programa para uma loja de tintas. O programa deverá pedir o tamanho em metros quadrados da área a ser pintada e calcular a quantidade de tinta necessária e o preço total.<p></p> <a href="./loja_tintas.py">Código</a></li><p></p>
-        <li><strong>Loja de tintas avançado</strong>: Faça um programa para uma loja de tintas que permita diferentes opções de compra. <p></p><a href="./loja_tintas_avancado.py">Código</a></li><p></p>
-        <li><strong>Velocidade de download</strong>: Faça um programa que peça o tamanho de um arquivo para download (em MB) e a velocidade de um link de Internet (em Mbps), calcule e informe o tempo aproximado de download do arquivo usando este link (em minutos).<p></p> <a href="./velocidade_download.py">Código</a></li><p></p>
-        <li><strong>Calculadora de horas trabalhadas</strong>: Faça um programa que pergunte quanto você ganha por hora e o número de horas trabalhadas no mês. Calcule e mostre o total do seu salário no referido mês.<p></p> <a href="./calculadora_horas_trabalhadas.py">Código</a></li><p></p>
-        <li><strong>Números em ordem decrescente</strong>: Faça um Programa que leia três números e mostre-os em ordem decrescente.<p></p> <a href="./numero_decrescente.py">Código</a></li><p></p>
-      </ol>
-    </article>
-    
+
+  <div class="container">
+    <div class="header">
+      <a href="https://zack-rodrigues.github.io/Estudo.Py.BR/" class="back-link">↩️ Voltar para a Trilha</a>
+      <h1>🔢 Estrutura Sequencial</h1>
+      <p class="subtitle">Aqui estão os exercícios para consolidar seus conhecimentos em fundamentos básicos de programação sequencial, variáveis e entrada/saída de dados (I/O) em Python.</p>
+    </div>
+
+    <div class="exercises-grid">
+
+      <div class="exercise-card">
+        <div class="exercise-header">
+          <h3>1. Meu Primeiro Código (Alô Mundo)</h3>
+        </div>
+        <p class="exercise-desc">O clássico! Crie um programa que exiba a famosa frase "Alo mundo" na tela para testar se o seu ambiente está funcionando perfeitamente.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content">
+<pre><code class="language-python">print("Alo mundo")
+</code></pre>
+          </div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header">
+          <h3>2. Ecoando Números</h3>
+        </div>
+        <p class="exercise-desc">Solicite um número ao usuário através do terminal e, em seguida, exiba a mensagem informando exatamente o número que foi digitado.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content">
+<pre><code class="language-python">numero = input("Informe um número: ")
+print(f"O número informado foi {numero}")
+</code></pre>
+          </div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header">
+          <h3>3. Calculadora Simples: Soma</h3>
+        </div>
+        <p class="exercise-desc">Peça ao usuário para digitar dois números (podem ser inteiros ou decimais) e exiba o resultado da soma entre eles.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content">
+<pre><code class="language-python">num1 = float(input("Digite o primeiro número: "))
+num2 = float(input("Digite o segundo número: "))
+
+soma = num1 + num2
+print(f"A soma dos números é: {soma}")
+</code></pre>
+          </div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header">
+          <h3>4. Boletim Escolar (Média)</h3>
+        </div>
+        <p class="exercise-desc">Peça ao usuário para inserir as 4 notas bimestrais de um aluno, calcule e mostre a média final.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content">
+<pre><code class="language-python">n1 = float(input("Digite a nota do 1º bimestre: "))
+n2 = float(input("Digite a nota do 2º bimestre: "))
+n3 = float(input("Digite a nota do 3º bimestre: "))
+n4 = float(input("Digite a nota do 4º bimestre: "))
+
+media = (n1 + n2 + n3 + n4) / 4
+print(f"A média final do aluno é: {media:.2f}")
+</code></pre>
+          </div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header">
+          <h3>5. Conversor de Medidas</h3>
+        </div>
+        <p class="exercise-desc">Crie um programa que receba um valor em metros e o converta automaticamente para centímetros.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content">
+<pre><code class="language-python">metros = float(input("Digite o valor em metros: "))
+centimetros = metros * 100
+
+print(f"{metros}m equivalem a {centimetros:.0f}cm.")
+</code></pre>
+          </div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header">
+          <h3>6. Geometria: Área do Círculo</h3>
+        </div>
+        <p class="exercise-desc">Solicite o raio de um círculo, calcule e mostre sua área. Dica: você pode usar o módulo <code>math</code> do Python.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content">
+<pre><code class="language-python">import math
+
+raio = float(input("Digite o raio do círculo: "))
+area = math.pi * (raio ** 2)
+
+print(f"A área do círculo é: {area:.2f}")
+</code></pre>
+          </div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header">
+          <h3>7. Geometria: O Dobro do Quadrado</h3>
+        </div>
+        <p class="exercise-desc">Calcule a área de um quadrado a partir da medida do seu lado, e em seguida exiba na tela o dobro dessa área.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content">
+<pre><code class="language-python">lado = float(input("Digite o tamanho do lado do quadrado: "))
+
+area = lado ** 2
+dobro = area * 2
+
+print(f"A área do quadrado é {area}, e o seu dobro é {dobro}.")
+</code></pre>
+          </div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header">
+          <h3>8. Folha de Pagamento Simples</h3>
+        </div>
+        <p class="exercise-desc">Pergunte o valor recebido por hora e a quantidade de horas trabalhadas no mês. O programa deve calcular e exibir o salário total.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content">
+<pre><code class="language-python">valor_hora = float(input("Quanto você ganha por hora? R$ "))
+horas_mes = float(input("Quantas horas você trabalhou no mês? "))
+
+salario = valor_hora * horas_mes
+print(f"Seu salário neste mês será de: R$ {salario:.2f}")
+</code></pre>
+          </div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header">
+          <h3>9. Conversor: Fahrenheit para Celsius</h3>
+        </div>
+        <p class="exercise-desc">Solicite uma temperatura em graus Fahrenheit, aplique a fórmula de conversão e exiba o resultado em Celsius. <br><small>Fórmula: C = 5 * ((F - 32) / 9)</small></p>
+        <details>
+          <summary></summary>
+          <div class="code-content">
+<pre><code class="language-python">fahrenheit = float(input("Digite a temperatura em Fahrenheit (°F): "))
+celsius = 5 * ((fahrenheit - 32) / 9)
+
+print(f"A temperatura em graus Celsius é: {celsius:.2f} °C")
+</code></pre>
+          </div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header">
+          <h3>10. Conversor: Celsius para Fahrenheit</h3>
+        </div>
+        <p class="exercise-desc">Faça o inverso do exercício anterior: peça a temperatura em Celsius e transforme para Fahrenheit.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content">
+<pre><code class="language-python">celsius = float(input("Digite a temperatura em Celsius (°C): "))
+fahrenheit = (celsius * 9 / 5) + 32
+
+print(f"A temperatura em graus Fahrenheit é: {fahrenheit:.2f} °F")
+</code></pre>
+          </div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header">
+          <h3>11. Saúde: Peso Ideal</h3>
+        </div>
+        <p class="exercise-desc">Com base na altura informada, calcule o peso ideal de uma pessoa usando a fórmula médica padrão: <code>(72.7 * altura) - 58</code>.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content">
+<pre><code class="language-python">altura = float(input("Digite a sua altura em metros (ex: 1.75): "))
+peso_ideal = (72.7 * altura) - 58
+
+print(f"O seu peso ideal é: {peso_ideal:.2f} kg")
+</code></pre>
+          </div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header">
+          <h3>12. Saúde: Peso Ideal por Gênero</h3>
+        </div>
+        <p class="exercise-desc">Aprimore o programa anterior! Peça a altura e calcule o peso ideal exibindo os valores separados para homens <code>(72.7 * h) - 58</code> e para mulheres <code>(62.1 * h) - 44.7</code>.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content">
+<pre><code class="language-python">altura = float(input("Digite a sua altura em metros (ex: 1.75): "))
+
+peso_ideal_homem = (72.7 * altura) - 58
+peso_ideal_mulher = (62.1 * altura) - 44.7
+
+print("--- PESO IDEAL ---")
+print(f"Para homens: {peso_ideal_homem:.2f} kg")
+print(f"Para mulheres: {peso_ideal_mulher:.2f} kg")
+</code></pre>
+          </div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header">
+          <h3>13. João Papo-de-Pescador (Controle de Multas)</h3>
+        </div>
+        <p class="exercise-desc">João precisa pagar R$ 4,00 de multa por quilo de peixe que exceder o limite legal de 50 kg diários. Faça um programa que leia o peso, calcule o excesso e o valor da multa a pagar.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content">
+<pre><code class="language-python">peso_peixes = float(input("Digite o peso total dos peixes (kg): "))
+
+# Usamos max() para garantir que, se não houver excesso, o valor seja 0
+excesso = max(0, peso_peixes - 50)  
+multa = excesso * 4.00
+
+print(f"Peso excedente: {excesso:.2f} kg")
+print(f"Valor da multa a pagar: R$ {multa:.2f}")
+</code></pre>
+          </div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header">
+          <h3>14. Sistema da Loja de Tintas</h3>
+        </div>
+        <p class="exercise-desc">Peça o tamanho da área a ser pintada (em m²). Sabendo que 1 litro de tinta pinta 3m² e que a tinta é vendida em latas de 18 litros (R$ 80,00), calcule quantas latas devem ser compradas e o preço total.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content">
+<pre><code class="language-python">import math
+
+area_pintura = float(input("Tamanho da área a ser pintada em m²: "))
+
+# 1 litro para cada 3 metros
+litros_tinta = area_pintura / 3 
+
+# math.ceil arredonda para cima, garantindo que compre latas inteiras
+latas_necessarias = math.ceil(litros_tinta / 18) 
+preco_total = latas_necessarias * 80.00
+
+print(f"Quantidade de latas necessárias: {latas_necessarias}")
+print(f"Preço total a pagar: R$ {preco_total:.2f}")
+</code></pre>
+          </div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header">
+          <h3>15. Loja de Tintas Avançada</h3>
+        </div>
+        <p class="exercise-desc">Aprimore o sistema! Agora a tinta é vendida em latas de 18L (R$ 80,00) ou galões de 3,6L (R$ 25,00). Calcule e exiba as opções: comprar apenas latas, apenas galões, ou misturar ambos (priorizando o menor custo e considerando 10% de folga).</p>
+        <details>
+          <summary></summary>
+          <div class="code-content">
+<pre><code class="language-python">import math
+
+area_pintura = float(input("Tamanho da área a ser pintada em m²: "))
+
+# Adicionando 10% de folga (1 litro pinta 6 metros na nova regra clássica, ou mantenha 3)
+# Vamos usar 1 litro para 6m² conforme o exercício padrão brasileiro
+litros_tinta = (area_pintura / 6) * 1.10
+
+# Opção 1: Apenas latas de 18 litros
+latas = math.ceil(litros_tinta / 18)
+preco_latas = latas * 80.0
+
+# Opção 2: Apenas galões de 3.6 litros
+galoes = math.ceil(litros_tinta / 3.6)
+preco_galoes = galoes * 25.0
+
+# Opção 3: Misturar latas e galões (menor desperdício)
+latas_mistura = math.floor(litros_tinta / 18)
+litros_restantes = litros_tinta - (latas_mistura * 18)
+galoes_mistura = math.ceil(litros_restantes / 3.6)
+
+preco_mistura = (latas_mistura * 80.0) + (galoes_mistura * 25.0)
+
+print("\n--- OPÇÕES DE COMPRA ---")
+print(f"1) Apenas latas (18L): {latas} latas - R$ {preco_latas:.2f}")
+print(f"2) Apenas galões (3.6L): {galoes} galões - R$ {preco_galoes:.2f}")
+print(f"3) Mistura ideal: {latas_mistura} lata(s) e {galoes_mistura} galão(ões) - R$ {preco_mistura:.2f}")
+</code></pre>
+          </div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header">
+          <h3>16. Estimativa de Download</h3>
+        </div>
+        <p class="exercise-desc">Peça o tamanho de um arquivo em MB e a velocidade do link de internet em Mbps. Calcule o tempo aproximado que o arquivo levará para ser baixado (em minutos).</p>
+        <details>
+          <summary></summary>
+          <div class="code-content">
+<pre><code class="language-python">tamanho_arquivo = float(input("Tamanho do arquivo (MB): "))
+velocidade_internet = float(input("Velocidade da internet (Mbps): "))
+
+# Conversão: 1 Byte = 8 bits
+velocidade_mbps = velocidade_internet / 8
+tempo_segundos = tamanho_arquivo / velocidade_mbps
+tempo_minutos = tempo_segundos / 60
+
+print(f"Tempo aproximado de download: {tempo_minutos:.2f} minutos.")
+</code></pre>
+          </div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header">
+          <h3>17. Calculadora de Salário Líquido</h3>
+        </div>
+        <p class="exercise-desc">Expanda a folha de pagamento! Calcule o salário bruto baseado nas horas trabalhadas e deduza os impostos: Imposto de Renda (11%), INSS (8%) e Sindicato (5%). No final, exiba o Salário Líquido.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content">
+<pre><code class="language-python">valor_hora = float(input("Quanto você ganha por hora? R$ "))
+horas_mes = float(input("Horas trabalhadas no mês: "))
+
+salario_bruto = valor_hora * horas_mes
+ir = salario_bruto * 0.11
+inss = salario_bruto * 0.08
+sindicato = salario_bruto * 0.05
+
+total_descontos = ir + inss + sindicato
+salario_liquido = salario_bruto - total_descontos
+
+print(f"\n+ Salário Bruto : R$ {salario_bruto:.2f}")
+print(f"- IR (11%)      : R$ {ir:.2f}")
+print(f"- INSS (8%)     : R$ {inss:.2f}")
+print(f"- Sindicato (5%): R$ {sindicato:.2f}")
+print(f"= Salário Líquido: R$ {salario_liquido:.2f}")
+</code></pre>
+          </div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header">
+          <h3>18. Ordem Decrescente</h3>
+        </div>
+        <p class="exercise-desc">Faça um Programa que leia três números soltos e mostre-os organizados em ordem decrescente (do maior para o menor).</p>
+        <details>
+          <summary></summary>
+          <div class="code-content">
+<pre><code class="language-python">n1 = float(input("Digite o 1º número: "))
+n2 = float(input("Digite o 2º número: "))
+n3 = float(input("Digite o 3º número: "))
+
+# Usando o poder do Python com listas e o método sort
+numeros = [n1, n2, n3]
+numeros.sort(reverse=True)
+
+print(f"Números em ordem decrescente: {numeros}")
+</code></pre>
+          </div>
+        </details>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
 </body>
 </html>
-

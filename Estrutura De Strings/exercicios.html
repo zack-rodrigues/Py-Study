@@ -2,225 +2,554 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Exercícios de Strings em Python</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.0/github-markdown-dark.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estrutura de Strings - Exercícios | Estudo.Py.BR</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css">
+  
   <style>
+    /* Paleta de Cores e Tema Base (Estilo GitHub Dark) */
+    :root {
+      --bg-color: #0d1117;
+      --card-bg: #161b22;
+      --text-main: #c9d1d9;
+      --text-muted: #8b949e;
+      --border-color: #30363d;
+      --accent: #58a6ff;
+      --accent-hover: #1f6feb;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
-      background-color: #0d1117;
-      color: #c9d1d9;
-      font-family: system-ui, sans-serif;
-      padding: 2rem;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      padding: 2rem 1rem;
       display: flex;
       justify-content: center;
     }
-    .markdown-body {
+
+    .container {
       max-width: 900px;
+      width: 100%;
     }
-    a {
-      color: #58a6ff;
+
+    /* Navegação e Cabeçalho */
+    .header {
+      margin-bottom: 2.5rem;
     }
-    li {
-      margin-bottom: 2rem;
-      line-height: 1.6;
-    }
-    li > p {
-      margin: 0.5rem 0;
-    }
-    .code-link {
-      display: block;
-      margin-top: 0.75rem;
-      font-weight: 500;
-    }
-    h1 {
-      border-bottom: 1px solid #30363d;
-      padding-bottom: 0.5rem;
+    
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 8px 16px;
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      transition: all 0.2s ease-in-out;
       margin-bottom: 1.5rem;
     }
-    h2 {
-      margin: 2rem 0 1rem;
-      border-bottom: 1px solid #30363d;
-      padding-bottom: 0.3rem;
+    
+    .back-link:hover {
+      background-color: var(--border-color);
+      color: #ffffff;
     }
-    pre {
-      background-color: #161b22;
-      padding: 1rem;
+
+    h1 {
+      font-size: 2.2rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+      color: #ffffff;
+    }
+    
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+    }
+
+    /* Grid de Cartões de Exercícios */
+    .exercises-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .exercise-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .exercise-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 0.75rem;
+    }
+    
+    .exercise-header h3 {
+      font-size: 1.3rem;
+      color: var(--accent);
+    }
+    
+    .exercise-desc {
+      margin-bottom: 1.25rem;
+      font-size: 1.05rem;
+      color: #e6edf3;
+    }
+
+    /* Bloco de Exemplo */
+    .example-block {
+      background-color: #0d1117;
+      border-left: 4px solid var(--accent);
+      padding: 12px 16px;
+      margin-bottom: 1.25rem;
+      border-radius: 0 6px 6px 0;
+      font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+      font-size: 0.9rem;
+      color: #8b949e;
+      white-space: pre-wrap;
+    }
+
+    /* Botão de Resposta (details/summary) */
+    details {
+      background-color: var(--bg-color);
+      border: 1px solid var(--border-color);
       border-radius: 6px;
+      overflow: hidden;
+    }
+
+    summary {
+      padding: 12px 16px;
+      cursor: pointer;
+      color: var(--accent);
+      font-weight: bold;
+      background-color: var(--card-bg);
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s;
+      user-select: none;
+    }
+    
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary:hover {
+      background-color: #1f242c;
+    }
+
+    summary::before {
+      content: "👁️ Exibir Resposta";
+    }
+    
+    details[open] summary::before {
+      content: "🔽 Ocultar Resposta";
+    }
+    
+    details[open] summary {
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    /* Bloco de Código */
+    .code-content {
+      padding: 0;
+      margin: 0;
+    }
+
+    .code-content pre {
+      margin: 0;
+      padding: 16px;
       overflow-x: auto;
+      background-color: transparent !important;
     }
-    .example {
-      background-color: #161b22;
-      padding: 1rem;
-      border-radius: 6px;
-      margin: 0.5rem 0 1rem;
-      border-left: 3px solid #58a6ff;
+
+    .code-content code {
+      font-family: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 0.95rem;
+      line-height: 1.5;
     }
+
   </style>
 </head>
 <body>
-  <h3>
-    ↩️<a href="https://zack-rodrigues.github.io/Estudo.Py.BR/">Voltar</a>
-  <article class="markdown-body">
-    <h1>Lista de Exercícios de Strings em Python</h1>
-    <p>Aqui estão os exercícios para praticar manipulação de strings em Python. Clique nos links para acessar os códigos correspondentes.</p>
+
+  <div class="container">
+    <div class="header">
+      <a href="https://zack-rodrigues.github.io/Estudo.Py.BR/" class="back-link">↩️ Voltar para a Trilha</a>
+      <h1>🔤 Estrutura de Strings</h1>
+      <p class="subtitle">Strings são sequências de caracteres! Nestes exercícios, você vai praticar fatiamento (slicing), formatação, validações e manipulação de textos no Python.</p>
+    </div>
+
+    <div class="exercises-grid">
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>1. Tamanho de Strings</h3></div>
+        <p class="exercise-desc">Faça um programa que leia 2 strings e informe o conteúdo delas seguido do seu comprimento. Informe também se as duas strings possuem o mesmo comprimento e se são iguais ou diferentes no conteúdo.</p>
+        <div class="example-block">String 1: Brasil Hexa 2006
+String 2: Brasil! Hexa 2006!
+Tamanho de "Brasil Hexa 2006": 16 caracteres
+Tamanho de "Brasil! Hexa 2006!": 18 caracteres
+As duas strings são de tamanhos diferentes.
+As duas strings possuem conteúdo diferente.</div>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">str1 = input("String 1: ")
+str2 = input("String 2: ")
+
+print(f'\nTamanho de "{str1}": {len(str1)} caracteres')
+print(f'Tamanho de "{str2}": {len(str2)} caracteres')
+
+if len(str1) == len(str2):
+    print("As duas strings são de tamanhos iguais.")
+else:
+    print("As duas strings são de tamanhos diferentes.")
+
+if str1 == str2:
+    print("As duas strings possuem o mesmo conteúdo.")
+else:
+    print("As duas strings possuem conteúdo diferente.")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>2. Nome ao Contrário em Maiúsculas</h3></div>
+        <p class="exercise-desc">Faça um programa que permita ao usuário digitar o seu nome e em seguida mostre o nome do usuário de trás para frente utilizando somente letras maiúsculas.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">nome = input("Digite o seu nome: ").upper()
+
+# O [::-1] é um "slicing" que inverte a string no Python
+nome_invertido = nome[::-1]
+
+print(f"Seu nome invertido é: {nome_invertido}")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>3. Nome na Vertical</h3></div>
+        <p class="exercise-desc">Faça um programa que solicite o nome do usuário e imprima-o na vertical, com uma letra em cada linha.</p>
+        <div class="example-block">F
+U
+L
+A
+N
+O</div>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">nome = input("Digite o seu nome: ").upper()
+
+for letra in nome:
+    print(letra)</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>4. Nome na Vertical em Escada</h3></div>
+        <p class="exercise-desc">Modifique o programa anterior de forma a mostrar o nome em formato de escada, adicionando uma letra a cada linha.</p>
+        <div class="example-block">F
+FU
+FUL
+FULA
+FULAN
+FULANO</div>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">nome = input("Digite o seu nome: ").upper()
+
+for i in range(len(nome)):
+    # Imprime do início (0) até o índice atual + 1
+    print(nome[:i+1])</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>5. Nome na Vertical em Escada Invertida</h3></div>
+        <p class="exercise-desc">Altere o programa anterior de modo que a escada seja invertida, removendo uma letra a cada linha até sobrar apenas a primeira.</p>
+        <div class="example-block">FULANO
+FULAN
+FULA
+FUL
+FU
+F</div>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">nome = input("Digite o seu nome: ").upper()
+
+for i in range(len(nome), 0, -1):
+    # Imprime do início até o tamanho 'i' que vai diminuindo
+    print(nome[:i])</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>6. Data por Extenso</h3></div>
+        <p class="exercise-desc">Faça um programa que solicite a data de nascimento (dd/mm/aaaa) do usuário e imprima a data com o nome do mês por extenso.</p>
+        <div class="example-block">Data de Nascimento: 29/10/1973
+Você nasceu em 29 de Outubro de 1973.</div>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">data = input("Data de Nascimento (dd/mm/aaaa): ")
+
+meses = [
+    "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+    "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+]
+
+# Dividindo a string nos delimitadores '/'
+dia, mes, ano = data.split('/')
+
+# Convertendo o mês (str) para int e pegando na lista (índice começa em 0)
+nome_mes = meses[int(mes) - 1]
+
+print(f"Você nasceu em {dia} de {nome_mes} de {ano}.")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>7. Conta Espaços e Vogais</h3></div>
+        <p class="exercise-desc">Dado uma string com uma frase informada pelo usuário, conte quantos espaços em branco existem e quantas vezes aparecem as vogais (a, e, i, o, u).</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">frase = input("Digite uma frase: ").lower()
+
+espacos = frase.count(" ")
+vogais = 0
+
+for letra in frase:
+    if letra in "aeiouáéíóúãõâêîôû":
+        vogais += 1
+
+print(f"A frase tem {espacos} espaço(s) em branco.")
+print(f"A frase possui {vogais} vogal(is).")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>8. Verificador de Palíndromo</h3></div>
+        <p class="exercise-desc">Um palíndromo é uma sequência de caracteres cuja leitura é idêntica da direita para esquerda ou vice-versa (ignorando espaços e pontuação). Faça um programa que diga se o texto é um palíndromo.</p>
+        <div class="example-block">Exemplo de palíndromos: SUBI NO ONIBUS, ANOTARAM A DATA DA MARATONA</div>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">texto = input("Digite a palavra/frase: ").upper()
+
+# Limpando o texto (removendo espaços e mantendo só letras/números)
+texto_limpo = "".join(caractere for caractere in texto if caractere.isalnum())
+
+# Invertendo a string limpa
+texto_invertido = texto_limpo[::-1]
+
+if texto_limpo == texto_invertido:
+    print("É um palíndromo!")
+else:
+    print("Não é um palíndromo.")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>9. Verificação de CPF</h3></div>
+        <p class="exercise-desc">Desenvolva um programa que solicite a digitação de um CPF no formato xxx.xxx.xxx-xx e valide se os dígitos verificadores (os dois últimos números) estão matematicamente corretos.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">def validar_cpf(cpf):
+    # Remove pontuações
+    cpf_limpo = cpf.replace(".", "").replace("-", "")
     
-    <h2>Exercícios</h2>
+    # Verifica tamanho ou se todos os números são iguais (ex: 111.111.111-11)
+    if len(cpf_limpo) != 11 or cpf_limpo == cpf_limpo[0] * 11:
+        return False
+
+    # Calculando o primeiro dígito verificador
+    soma = sum(int(cpf_limpo[i]) * (10 - i) for i in range(9))
+    digito1 = (soma * 10 % 11) % 10
+
+    # Calculando o segundo dígito verificador
+    soma = sum(int(cpf_limpo[i]) * (11 - i) for i in range(10))
+    digito2 = (soma * 10 % 11) % 10
+
+    # Verifica se os dígitos batem
+    return str(digito1) == cpf_limpo[9] and str(digito2) == cpf_limpo[10]
+
+cpf_usuario = input("Digite o CPF (xxx.xxx.xxx-xx): ")
+
+if validar_cpf(cpf_usuario):
+    print("CPF Válido!")
+else:
+    print("CPF Inválido!")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>10. Número por Extenso</h3></div>
+        <p class="exercise-desc">Escreva um programa que solicite ao usuário a digitação de um número até 99 e imprima-o na tela por extenso.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">unidades = ["Zero", "Um", "Dois", "Três", "Quatro", "Cinco", "Seis", "Sete", "Oito", "Nove", 
+            "Dez", "Onze", "Doze", "Treze", "Catorze", "Quinze", "Dezesseis", "Dezessete", "Dezoito", "Dezenove"]
+            
+dezenas = ["", "", "Vinte", "Trinta", "Quarenta", "Cinquenta", "Sessenta", "Setenta", "Oitenta", "Noventa"]
+
+num = int(input("Digite um número entre 0 e 99: "))
+
+if 0 &lt;= num &lt; 20:
+    print(unidades[num])
+elif 20 &lt;= num &lt;= 99:
+    dezena = num // 10
+    unidade = num % 10
     
-    <ol>
-      <li>
-        <strong>Tamanho de Strings</strong>
-        <p>Faça um programa que leia 2 strings e informe o conteúdo delas seguido do seu comprimento. Informe também se as duas strings possuem o mesmo comprimento e se são iguais ou diferentes no conteúdo.</p>
-        <div class="example">
-          <p>Exemplo:</p>
-          <pre>String 1: Brasil Hexa 2006  
-String 2: Brasil! Hexa 2006!  
-Tamanho de "Brasil Hexa 2006": 16 caracteres  
-Tamanho de "Brasil! Hexa 2006!": 18 caracteres  
-As duas strings são de tamanhos diferentes.  
-As duas strings possuem conteúdo diferente.</pre>
-        </div>
-        <a href="./tamanho_strings.py" class="code-link">Código</a>
-      </li>
-      
-      <li>
-        <strong>Nome ao Contrário em Maiúsculas</strong>
-        <p>Faça um programa que permita ao usuário digitar o seu nome e em seguida mostre o nome do usuário de trás para frente utilizando somente letras maiúsculas.</p>
-        <a href="./nome_ao_contrario.py" class="code-link">Código</a>
-      </li>
-      
-      <li>
-        <strong>Nome na Vertical</strong>
-        <p>Faça um programa que solicite o nome do usuário e imprima-o na vertical.</p>
-        <div class="example">
-          <p>Exemplo:</p>
-          <pre>F  
-U  
-L  
-A  
-N  
-O</pre>
-        </div>
-        <a href="./nome_vertical.py" class="code-link">Código</a>
-      </li>
-      
-      <li>
-        <strong>Nome na Vertical em Escada</strong>
-        <p>Modifique o programa anterior de forma a mostrar o nome em formato de escada.</p>
-        <div class="example">
-          <p>Exemplo:</p>
-          <pre>F  
-FU  
-FUL  
-FULA  
-FULAN  
-FULANO</pre>
-        </div>
-        <a href="./nome_escada.py" class="code-link">Código</a>
-      </li>
-      
-      <li>
-        <strong>Nome na Vertical em Escada Invertida</strong>
-        <p>Altere o programa anterior de modo que a escada seja invertida.</p>
-        <div class="example">
-          <p>Exemplo:</p>
-          <pre>FULANO  
-FULAN  
-FULA  
-FUL  
-FU  
-F</pre>
-        </div>
-        <a href="./nome_escada_invertida.py" class="code-link">Código</a>
-      </li>
-      
-      <li>
-        <strong>Data por Extenso</strong>
-        <p>Faça um programa que solicite a data de nascimento (dd/mm/aaaa) do usuário e imprima a data com o nome do mês por extenso.</p>
-        <div class="example">
-          <p>Exemplo:</p>
-          <pre>Data de Nascimento: 29/10/1973  
-Você nasceu em 29 de Outubro de 1973.</pre>
-        </div>
-        <a href="./data_por_extenso.py" class="code-link">Código</a>
-      </li>
-      
-      <li>
-        <strong>Conta Espaços e Vogais</strong>
-        <p>Dado uma string com uma frase informada pelo usuário (incluindo espaços em branco), conte:</p>
-        <ul>
-          <li>Quantos espaços em branco existem na frase.</li>
-          <li>Quantas vezes aparecem as vogais a, e, i, o, u.</li>
-        </ul>
-        <a href="./conta_espacos_vogais.py" class="code-link">Código</a>
-      </li>
-      
-      <li>
-        <strong>Palíndromo</strong>
-        <p>Um palíndromo é uma sequência de caracteres cuja leitura é idêntica se feita da direita para esquerda ou vice-versa. Em textos mais complexos os espaços e pontuação são ignorados.</p>
-        <div class="example">
-          <p>Exemplo:</p>
-          <pre>SUBI NO ONIBUS</pre>
-        </div>
-        <p>Faça um programa que leia uma sequência de caracteres, mostre-a e diga se é um palíndromo ou não.</p>
-        <a href="./palindromo.py" class="code-link">Código</a>
-      </li>
-      
-      <li>
-        <strong>Verificação de CPF</strong>
-        <p>Desenvolva um programa que solicite a digitação de um número de CPF no formato xxx.xxx.xxx-xx e indique se é um número válido ou inválido através da validação dos dígitos verificadores e dos caracteres de formatação.</p>
-        <a href="./verifica_cpf.py" class="code-link">Código</a>
-      </li>
-      
-      <li>
-        <strong>Número por Extenso</strong>
-        <p>Escreva um programa que solicite ao usuário a digitação de um número até 99 e imprima-o na tela por extenso.</p>
-        <a href="./numero_por_extenso.py" class="code-link">Código</a>
-      </li>
-      
-      <li>
-        <strong>Jogo da Forca</strong>
-        <p>Desenvolva um jogo da forca. O programa terá uma lista de palavras lidas de um arquivo texto e escolherá uma aleatoriamente. O jogador poderá errar 6 vezes antes de ser enforcado.</p>
-        <div class="example">
-          <p>Exemplo:</p>
-          <pre>Digite uma letra: A  
--> Você errou pela 1ª vez. Tente de novo!
+    if unidade == 0:
+        print(dezenas[dezena])
+    else:
+        print(f"{dezenas[dezena]} e {unidades[unidade].lower()}")
+else:
+    print("Número fora do intervalo.")</code></pre></div>
+        </details>
+      </div>
 
-Digite uma letra: O  
-A palavra é: _ _ _ _ O
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>11. Jogo da Forca</h3></div>
+        <p class="exercise-desc">Desenvolva um jogo da forca. O programa escolhe uma palavra aleatória (pode ser de uma lista interna ou arquivo .txt). O jogador pode errar 6 vezes antes de ser enforcado.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">import random
 
-Digite uma letra: E  
-A palavra é: _ E _ _ O
+# Dica: Você pode usar `open("palavras.txt", "r")` para ler de um arquivo real
+lista_palavras = ["PYTHON", "PROGRAMACAO", "COMPUTADOR", "ALGORITMO", "VARIAVEL"]
+palavra_secreta = random.choice(lista_palavras)
 
-Digite uma letra: S  
--> Você errou pela 2ª vez. Tente de novo!</pre>
-        </div>
-        <a href="./jogo_forca.py" class="code-link">Código</a>
-      </li>
-      
-      <li>
-        <strong>Valida e Corrige Número de Telefone</strong>
-        <p>Faça um programa que leia um número de telefone e corrija o número no caso deste conter somente 7 dígitos, acrescentando o '3' na frente. O usuário pode informar o número com ou sem o traço separador.</p>
-        <div class="example">
-          <p>Exemplo:</p>
-          <pre>Telefone: 461-0133  
-Telefone possui 7 dígitos. Vou acrescentar o dígito três na frente.  
-Telefone corrigido sem formatação: 34610133  
-Telefone corrigido com formatação: 3461-0133</pre>
-        </div>
-        <a href="./corrige_telefone.py" class="code-link">Código</a>
-      </li>
-      
-      <li>
-        <strong>Jogo da Palavra Embaralhada</strong>
-        <p>Desenvolva um jogo em que o usuário tenha que adivinhar uma palavra que será mostrada com as letras embaralhadas. O programa terá uma lista de palavras lidas de um arquivo texto e escolherá uma aleatoriamente. O jogador terá seis tentativas para adivinhar a palavra. Ao final, a palavra deve ser mostrada na tela, informando se o usuário ganhou ou perdeu o jogo.</p>
-        <a href="./jogo_palavra_embaralhada.py" class="code-link">Código</a>
-      </li>
-      
-      <li>
-        <strong>Leet Speak Generator</strong>
-        <p>Leet é uma forma de se escrever o alfabeto latino usando outros símbolos em lugar das letras, como números por exemplo. A própria palavra leet admite muitas variações, como l33t ou 1337. O uso do leet reflete uma subcultura relacionada ao mundo dos jogos de computador e internet. Pesquise sobre as principais formas de traduzir as letras. Depois, faça um programa que peça um texto e transforme-o para a grafia leet speak.</p>
-        <a href="./leet_speak.py" class="code-link">Código</a>
-      </li>
-    </ol>
-  </article>
+letras_acertadas = ["_" for _ in palavra_secreta]
+erros = 0
+max_erros = 6
+
+print("Bem-vindo ao Jogo da Forca!")
+print(" ".join(letras_acertadas))
+
+while erros &lt; max_erros and "_" in letras_acertadas:
+    chute = input("\nDigite uma letra: ").upper()
+
+    if chute in palavra_secreta:
+        for i, letra in enumerate(palavra_secreta):
+            if letra == chute:
+                letras_acertadas[i] = chute
+        print("A palavra é:", " ".join(letras_acertadas))
+    else:
+        erros += 1
+        print(f"-> Você errou pela {erros}ª vez. Tente de novo!")
+
+if "_" not in letras_acertadas:
+    print("\n🎉 Parabéns! Você ganhou!")
+else:
+    print(f"\n💀 Game Over! A palavra era: {palavra_secreta}")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>12. Valida e Corrige Número de Telefone</h3></div>
+        <p class="exercise-desc">Faça um programa que leia um número de telefone e, caso ele contenha somente 7 dígitos, acrescente o '3' na frente (antiga regra da telefonia). Considere números com ou sem hífen.</p>
+        <div class="example-block">Telefone: 461-0133
+Telefone possui 7 dígitos. Vou acrescentar o dígito três na frente.
+Telefone corrigido sem formatação: 34610133
+Telefone corrigido com formatação: 3461-0133</div>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">telefone = input("Telefone: ")
+tel_limpo = telefone.replace("-", "")
+
+if len(tel_limpo) == 7:
+    print("Telefone possui 7 dígitos. Vou acrescentar o dígito três na frente.")
+    tel_corrigido = "3" + tel_limpo
+    tel_formatado = f"{tel_corrigido[:4]}-{tel_corrigido[4:]}"
+    
+    print(f"Telefone corrigido sem formatação: {tel_corrigido}")
+    print(f"Telefone corrigido com formatação: {tel_formatado}")
+elif len(tel_limpo) == 8:
+    print("Telefone já possui 8 dígitos e está correto.")
+else:
+    print("Número inválido.")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>13. Jogo da Palavra Embaralhada</h3></div>
+        <p class="exercise-desc">O usuário deve adivinhar uma palavra que será mostrada com as letras embaralhadas. Ele terá seis tentativas. Ao final, informe se ele ganhou ou perdeu.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">import random
+
+# Dica: Substitua por leitura de arquivo txt se desejar
+banco_palavras = ["desenvolvedor", "tecnologia", "sistema", "internet"]
+palavra = random.choice(banco_palavras).upper()
+
+# Embaralha a string
+embaralhada = "".join(random.sample(palavra, len(palavra)))
+
+print(f"Adivinhe a palavra: {embaralhada}")
+
+tentativas = 6
+venceu = False
+
+for i in range(tentativas):
+    chute = input(f"\nTentativa {i+1}/6 - Seu palpite: ").upper()
+    if chute == palavra:
+        venceu = True
+        break
+    else:
+        print("Palavra incorreta.")
+
+if venceu:
+    print(f"🎉 Parabéns, você acertou! A palavra é {palavra}.")
+else:
+    print(f"💀 Suas tentativas acabaram! A palavra correta era: {palavra}")</code></pre></div>
+        </details>
+      </div>
+
+      <div class="exercise-card">
+        <div class="exercise-header"><h3>14. Leet Speak Generator</h3></div>
+        <p class="exercise-desc">O "Leet" (ou 1337) troca letras normais por números ou símbolos parecidos. Faça um programa que receba um texto e o converta para a grafia hacker leet speak.</p>
+        <details>
+          <summary></summary>
+          <div class="code-content"><pre><code class="language-python">texto = input("Digite um texto: ").upper()
+
+# Dicionário de tradução básica do Leet Speak
+leet_dict = {
+    'A': '4',
+    'E': '3',
+    'I': '1',
+    'O': '0',
+    'S': '5',
+    'T': '7'
+}
+
+texto_leet = ""
+
+for letra in texto:
+    # Se a letra existir no dicionário, substitui. Se não, mantém a original.
+    texto_leet += leet_dict.get(letra, letra)
+
+print(f"Texto em Leet Speak: {texto_leet}")</code></pre></div>
+        </details>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
 </body>
 </html>
